@@ -1,0 +1,273 @@
+<resources>
+    <string name="app_name">Radical</string>
+
+    <string name="category_image_url">https://radical-app.ir/api/images/category/%s.png</string>
+    <string name="main_image_url">https://radical-app.ir/api/images/shops/%s/main.JPG</string>
+    <string name="shop_image_url">https://radical-app.ir/api/images/shops/%s/%d.JPG</string>
+    <string name="eng_digits">1234567890abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_@.-</string>
+
+    <string name="search_hint">جستجو</string>
+
+    <string name="txt_share">اشتراک از طریق</string>
+    <string name="txt_qr">برای ادامه، لطفا بارکد داخل فروشگاه را اسکن کنید!</string>
+    <string name="txt_sent">کد تایید با موفقیت ارسال شد!</string>
+    <string name="txt_loading">...</string>
+    <string name="txt_tryagain">تلاش مجدد</string>
+    <string name="txt_exit">برای خروج کلید بازگشت رو دوباره بفشارید!</string>
+    <string name="txt_wait">لطفا منتظر باشید...</string>
+    <string name="txt_welcome">خوش آمدید!</string>
+    <string name="txt_empty">فروشگاهی موجود نیست!</string>
+    <string name="txt_empty2">چیزی برای نمایش وجود ندارد!</string>
+    <string name="txt_default_name">کاربر رادیکال</string>
+    <string name="txt_profile_success">اطلاعات با موفقیت ذخیره شد!</string>
+
+    <string name="plan_bronze">عادی</string>
+    <string name="plan_bronze_exp">نامحدود</string>
+    <string name="plan_diamond">VIP</string>
+    <string name="plan_diamond_exp">%d روز</string>
+
+    <string name="number_error">لطفا شماره تلفن را بررسی کنید!</string>
+    <string name="name_error">لطفا نام را بررسی کنید!</string>
+    <string name="email_error">لطفا ایمیل را بررسی کنید!</string>
+    <string name="color_error">لطفا رنگ مورد علاقه خود را انتخاب کنید!</string>
+    <string name="data_error">خطا در اطلاعات برنامه! لطفا دوباره وارد شوید</string>
+    <string name="invitecide_error">شماره معرف نمی تواند شماره خودتان باشد!</string>
+    <string name="access_error">حساب شما در جای دیگر آنلاین شده! لطفا دوباره وارد شوید</string>
+    <string name="internet_error">لطفا اتصال به اینترنت را بررسی کنید!</string>
+    <string name="general_error">خطا! لطفا دوباره امتحان کنید</string>
+    <string name="giftcode_error">کد وارد شده معتبر نیست!</string>
+    <string name="qr_error">خطا! بارکد نامعتبر است</string>
+    <string name="wrongcode_error">کد وارد شده صحیح نیست!</string>
+    <string name="noreg_error">خطایی در شماره تلفن رخ داده!</string>
+    <string name="fillbuy_error">خطا! لیست خرید خود را تکمیل کنید</string>
+
+    <string name="permission_camera">دسترسی به دوربین</string>
+    <string name="permission_camera_toast">دسترسی به دوربین را داخل تنظیمات فعال کنید</string>
+    <string name="permission_camera_message">رادیکال برای خواندن QR کد اجازه دسترسی به دوربین را لازم دارد!</string>
+    <string name="permission_allow">اجازه می دهم</string>
+    <string name="permission_dismiss">اجازه نمی دهم</string>
+
+    <string name="toolbar_discount">تخفیف تاکنون: %s</string>
+
+    <string name="navigation_mainpage">صفحه اصلی</string>
+    <string name="navigation_profile">حساب کاربری</string>
+    <string name="navigation_wallet">کیف پول</string>
+    <string name="navigation_history">تاریخچه خرید</string>
+    <string name="navigation_history_sub1">ارتقاء طرح</string>
+    <string name="navigation_history_sub2">خرید از فروشگاه</string>
+    <string name="navigation_history_sub3">آمار و اطلاعات</string>
+    <string name="navigation_catagory">دسته بندی ها</string>
+    <string name="navigation_plan">ارتقاء طرح</string>
+    <string name="navigation_favorites">مکان های نشان شده</string>
+    <string name="navigation_share">معرفی به دوستان</string>
+    <string name="navigation_support">پیام ها/پشتیبانی</string>
+    <string name="navigation_support_sub1">پیام های عمومی</string>
+    <string name="navigation_support_sub2">ارتباط با پشتیبانی</string>
+    <string name="navigation_coop">درخواست همکاری</string>
+    <string name="navigation_help">راهنما</string>
+    <string name="navigation_about">درباره داریکال</string>
+    <string name="navigation_exit">خروج از حساب</string>
+
+    <string name="login_reg">ثبت نام</string>
+    <string name="login_login">ورود</string>
+    <string name="login_number">شماره تلفن</string>
+    <string name="login_text">ورود به رادیکال</string>
+    <string name="login_text2">جهت ورود به اپلیکیشن رادیکال و استفاده از خدمات آن لطفا شماره تلفن همراه خود را وارد کنید و منتظر دریافت کد از طریق پیامک باشید</string>
+
+    <string name="reg_number">شماره تلفن</string>
+    <string name="reg_invite">کد معرف (اختیاری)</string>
+    <string name="reg_text">حساب کاربری جدید</string>
+    <string name="reg_name">نام و نام خانوادگی</string>
+
+
+    <string name="code_text">کد تایید به شماره تلفن شما ارسال شد. \n لطفا کد دریافتی را در کادر زیر وارد کنید</string>
+    <string name="code_reg">تایید</string>
+    <string name="code_code">کد تایید</string>
+    <string name="code_resend">ارسال مجدد کد</string>
+
+
+    <string name="about_title">درباره رادیکال</string>
+    <string name="about_text">هدف رادیکال کاهش هزینه های خانوار و کسب و کارها بدون افت کیفیت زندگی می باشد. رادیکال حاصل تحقیق، جمع آوری و توسعه اطلاعات بر روی مسائل اقتصادی خانوارهای ایرانی به ویژه کرمانشاهی ، همچنین مدل های کسب و کار در کشور است که جای خالی آن ها به خوبی احساس می شود. موضوع مهمی که در خانوارها فراموش، در مدرسه غیرقابل آموزش و در دانشگاه ها به دست فراموشی سپرده شده است. 
+
+این موضوع اصلی نقش پول در اقتصاد خانواده ، کسب و کار و نوع به کاربگیری پول می باشد. شرکت های تخفیفاتی، تبلیغاتی و ... به هر طریقی جامعه را سمت مصرف و خرید محصول سوق می دهند. تخفیف هایی با درصد بالا ، تبلیغاتی با رنگ و لعاب وسوسه کننده که مشتریان را به مصرف کالا هدایت می کند که شاید واقعاً به خرید آن در آن زمان نیازی نباشد. 
+
+موضوع مهم نحوه ی برخورد با پول است که درگیر عادت غیرخوب مصرف گرایی شده ایم. همین موضوع باعث شد تا ما با تحفیف، جمع آوری و توسعه اطلاعات اقتصادی در یک تیم متخصص، رادیکال را ایجاد کنیم تا شما بتوانید با تخفیف های واقعی و نه وسوسه کننده به صورت روزانه برای خرید یا هر هزینه ای که ناگزیر به انجام آن هستید با فعال کردن طرح مناسب ، مخارج زندگی را کاهش دهید و اعجاز زندگی به سبک رادیکال را حس کنید. 
+
+برای ما مهم است بتوانیم ابزار مناسب و آموزش لازم در زندگی مردم ایران سهم مثبت و مفیدی را به خود اختصاص دهیم، به همین دلیل تمام علم وتوان خود را برای بهبود روز به روز به کار بسته ایم ، شما نیز ما را دراین مهم یاری دهید.</string>
+
+    <string name="about_email">ارسال ایمیل</string>
+    <string name="about_issue">گزارش مشکل</string>
+    <string name="about_trademark1">تمامی حقوق این محصول متعلق به شرکت تاجران نوین تسنیم میباشد</string>
+    <string name="about_trademark2">توسعه دهنده و برنامه نویس سمت سرور: شهاب عظیمی</string>
+    <string name="about_trademark3">ورژن %s ، 1397</string>
+
+    <string name="profile_phone">شماره تلفن</string>
+    <string name="profile_email">ایمیل</string>
+    <string name="profile_gender">جنسیت</string>
+    <string name="profile_plan">نوع حساب</string>
+    <string name="profile_job">شغل</string>
+    <string name="profile_edu">تحصیلات</string>
+    <string name="profile_region">محله زندگی</string>
+    <string name="profile_color">رنگ مورد علاقه</string>
+    <string name="profile_color_select">انتخاب رنگ</string>
+    <string name="profile_color_select_title">رنگ مورد علاقه خود را انتخاب کنید</string>
+    <string name="profile_time">زمان باقی مانده طرح</string>
+    <string name="profile_giftcode">شماره معرف</string>
+    <string name="profile_sex_male">آقا</string>
+    <string name="profile_sex_female">خانم</string>
+    <string name="profile_save">ذخیره</string>
+
+
+    <string name="wallet_text">موجودی کیف پول شما:</string>
+    <string name="wallet_buy">ارتقاء حساب کاربری</string>
+    <string name="wallet_info_title">راه های افزایش موجودی کیف پول</string>
+    <string name="wallet_info2_title">موارد استفاده از کیف پول</string>
+    <string name="wallet_info_text1">* تکمیل کردن حساب کاربری</string>
+    <string name="wallet_info_text2">* معرفی رادیکال به دوستان خود</string>
+    <string name="wallet_info_text3">* خرید از فروشگاه ها</string>
+    <string name="wallet_info2_text1">* در حال حاضر می توانید از موجود خود جهت خرید طرح استفاده کنید</string>
+
+
+    <string name="share_info_title">با معرفی </string>
+    <string name="share_get_title">دریافت جایزه!</string>
+    <string name="share_info_text1">3 نفر، 5،450 تومان</string>
+    <string name="share_info_text2">5 نفر، 10،900 تومان</string>
+    <string name="share_info_text3">7 نفر، 16،350 تومان</string>
+    <string name="share_info_text4">جایزه بگیرید!</string>
+
+
+
+    <string name="giftcode_title">کد معرفی شما:</string>
+    <string name="giftcode_title2">شما را به عنوان معرف خود معرفی کرده اند</string>
+    <string name="giftcode_count">%s نفر</string>
+    <string name="giftcode_3">معرفی 3 نفر</string>
+    <string name="giftcode_3_text">+5,450 تومان \n اضافه به کیف پول</string>
+    <string name="giftcode_5">معرفی 5 نفر</string>
+    <string name="giftcode_5_text">+10,900 تومان \n اضافه به کیف پول</string>
+    <string name="giftcode_7">معرفی 7 نفر</string>
+    <string name="giftcode_7_text">+16,350 تومان \n اضافه به کیف پول</string>
+    <string name="giftcode_warning">توجه: فقط یکبار می توانید از این تخفیف استفاده کنید!</string>
+    <string name="giftcode_share">سلام! بعد از ثبت نام در اپلیکیشن رادیکال این شماره رو %s به عنوان معرف خودت داخل حساب کاربریت وارد کن.</string>
+
+    <string name="plan_title">ارتقاء طرح</string>
+    <string name="plan_text">با ارتقاء طرح خود از بالاترین درصد تخفیف ها بهره مند شوید</string>
+    <string name="plan_buy">خرید کنید</string>
+
+    <string name="intro_dialog_title">خوش آمدید</string>
+    <string name="intro_dialog_show">مشاهده راهنما</string>
+    <string name="intro_dialog_cancel">بستن</string>
+    <string name="intro_dialog_text">سلام، به رادیکال خوش آمدید. \nاگر قبلا از رادیکال استفاده نکردید لطفا در ابتدا راهنمای برنامه را مشاهده کنید!</string>
+
+    <string name="messages_menu_message">پیام ها</string>
+    <string name="messages_menu_support">پشتیبانی</string>
+    <string name="history_menu_plans">طرح ها</string>
+    <string name="history_menu_buy">خرید ها</string>
+
+    <string name="messages_model">%s ساعت %s</string>
+    <string name="messages_model2">%s \nساعت %s</string>
+    <string name="amount_model">%s تومان</string>
+    <string name="discount_model">%s %</string>
+
+    <string name="shop_diamond_title">تخفیف های VIP</string>
+    <string name="shop_bronze_title">تخفیف های عادی</string>
+    <string name="shop_rate_title">%s ستاره از  %d امتیاز</string>
+    <string name="shop_buy">خرید کنید</string>
+    <string name="shop_share">فروشگاه %s رو داخل رادیکال ببین و از تخفیف هاش استفاده کن. \n %s</string>
+
+
+    <string name="buy_plan">حساب کاربری شما: %s</string>
+    <string name="buy_pay_title">مبلغ خرید (به تومان):</string>
+    <string name="buy_discount">مبلغ با اعمال تخفیف:</string>
+    <string name="buy_pay_btn">تکمیل خرید و صدور فاکتور</string>
+    <string name="buy_pay_footer_title">مبلغ قابل پرداخت</string>
+    <string name="buy_amount_hint">مثال: 85,000</string>
+    <string name="buy_currency">تومان</string>
+
+    <string name="receipt_ok">خرید با موفقیت انجام شد!</string>
+    <string name="receipt_total">مبلغ کل خرید:</string>
+    <string name="receipt_discount">مبلغ تخفیف:</string>
+    <string name="receipt_pay">مبلغ قابل پرداخت:</string>
+    <string name="receipt_pay2">مبلغ پرداخت شده:</string>
+    <string name="receipt_shop">فروشگاه: %s</string>
+    <string name="receipt_table_row">ردیف</string>
+    <string name="receipt_table_title">عنوان</string>
+    <string name="receipt_table_total">مبلغ کل</string>
+    <string name="receipt_table_discount">مبلغ با تخفیف</string>
+
+    <string name="newversion_dialog_title">نسخه جدید</string>
+    <string name="newversion_dialog_show">دانلود</string>
+    <string name="newversion_dialog_cancel">بستن</string>
+    <string name="newversion_dialog_text">دوست عزیز نسخه جدید رادیکال منتشر شده، پیشنهاد میکنم که حتما دانلود کنی!</string>
+
+
+
+    <string name="buy_dialog_text">مبلغ قابل پرداخت:</string>
+    <string name="buy_dialog_discount_text">مبلغ قابل پرداخت با %d درصد تخفیف:</string>
+    <string name="buy_dialog_buy">پرداخت</string>
+    <string name="buy_dialog_cancel">انصراف</string>
+    <string name="buy_dialog_giftcode">کد تخفیف</string>
+    <string name="buy_dialog_check">بررسی</string>
+    <string name="buy_dialog_giftcode_btn">کد تخفیف دارم!</string>
+
+    <string name="upgrade_title">به افراد VIP بپیوندید</string>
+    <string name="upgrade_description">با ارتقاء حساب کاربری خود به VIP می توایند با کمترین هزینه از بیشترین تخفیف های موجود در هر فروشگاه استفاده کنید. \n برای پرداخت می توانید از کیف پول خود نیز استفاده کنید.</string>
+    <string name="upgrade_cost">هزینه فعالسازی: %s تومان</string>
+    <string name="upgrade_wallet">موجودی کیف پول شما: %s تومان</string>
+    <string name="upgrade_buy">خرید آنلاین</string>
+    <string name="upgrade_buy_wallet">خرید با استفاده از کیف پول</string>
+    <string name="upgrade_cancel">انصراف</string>
+
+    <string name="stats_title1">تعداد خرید برای هر ماه در سال</string>
+    <string name="stats_title2">میزان تخفیف کسب شده در هر ماه:</string>
+    <string name="stats_countyeartitle">"تعداد خرید ها در سال %s :"</string>
+
+    <string name="stats_counttotalyeartitle">"تعداد خرید ها در سال %s :"</string>
+    <string name="stats_counttotaltitle">"تعداد کل خرید ها تا امروز:"</string>
+    <string name="stats_sumtotalyeartitle">"کل تخفیف کسب شده در سال %s :"</string>
+    <string name="stats_sumtotaltitle">"کل تخفیف کسب شده تا امروز:"</string>
+
+
+    <string-array name="jobs">
+        <item>دانشجو</item>
+        <item>کارمند</item>
+        <item>درمانی</item>
+        <item>خانه دار</item>
+        <item>معلم</item>
+        <item>خدماتی</item>
+        <item>آزاد</item>
+        <item>بدون شغل</item>
+    </string-array>
+
+
+    <string-array name="edu">
+        <item>زیر دیپلم</item>
+        <item>دیپلم</item>
+        <item>فوق دیپلم</item>
+        <item>لیسانس</item>
+        <item>فوق لیسانس</item>
+        <item>دکترا و بالاتر</item>
+    </string-array>
+
+    <string-array name="region">
+        <item>الهیه</item>
+        <item>22بهمن</item>
+        <item>فردوسی</item>
+        <item>مسکن</item>
+        <item>کارمندان</item>
+        <item>فرهنگیان</item>
+        <item>گلریزان</item>
+        <item>دولت آباد</item>
+        <item>سنگر</item>
+        <item>گلستان</item>
+        <item>شریعتی</item>
+        <item>مصدق</item>
+        <item>آناهیتا</item>
+        <item>رجایی</item>
+        <item>معلم</item>
+        <item>تعاون</item>
+        <item>کسری</item>
+        <item>طاق بستان</item>
+    </string-array>
+
+
+</resources>

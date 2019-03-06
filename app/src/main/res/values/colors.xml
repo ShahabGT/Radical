@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#202020</color>
+    <color name="colorPrimaryDark">#232e33</color>
+    <color name="colorAccent">#efb303</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="yellow_light">#FFF594</color>
+    <color name="yellow">#FCD736</color>
+    <color name="yellow_dark">#FBC02D</color>
+    <color name="orange">#E95420</color>
+    <color name="green">#00C853</color>
+    <color name="blue">#249FE6</color>
+    <color name="pink">#EC407A</color>
+    <color name="bronze">#CD7F32</color>
+
+    <drawable name="transparent">#00000000</drawable>
+    <drawable name="clicked_gray">#80e0e0e0</drawable>
+
+    <color name="app_bg">#ECEFF1</color>
+    <color name="progress_bg">#B0B0B4</color>
+    <color name="rate_bg">#9A000000</color>
+
+    <!-- OVERWRITE THESE COLORS FOR A LIGHT THEME -->
+    <!-- MaterialDrawer DEFAULT colors -->
+    <color name="material_drawer_background">#F9F9F9</color>
+    <!-- Material DEFAULT text / items colors -->
+    <color name="material_drawer_primary_text">#000000</color>
+    <color name="material_drawer_primary_icon">#8A000000</color>
+    <color name="material_drawer_secondary_text">#000000</color>
+    <color name="material_drawer_hint_text">#42000000</color>
+    <color name="material_drawer_divider">#aa000000</color>
+    <!-- Material DEFAULT drawer colors -->
+    <color name="material_drawer_selected">#1F2196F3</color>
+    <color name="material_drawer_selected_legacy">#E8E8E8</color>
+    <color name="material_drawer_selected_text">#000000</color>
+    <color name="material_drawer_header_selection_text">#000000</color>
+    <color name="material_drawer_header_selection_subtext">#8A000000</color>
+
+
+</resources>

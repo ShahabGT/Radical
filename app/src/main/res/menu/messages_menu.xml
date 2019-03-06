@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/messages_menu_messages"
+        android:title="@string/messages_menu_message"
+        android:icon="@drawable/vector_messages"/>
+
+    <item
+        android:id="@+id/messages_menu_support"
+        android:title="@string/messages_menu_support"
+        android:icon="@drawable/vector_support"/>
+
+</menu>

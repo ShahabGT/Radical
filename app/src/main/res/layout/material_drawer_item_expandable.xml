@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/material_drawer_item_primary">
+
+    <LinearLayout
+        android:id="@+id/material_drawer_arrow_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/material_drawer_arrow"
+            android:layout_width="25dp"
+            android:layout_gravity="right|center"
+            android:layout_height="25dp" />
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/material_drawer_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textColor="@color/white"
+        android:id="@+id/material_drawer_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/vazir"
+        android:gravity="center_vertical|start"
+        android:lines="1"
+        android:singleLine="true"
+        android:textDirection="anyRtl"
+        android:textSize="@dimen/material_drawer_item_primary_text"
+        app:layout_constraintBottom_toTopOf="@id/material_drawer_description"
+        app:layout_constraintRight_toLeftOf="@id/material_drawer_icon"
+        app:layout_constraintLeft_toRightOf="@id/material_drawer_arrow_container"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Some drawer text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textColor="@color/white"
+        android:id="@+id/material_drawer_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/vazir"
+        android:gravity="center_vertical|start"
+        android:lines="1"
+        android:singleLine="true"
+        android:textDirection="anyRtl"
+        android:textSize="@dimen/material_drawer_item_primary_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/material_drawer_arrow_container"
+        app:layout_constraintRight_toLeftOf="@id/material_drawer_icon"
+        app:layout_constraintTop_toBottomOf="@id/material_drawer_name"
+        tools:text="Some drawer text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

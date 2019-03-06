@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "823146376218",
+    "firebase_url": "https://radical-6b16a.firebaseio.com",
+    "project_id": "radical-6b16a",
+    "storage_bucket": "radical-6b16a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823146376218:android:1c3c9d2f2d524555",
+        "android_client_info": {
+          "package_name": "ir.radical_app.radical"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823146376218-7qvam71pd1jvu380o0ijk0kt6do287e7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH1RLiotY1N3XZXpHVCBcTYD2oT01gkIA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

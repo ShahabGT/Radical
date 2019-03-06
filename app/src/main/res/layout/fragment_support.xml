@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/app_bg"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:id="@+id/main_linear"
+    android:layout_height="match_parent"
+    tools:context=".fragments.SupportFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/support_recycler" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:visibility="gone"
+        android:padding="5dp"
+        android:background="@drawable/shape_send"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:padding="12dp"
+        android:background="@drawable/shape_send"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/ic_send"
+            android:id="@+id/support_send"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/support_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/vazir"
+            android:hint="متن مورد نظر"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="500"
+            android:maxLines="4"
+            android:minLines="1"
+            android:text="" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

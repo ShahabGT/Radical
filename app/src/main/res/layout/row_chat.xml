@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    android:id="@+id/chat_row_main_linear"
+    android:gravity="right"
+    android:layout_height="wrap_content">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/shape_me"
+            android:id="@+id/chat_row_message"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:maxWidth="240dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:gravity="right"
+            android:padding="12dp"
+            android:shadowColor="#ffffff"
+            android:text="متن پیام"
+            android:textColor="#ffffff" />
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/chat_row_message"
+                android:id="@+id/chat_row_time"
+                style="@style/Base.TextAppearance.AppCompat.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:gravity="center"
+                android:text="تاریخ"
+                android:textColor="@color/md_blue_900" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

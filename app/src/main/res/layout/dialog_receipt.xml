@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<androidx.cardview.widget.CardView
+    android:layout_margin="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.airbnb.lottie.LottieAnimationView
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/ok_anim"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:lottie_speed="0.3"
+        app:lottie_rawRes="@raw/ok"
+        app:lottie_autoPlay="true" />
+
+    <TextView
+        android:id="@+id/receipt_title"
+        android:textColor="@color/green"
+        style="@style/Base.TextAppearance.AppCompat.Large"
+        android:fontFamily="@font/vazir"
+        app:layout_constraintRight_toLeftOf="@id/ok_anim"
+        android:text="@string/receipt_ok"
+        app:layout_constraintBottom_toBottomOf="@id/ok_anim"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/receipt_details_card"
+        android:layout_margin="8dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/ok_anim"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:padding="8dp"
+                android:id="@+id/receipt_receipt_title"
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:text="فاکتور خرید"
+                android:textColor="@color/black"
+                android:fontFamily="@font/vazir"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:padding="8dp"
+                android:id="@+id/receipt_shop_title"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="فاکتور خرید"
+                android:textColor="@color/black"
+                android:fontFamily="@font/vazir"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receipt_receipt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TableLayout
+                android:layout_margin="5dp"
+                android:id="@+id/receipt_table"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:collapseColumns="*"
+                android:shrinkColumns="*"
+                android:stretchColumns="*"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receipt_shop_title">
+
+                <TableRow>
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/cell_shape"
+                        android:fontFamily="@font/vazir"
+                        android:text="@string/receipt_table_discount"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/cell_shape"
+                        android:fontFamily="@font/vazir"
+                        android:text="@string/receipt_table_total"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/cell_shape"
+                        android:fontFamily="@font/vazir"
+                        android:text="@string/receipt_table_title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/cell_shape"
+                        android:fontFamily="@font/vazir"
+                        android:text="@string/receipt_table_row"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white" />
+                </TableRow>
+
+            </TableLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/receipt_payment_card"
+        android:layout_margin="8dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/receipt_details_card"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:padding="8dp"
+            android:id="@+id/receipt_total_title"
+            android:textColor="@color/black"
+            android:text="@string/receipt_total"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:fontFamily="@font/vazir"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+            <TextView
+                android:padding="8dp"
+                android:id="@+id/receipt_total"
+                android:textColor="@color/black"
+                android:text="0"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:fontFamily="@font/vazir"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/receipt_total_title"
+                app:layout_constraintBottom_toBottomOf="@id/receipt_total_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:padding="8dp"
+                android:id="@+id/receipt_discount_title"
+                android:textColor="@color/black"
+                android:text="@string/receipt_discount"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:fontFamily="@font/vazir"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/receipt_total_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:padding="8dp"
+                android:id="@+id/receipt_discount"
+                android:textColor="@color/green"
+                android:text="0"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:fontFamily="@font/vazir"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/receipt_discount_title"
+                app:layout_constraintBottom_toBottomOf="@id/receipt_discount_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:padding="8dp"
+                android:id="@+id/receipt_pay_title"
+                android:textColor="@color/blue"
+                android:text="@string/receipt_pay"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:fontFamily="@font/vazir"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/receipt_discount_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:padding="8dp"
+                android:id="@+id/receipt_pay"
+                android:textColor="@color/blue"
+                android:text="0"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:fontFamily="@font/vazir"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/receipt_pay_title"
+                app:layout_constraintBottom_toBottomOf="@id/receipt_pay_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/receipt_payment_card"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
+</ScrollView>

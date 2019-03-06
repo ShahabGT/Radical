@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/code_layout"
+    tools:context=".fragments.CodeFragment">
+
+    <ImageView
+        android:elevation="25dp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:id="@+id/code_logo"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/confirm_logo"
+        app:layout_constraintBottom_toTopOf="@+id/code_card"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/code_card" />
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/code_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="68dp"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <TextView
+                android:fontFamily="@font/vazir"
+                android:text="@string/code_text"
+                android:id="@+id/code_text"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_height="wrap_content"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@id/code_input"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/code_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/code_resend"
+                app:layout_constraintLeft_toRightOf="@+id/code_reg"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/code_code"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/vazir"
+                    android:hint="@string/code_code"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
+                    android:maxLength="4"
+                    android:padding="5dp"
+                    android:textColor="@color/primary" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/code_reg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:text="@string/code_reg"
+                app:layout_constraintBottom_toTopOf="@id/code_resend"
+                app:layout_constraintTop_toTopOf="@id/code_input"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/code_input" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:id="@+id/code_resend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:text="00:00"
+                app:layout_constraintTop_toBottomOf="@id/code_input"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

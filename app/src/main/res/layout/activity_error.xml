@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    tools:context=".activities.ErrorActivity">
+    <com.airbnb.lottie.LottieAnimationView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/animation_view"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        app:lottie_speed="0.5"
+        app:lottie_rawRes="@raw/nointernet"
+        app:lottie_autoPlay="true" />
+
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/error_text"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:fontFamily="@font/vazir"
+        android:gravity="center"
+        android:text="@string/general_error"
+        app:layout_constraintTop_toBottomOf="@id/animation_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/error_tryagain"
+        android:textSize="20sp"
+        android:text="@string/txt_tryagain"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/error_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

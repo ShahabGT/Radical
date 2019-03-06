@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/stats_yearselector"
+            style="@style/Base.TextAppearance.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="انتخاب سال"
+            android:textColor="#ffffff" />
+        <TextView
+            android:id="@+id/stats_countyeartitle"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:padding="8dp"
+            android:text="@string/stats_title1"
+            android:textColor="@color/black" />
+            <org.eazegraph.lib.charts.BarChart
+                android:id="@+id/barchart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:padding="10dp"
+                app:egBarWidth="20dp"
+                app:egFixedBarWidth="true"
+                app:egLegendHeight="40dp" />
+        <TextView
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:padding="8dp"
+            android:text="@string/stats_title2"
+            android:textColor="@color/black" />
+
+
+
+
+        <org.eazegraph.lib.charts.PieChart
+            android:id="@+id/piechart"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:padding="10dp"
+            app:egBarWidth="20dp"
+            app:egFixedBarWidth="true"
+            app:egLegendHeight="40dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/stats_counttotalyeartitle"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="8dp"
+                android:text="کل بسته های فروخته شده در سال "
+                android:textColor="@color/black"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/stats_totalyearcount"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:fontFamily="@font/vazir"
+                android:padding="8dp"
+                android:text="0"
+                android:textColor="@color/blue"
+                app:layout_constraintBottom_toBottomOf="@+id/stats_counttotalyeartitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/stats_counttotalyeartitle" />
+
+            <TextView
+                android:id="@+id/stats_sumtotalyeartitle"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="8dp"
+                android:text="کل درآمد کسب شده در سال "
+                android:textColor="@color/black"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/stats_counttotalyeartitle" />
+
+
+            <TextView
+                android:id="@+id/stats_totalyearprice"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:fontFamily="@font/vazir"
+                android:padding="8dp"
+                android:text="0"
+                android:textColor="@color/blue"
+                app:layout_constraintBottom_toBottomOf="@+id/stats_sumtotalyeartitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/stats_sumtotalyeartitle" />
+
+
+            <TextView
+                android:id="@+id/stats_totaltitle"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="8dp"
+                android:text="@string/stats_counttotaltitle"
+                android:textColor="@color/black"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/stats_sumtotalyeartitle" />
+
+
+            <TextView
+                android:id="@+id/stats_totalcount"
+
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:fontFamily="@font/vazir"
+                android:padding="8dp"
+                android:text="0"
+                android:textColor="@color/blue"
+                app:layout_constraintBottom_toBottomOf="@+id/stats_totaltitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/stats_totaltitle" />
+
+            <TextView
+                android:id="@+id/stats_totaltitle2"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="8dp"
+                android:text="@string/stats_sumtotaltitle"
+                android:textColor="@color/black"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/stats_totaltitle" />
+
+            <TextView
+                android:id="@+id/stats_totalprice"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:fontFamily="@font/vazir"
+                android:padding="8dp"
+                android:text="0"
+                android:textColor="@color/blue"
+                app:layout_constraintBottom_toBottomOf="@+id/stats_totaltitle2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/stats_totaltitle2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
