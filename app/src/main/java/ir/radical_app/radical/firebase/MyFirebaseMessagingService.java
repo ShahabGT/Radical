@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -33,7 +34,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Map<String, String> data = remoteMessage.getData();
         String title = data.get("title");
         String body = data.get("body");
-        String sender = data.get("sender");
+        String sender = data.get("sender")+"";
 
         MessageModel model = new MessageModel();
         model.setMessage(body);
@@ -60,18 +61,22 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        //Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri alarmSound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.notification);;
         createNotificationChannel();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, Const.CHANNEL_CODE);
+
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentTitle(title);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
         builder.setContentText(message);
+        builder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setAutoCancel(true);
         builder.setContentIntent(pendingIntent);
         builder.setSound(alarmSound, AudioManager.STREAM_NOTIFICATION);
         builder.setVibrate(new long[] {1000,1000});
+        builder.setLights(Color.YELLOW,1000,1000);
         NotificationManagerCompat notificationManagerCompat =  NotificationManagerCompat.from(this);
         notificationManagerCompat.notify(Const.NOTIFICATION_ID,builder.build());
 

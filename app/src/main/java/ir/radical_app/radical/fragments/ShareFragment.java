@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -80,13 +81,16 @@ public class ShareFragment extends Fragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.shareCode(getActivity(),getString(R.string.giftcode_share,code.getText().toString()));
-            }
+                MyUtils.shareCode(getActivity(),getString(R.string.giftcode_share,
+                        code.getText().toString(),
+                        "https://radical-app.ir"));            }
         });
         code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.shareCode(getActivity(),getString(R.string.giftcode_share,code.getText().toString()));
+                MyUtils.shareCode(getActivity(),getString(R.string.giftcode_share,
+                        code.getText().toString(),
+                        "https://radical-app.ir"));
             }
         });
 
@@ -107,6 +111,8 @@ public class ShareFragment extends Fragment {
         if(!cancel){
             dialog = new LoadingDialog(getContext());
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
             dialog.setCancelable(false);
             dialog.show();
         }else{

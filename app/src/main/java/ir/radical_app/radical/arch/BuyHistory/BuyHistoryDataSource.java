@@ -4,6 +4,8 @@ package ir.radical_app.radical.arch.BuyHistory;
 import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
 import ir.radical_app.radical.data.RetrofitClient;
+import ir.radical_app.radical.fragments.BuyHistoryFragment;
+import ir.radical_app.radical.fragments.SpecificCategoryFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,11 +36,15 @@ public class BuyHistoryDataSource extends PageKeyedDataSource<Integer, BuyItem> 
 
                             callback.onResult(response.body().getData(), null, START + SIZE);
 
+                        }else{
+                            BuyHistoryFragment.showEmpty("خریدی انجام نداده اید!");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BuyHistoryResponse> call, Throwable t) {
+                        BuyHistoryFragment.showEmpty("خریدی انجام نداده اید!");
+
                     }
                 });
 

@@ -1,109 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg"
+    android:background="@drawable/loginbg"
     android:clickable="true"
     android:focusable="true"
-    android:id="@+id/code_layout"
     tools:context=".fragments.CodeFragment">
 
     <ImageView
-        android:elevation="25dp"
-        app:layout_constraintDimensionRatio="1:1"
         android:id="@+id/code_logo"
         android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:src="@drawable/confirm_logo"
-        app:layout_constraintBottom_toTopOf="@+id/code_card"
+        android:layout_height="150dp"
+        android:src="@drawable/radical_logo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/code_card" />
+        app:layout_constraintTop_toTopOf="@id/guideline" />
 
 
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/code_card"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/code_text2"
+        style="@style/Base.TextAppearance.AppCompat.Small"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/vazir"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/code_text"
+        android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/code_logo" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/code_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/guideline2"
+        app:layout_constraintRight_toRightOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/code_text2">
+
+        <com.google.android.material.textfield.TextInputLayout
+
             android:layout_width="match_parent"
-            android:layout_marginTop="68dp"
             android:layout_height="wrap_content"
-            android:padding="15dp">
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_text2">
 
-            <TextView
-                android:fontFamily="@font/vazir"
-                android:text="@string/code_text"
-                android:id="@+id/code_text"
-                android:layout_width="wrap_content"
-                android:layout_marginBottom="32dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/code_code"
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:drawableRight="@drawable/vector_code_key"
+                android:fontFamily="@font/vazir"
                 android:gravity="center"
-                app:layout_constraintBottom_toTopOf="@id/code_input"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/code_input"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/code_resend"
-                app:layout_constraintLeft_toRightOf="@+id/code_reg"
-                app:layout_constraintRight_toRightOf="parent">
+                android:hint="@string/code_code"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="4"
+                android:padding="5dp"
+                android:textColor="@color/primary"
+                android:textColorHint="@color/black" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/code_code"
-                    style="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/vazir"
-                    android:hint="@string/code_code"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:imeOptions="actionDone"
-                    android:maxLength="4"
-                    android:padding="5dp"
-                    android:textColor="@color/primary" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/code_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/vazir"
-                android:text="@string/code_reg"
-                app:layout_constraintBottom_toTopOf="@id/code_resend"
-                app:layout_constraintTop_toTopOf="@id/code_input"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/code_input" />
-
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:id="@+id/code_resend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/vazir"
-                android:text="00:00"
-                app:layout_constraintTop_toBottomOf="@id/code_input"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/code_reg"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/vazir"
+        android:text="@string/code_reg"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/code_input" />
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:id="@+id/code_resend"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/vazir"
+        android:text="00:00"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/code_reg" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

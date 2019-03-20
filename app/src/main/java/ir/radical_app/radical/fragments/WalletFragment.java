@@ -1,25 +1,18 @@
 package ir.radical_app.radical.fragments;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-
 import com.google.android.material.button.MaterialButton;
-
-import ir.radical_app.radical.activities.MainActivity;
 import ir.radical_app.radical.activities.SplashActivity;
 import ir.radical_app.radical.classes.MySharedPreference;
 import ir.radical_app.radical.classes.MyToast;
@@ -83,6 +76,8 @@ public class WalletFragment extends Fragment {
         if(!cancel){
             dialog = new LoadingDialog(getContext());
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
             dialog.setCancelable(false);
             dialog.show();
         }else{
@@ -91,7 +86,7 @@ public class WalletFragment extends Fragment {
     }
 
     private void showUpgradeDialog() {
-        UpgradeDialog upgradeDialog = new UpgradeDialog(getContext());
+        UpgradeDialog upgradeDialog = new UpgradeDialog(getActivity());
 
         upgradeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         upgradeDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;

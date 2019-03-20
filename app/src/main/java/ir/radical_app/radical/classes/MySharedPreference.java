@@ -101,4 +101,19 @@ public class MySharedPreference {
     public String getInviteCode(){
         return sp.getString("InviteCode","");
     }
+
+    public void setPlan(int Plan){
+        editor.putInt("Plan",Plan).apply();
+    }
+    public int getPlan(){
+        return sp.getInt("Plan",1);
+    }
+
+    public void setNewVersion(int NewVersion){
+        editor.putInt("NewVersion",NewVersion).apply();
+    }
+    public int getNewVersion(){
+        return sp.getInt("NewVersion",1);
+    }
+
 }

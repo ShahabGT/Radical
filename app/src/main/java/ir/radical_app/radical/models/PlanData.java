@@ -4,10 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class PlanData {
     private String description;
-    @SerializedName("plan_bronze")
-    private String planBronze;
-    @SerializedName("plan_diamond")
-    private String planDiamond;
+    private String discount;
     private String plan;
 
     public String getPlan() {
@@ -22,19 +19,13 @@ public class PlanData {
         this.description = description;
     }
 
-    public String getPlanBronze() {
-        return planBronze;
+    public String getDiscount() {
+        return discount;
     }
 
-    public void setPlanBronze(String planBronze) {
-        this.planBronze = planBronze;
+    public void setDiscount(String discount) {
+        this.discount = discount;
     }
 
-    public String getPlanDiamond() {
-        return planDiamond;
-    }
 
-    public void setPlanDiamond(String planDiamond) {
-        this.planDiamond = planDiamond;
-    }
 }

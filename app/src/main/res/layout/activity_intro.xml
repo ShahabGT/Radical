@@ -5,19 +5,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg"
+    android:background="@color/white"
     tools:context=".activities.IntroActivity">
 
 
 
-    <com.tmall.ultraviewpager.UltraViewPager
-        android:padding="15dp"
+
+    <FrameLayout
+        android:id="@+id/intro_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/intro_nextbtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+    <ImageView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"
+        android:id="@+id/intro_backbtn"
+        android:layout_margin="18dp"
+        android:src="@drawable/vector_left"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/intro_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:visibility="gone"
+        android:id="@+id/intro_nextbtn"
+        android:layout_width="wrap_content"
+        app:fabSize="normal"
+        android:layout_margin="18dp"
+        android:src="@drawable/vector_right"
+        android:layout_gravity="bottom|right"
+        app:backgroundTint="@color/white"
+        android:layout_height="wrap_content" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

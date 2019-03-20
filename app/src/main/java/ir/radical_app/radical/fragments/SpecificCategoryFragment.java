@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -36,6 +39,7 @@ public class SpecificCategoryFragment extends Fragment {
     private boolean isSearch;
     private boolean isBookmark;
     private static ConstraintLayout emptyView;
+    private static TextView emptyViewText;
 
     public void setSearch(boolean search) {
         isSearch = search;
@@ -58,6 +62,7 @@ public class SpecificCategoryFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         emptyView = v.findViewById(R.id.empty_view);
+        emptyViewText = v.findViewById(R.id.empty_text);
 
         if(isSearch)
             showSearchData();
@@ -67,8 +72,9 @@ public class SpecificCategoryFragment extends Fragment {
             showCategoryData();
     }
 
-    public static void showEmpty(){
+    public static void showEmpty(String text){
         emptyView.setVisibility(View.VISIBLE);
+        emptyViewText.setText(text);
     }
 
     private void showSearchData(){
@@ -103,7 +109,6 @@ public class SpecificCategoryFragment extends Fragment {
         });
         recyclerView.setAdapter(adapter);
     }
-
     private void showCategoryData(){
         ShopsCategoryViewModel itemViewModel = ViewModelProviders.of(this).get(ShopsCategoryViewModel.class);
         final ShopsCategoryAdapter adapter = new ShopsCategoryAdapter(getContext(),getActivity());

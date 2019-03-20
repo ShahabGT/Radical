@@ -15,7 +15,12 @@ public class JsonResponse {
     private String buydate;
     private String expdate;
     private String nowdate;
+    private String amount3;
+    private String amount7;
+    private String amount15;
     private String amount;
+    private String amount60;
+    private String amount90;
     private String invitecode;
     private String count;
     private String sum;
@@ -26,6 +31,26 @@ public class JsonResponse {
     private String job;
     private String region;
     private String description;
+
+    public String getAmount3() {
+        return amount3;
+    }
+
+    public String getAmount7() {
+        return amount7;
+    }
+
+    public String getAmount15() {
+        return amount15;
+    }
+
+    public String getAmount60() {
+        return amount60;
+    }
+
+    public String getAmount90() {
+        return amount90;
+    }
 
     public String getDescription() {
         return description;

@@ -15,6 +15,7 @@ public class LoginActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.fadein,R.anim.fadeout)
-                .add(R.id.login_container,new LoginFragment()).commit();
+                .add(R.id.login_container,new LoginFragment())
+                .commit();
     }
 }

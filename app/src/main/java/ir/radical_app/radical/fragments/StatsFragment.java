@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 import com.google.android.material.button.MaterialButton;
 import org.eazegraph.lib.charts.BarChart;
@@ -63,6 +64,8 @@ public class StatsFragment extends Fragment {
         if(!cancel){
             dialog = new LoadingDialog(getContext());
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
             dialog.setCancelable(false);
             dialog.show();
         }else{

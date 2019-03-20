@@ -1,19 +1,13 @@
 package ir.radical_app.radical.fragments;
 
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-
 import ir.radical_app.radical.classes.MySharedPreference;
 import ir.radical_app.radical.classes.MyToast;
 import ir.radical_app.radical.classes.MyUtils;
@@ -39,28 +33,9 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
-      //  backgroundAnimation(v);
-        bringToFront(v);
         init(v);
 
         return v;
-    }
-
-
-    private void backgroundAnimation(View v){
-        ConstraintLayout constraintLayout = v.findViewById(R.id.login_layout);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-        animationDrawable.setExitFadeDuration(4000);
-        animationDrawable.setEnterFadeDuration(2000);
-        animationDrawable.start();
-    }
-
-
-    private void bringToFront(View v){
-        ImageView imageView = v.findViewById(R.id.login_logo);
-        imageView.bringToFront();
-        imageView.requestLayout();
-        imageView.invalidate();
     }
 
     private void init(View v){
@@ -106,8 +81,9 @@ public class LoginFragment extends Fragment {
                                 case "ok":
                                     MySharedPreference.getInstance(getContext()).setNumber(number);
                                     getActivity().getSupportFragmentManager()
-                                            .beginTransaction().replace(R.id.login_container,new CodeFragment())
+                                            .beginTransaction()
                                             .setCustomAnimations(R.anim.fadein,R.anim.fadeout)
+                                            .replace(R.id.login_container,new CodeFragment())
                                             .commit();
                                     break;
 

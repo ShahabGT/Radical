@@ -38,7 +38,8 @@ public class ShopsImagesAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         SimpleDraweeView imageView = new SimpleDraweeView(context);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        Uri uri = Uri.parse(context.getString(R.string.shop_image_url,shopId,position+1));
+        String pos= (position+1)+"";
+        Uri uri = Uri.parse(context.getString(R.string.shop_image_url,shopId,pos));
         imageView.setImageURI(uri);
         container.addView(imageView);
         return imageView;

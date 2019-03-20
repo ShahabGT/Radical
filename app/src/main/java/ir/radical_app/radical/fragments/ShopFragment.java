@@ -15,6 +15,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import ir.radical_app.radical.activities.QrcodeActivity;
@@ -38,6 +41,7 @@ import ir.radical_app.radical.classes.MyUtils;
 import ir.radical_app.radical.classes.PermissionUtil;
 import ir.radical_app.radical.data.RetrofitClient;
 import ir.radical_app.radical.dialogs.LoadingDialog;
+import ir.radical_app.radical.dialogs.UpgradeDialog;
 import ir.radical_app.radical.models.JsonResponse;
 import ir.radical_app.radical.models.PlanData;
 import ir.radical_app.radical.models.ShopDetailsModel;
@@ -65,11 +69,14 @@ public class ShopFragment extends Fragment {
     private ImageView telegram,instagram,website,bookmark,share;
     private String telegramID,instagramID,websiteID,bookmarkStat;
 
-    private TextView bronzeDiscount1,bronzeDiscount2,bronzeDiscount3,bronzeDiscount4,bronzeDiscount5;
-    private TextView diamondDiscount1,diamondDiscount2,diamondDiscount3,diamondDiscount4,diamondDiscount5;
-    private TextView diamondDiscount1title,diamondDiscount2title,diamondDiscount3title,diamondDiscount4title,diamondDiscount5title;
+    private TextView discount1, discount2, discount3, discount4, discount5;
+    private TextView discount1title, discount2title, discount3title, discount4title, discount5title;
+    private ConstraintLayout discount1layout,discount2layout,discount3layout,discount4layout,discount5layout;
+    private View discount1line,discount2line,discount3line,discount4line;
 
     private View globalView;
+
+    private int maxDiscount;
 
     public ShopFragment() {
     }
@@ -103,22 +110,33 @@ public class ShopFragment extends Fragment {
         bookmark = v.findViewById(R.id.shop_bookmark);
         share = v.findViewById(R.id.shop_share);
 
-        bronzeDiscount1 = v.findViewById(R.id.shop_bronze_discount1);
-        bronzeDiscount2 = v.findViewById(R.id.shop_bronze_discount2);
-        bronzeDiscount3 = v.findViewById(R.id.shop_bronze_discount3);
-        bronzeDiscount4 = v.findViewById(R.id.shop_bronze_discount4);
-        bronzeDiscount5 = v.findViewById(R.id.shop_bronze_discount5);
+        discount1 = v.findViewById(R.id.shop_discount1);
+        discount1title = v.findViewById(R.id.shop_discount1_title);
+        discount1layout = v.findViewById(R.id.shop_discount1_layout);
+        discount1line = v.findViewById(R.id.shop_discount1_line);
 
-        diamondDiscount1 = v.findViewById(R.id.shop_diamond_discount1);
-        diamondDiscount1title = v.findViewById(R.id.shop_diamond_discount1_title1);
-        diamondDiscount2 = v.findViewById(R.id.shop_diamond_discount2);
-        diamondDiscount2title = v.findViewById(R.id.shop_diamond_discount1_title2);
-        diamondDiscount3 = v.findViewById(R.id.shop_diamond_discount3);
-        diamondDiscount3title = v.findViewById(R.id.shop_diamond_discount1_title3);
-        diamondDiscount4 = v.findViewById(R.id.shop_diamond_discount4);
-        diamondDiscount4title = v.findViewById(R.id.shop_diamond_discount1_title4);
-        diamondDiscount5 = v.findViewById(R.id.shop_diamond_discount5);
-        diamondDiscount5title = v.findViewById(R.id.shop_diamond_discount1_title5);
+        discount2 = v.findViewById(R.id.shop_discount2);
+        discount2title = v.findViewById(R.id.shop_discount2_title);
+        discount2layout = v.findViewById(R.id.shop_discount2_layout);
+        discount2line = v.findViewById(R.id.shop_discount2_line);
+
+
+        discount3 = v.findViewById(R.id.shop_discount3);
+        discount3title = v.findViewById(R.id.shop_discount3_title);
+        discount3layout = v.findViewById(R.id.shop_discount3_layout);
+        discount3line = v.findViewById(R.id.shop_discount3_line);
+
+
+        discount4 = v.findViewById(R.id.shop_discount4);
+        discount4title = v.findViewById(R.id.shop_discount4_title);
+        discount4layout = v.findViewById(R.id.shop_discount4_layout);
+        discount4line = v.findViewById(R.id.shop_discount4_line);
+
+
+        discount5 = v.findViewById(R.id.shop_discount5);
+        discount5title = v.findViewById(R.id.shop_discount5_title);
+        discount5layout = v.findViewById(R.id.shop_discount5_layout);
+
 
 
         getData();
@@ -184,14 +202,23 @@ public class ShopFragment extends Fragment {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestCamera();
+                if(MySharedPreference.getInstance(getContext()).getPlan()!=1)
+                    requestCamera();
+                else
+                    showUpgradeDialog();
             }
         });
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.shareCode(getActivity(),getString(R.string.shop_share,name.getText().toString(),"https://radical-app.ir/shops?id="+shopId));
+                MyUtils.shareCode(getActivity(),
+                        getString(R.string.shop_share,
+                                name.getText().toString(),
+                                maxDiscount+"%",
+                                address.getText().toString(),
+                                tel.getText().toString(),
+                                "https://radical-app.ir/shops?id="+shopId));
             }
         });
 
@@ -206,6 +233,8 @@ public class ShopFragment extends Fragment {
         if(!cancel){
             dialog = new LoadingDialog(getContext());
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
             dialog.setCancelable(false);
             dialog.show();
         }else{
@@ -316,58 +345,61 @@ public class ShopFragment extends Fragment {
         switch (list.size()){
             case 5:
                 String des5 = list.get(4).getDescription();
-                String b5 = list.get(4).getPlanBronze();
-                String d5 = list.get(4).getPlanDiamond();
-                diamondDiscount5.setVisibility(View.VISIBLE);
-                diamondDiscount5.setText(d5+"%");
-                diamondDiscount5title.setVisibility(View.VISIBLE);
-                diamondDiscount5title.setText(des5);
-                bronzeDiscount5.setVisibility(View.VISIBLE);
-                bronzeDiscount5.setText(b5+"%");
+                String d5 = list.get(4).getDiscount();
+                discount5.setVisibility(View.VISIBLE);
+                discount5.setText(d5+"%");
+                discount5title.setVisibility(View.VISIBLE);
+                discount5layout.setVisibility(View.VISIBLE);
+                discount4line.setVisibility(View.VISIBLE);
+                discount5title.setText(des5);
+                maxDiscount = Integer.parseInt(d5);
 
             case 4:
                 String des4 = list.get(3).getDescription();
-                String b4 = list.get(3).getPlanBronze();
-                String d4 = list.get(3).getPlanDiamond();
-                diamondDiscount4.setVisibility(View.VISIBLE);
-                diamondDiscount4.setText(d4+"%");
-                diamondDiscount4title.setVisibility(View.VISIBLE);
-                diamondDiscount4title.setText(des4);
-                bronzeDiscount4.setVisibility(View.VISIBLE);
-                bronzeDiscount4.setText(b4+"%");
+                String d4 = list.get(3).getDiscount();
+                discount4.setVisibility(View.VISIBLE);
+                discount4.setText(d4+"%");
+                discount4title.setVisibility(View.VISIBLE);
+                discount4layout.setVisibility(View.VISIBLE);
+                discount3line.setVisibility(View.VISIBLE);
+                discount4title.setText(des4);
+                if(Integer.parseInt(d4)>maxDiscount)
+                    maxDiscount=Integer.parseInt(d4);
 
             case 3:
                 String des3 = list.get(2).getDescription();
-                String b3 = list.get(2).getPlanBronze();
-                String d3 = list.get(2).getPlanDiamond();
-                diamondDiscount3.setVisibility(View.VISIBLE);
-                diamondDiscount3.setText(d3+"%");
-                diamondDiscount3title.setVisibility(View.VISIBLE);
-                diamondDiscount3title.setText(des3);
-                bronzeDiscount3.setVisibility(View.VISIBLE);
-                bronzeDiscount3.setText(b3+"%");
+                String d3 = list.get(2).getDiscount();
+                discount3.setVisibility(View.VISIBLE);
+                discount3.setText(d3+"%");
+                discount3title.setVisibility(View.VISIBLE);
+                discount2line.setVisibility(View.VISIBLE);
+                discount3layout.setVisibility(View.VISIBLE);
+                discount3title.setText(des3);
+                if(Integer.parseInt(d3)>maxDiscount)
+                    maxDiscount=Integer.parseInt(d3);
 
             case 2:
                 String des2 = list.get(1).getDescription();
-                String b2 = list.get(1).getPlanBronze();
-                String d2 = list.get(1).getPlanDiamond();
-                diamondDiscount2.setVisibility(View.VISIBLE);
-                diamondDiscount2.setText(d2+"%");
-                diamondDiscount2title.setVisibility(View.VISIBLE);
-                diamondDiscount2title.setText(des2);
-                bronzeDiscount2.setVisibility(View.VISIBLE);
-                bronzeDiscount2.setText(b2+"%");
+                String d2 = list.get(1).getDiscount();
+                discount2.setVisibility(View.VISIBLE);
+                discount2.setText(d2+"%");
+                discount2title.setVisibility(View.VISIBLE);
+                discount1line.setVisibility(View.VISIBLE);
+                discount2layout.setVisibility(View.VISIBLE);
+                discount2title.setText(des2);
+                if(Integer.parseInt(d2)>maxDiscount)
+                    maxDiscount=Integer.parseInt(d2);
 
             case 1:
                 String des = list.get(0).getDescription();
-                String b = list.get(0).getPlanBronze();
-                String d = list.get(0).getPlanDiamond();
-                diamondDiscount1.setVisibility(View.VISIBLE);
-                diamondDiscount1.setText(d+"%");
-                diamondDiscount1title.setVisibility(View.VISIBLE);
-                diamondDiscount1title.setText(des);
-                bronzeDiscount1.setVisibility(View.VISIBLE);
-                bronzeDiscount1.setText(b+"%");
+                String d = list.get(0).getDiscount();
+                discount1.setVisibility(View.VISIBLE);
+                discount1.setText(d+"%");
+                discount1title.setVisibility(View.VISIBLE);
+                discount1layout.setVisibility(View.VISIBLE);
+                discount1title.setText(des);
+                if(Integer.parseInt(d)>maxDiscount)
+                    maxDiscount=Integer.parseInt(d);
 
         }
         rateListener();
@@ -529,18 +561,6 @@ public class ShopFragment extends Fragment {
         getActivity().startActivityForResult(new Intent(getContext(), QrcodeActivity.class),QR_REQUEST_CODE);
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode== QR_REQUEST_CODE){
-//            if(resultCode== Activity.RESULT_OK){
-//                BuyFragment buyFragment = new BuyFragment();
-//                buyFragment.setQrId( data.getStringExtra("qrCode"));
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .add(R.id.main_container,buyFragment).addToBackStack(null).commit();
-//            }
-//        }
-//    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode){
@@ -549,6 +569,18 @@ public class ShopFragment extends Fragment {
                     readQr();
                 }
         }
+    }
+
+    private void showUpgradeDialog() {
+        UpgradeDialog upgradeDialog = new UpgradeDialog(getActivity());
+
+        upgradeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        upgradeDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        upgradeDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
+        upgradeDialog.show();
+        Window window = upgradeDialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
 }

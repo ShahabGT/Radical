@@ -7,13 +7,15 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="yellow_light">#FFF594</color>
-    <color name="yellow">#FCD736</color>
+    <color name="yellowOLD">#FCD736</color>
+    <color name="yellow">#FABC02</color>
     <color name="yellow_dark">#FBC02D</color>
     <color name="orange">#E95420</color>
     <color name="green">#00C853</color>
     <color name="blue">#249FE6</color>
     <color name="pink">#EC407A</color>
     <color name="bronze">#CD7F32</color>
+    <color name="red">#F44643</color>
 
     <drawable name="transparent">#00000000</drawable>
     <drawable name="clicked_gray">#80e0e0e0</drawable>
@@ -30,7 +32,7 @@
     <color name="material_drawer_primary_icon">#8A000000</color>
     <color name="material_drawer_secondary_text">#000000</color>
     <color name="material_drawer_hint_text">#42000000</color>
-    <color name="material_drawer_divider">#aa000000</color>
+    <color name="material_drawer_divider">#00000000</color>
     <!-- Material DEFAULT drawer colors -->
     <color name="material_drawer_selected">#1F2196F3</color>
     <color name="material_drawer_selected_legacy">#E8E8E8</color>

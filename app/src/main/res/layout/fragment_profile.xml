@@ -31,7 +31,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/profile_save"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -72,7 +72,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_cardphone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -118,8 +118,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_cardgender"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -190,8 +191,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_cardgiftcode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -239,8 +241,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_cardemail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -292,8 +295,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_cardjob"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -323,10 +327,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
-                    android:spinnerMode="dialog"
                     android:id="@+id/profile_job"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -334,8 +338,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_cardedu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -365,11 +370,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
-                    android:spinnerMode="dialog"
-
                     android:id="@+id/profile_edu"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -377,8 +382,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_cardregion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -408,10 +414,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
-                    android:spinnerMode="dialog"
                     android:id="@+id/profile_region"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -419,8 +425,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_cardcolor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -477,8 +484,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_cardplan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -497,7 +505,7 @@
                     style="@style/Base.TextAppearance.AppCompat.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/vector_diamond"
+                    android:drawableRight="@drawable/vector_plan"
                     android:fontFamily="@font/vazir"
                     android:gravity="center"
                     android:padding="5dp"
@@ -515,7 +523,7 @@
                     android:fontFamily="@font/vazir"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="الماس"
+                    android:text=""
                     android:textColor="@color/primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -524,12 +532,14 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_cardtime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:visibility="gone"
             app:cardCornerRadius="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -571,7 +581,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <View
             android:id="@+id/profile_view2"

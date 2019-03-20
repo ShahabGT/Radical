@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,80 +9,119 @@
     android:focusable="true"
     tools:context=".fragments.AboutFragment">
 
-  <LinearLayout
-      android:orientation="vertical"
-      android:padding="10dp"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-      <TextView
-          android:textColor="@color/yellow"
-          android:fontFamily="@font/vazir"
-          android:text="@string/about_title"
-          android:gravity="right"
-          style="@style/Base.TextAppearance.AppCompat.Large"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-      <ir.radical_app.radical.classes.JustifiedTextView
-          android:id="@+id/about_text"
-          android:textColor="@color/primary"
-          android:fontFamily="@font/vazir"
-          android:layout_marginTop="8dp"
-          android:padding="10dp"
-          android:gravity="right"
-          style="@style/Base.TextAppearance.AppCompat.Medium"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
-      <LinearLayout
-          android:orientation="horizontal"
-          android:padding="15dp"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-      <com.google.android.material.button.MaterialButton
-          app:icon="@drawable/vector_email"
-          android:fontFamily="@font/vazir"
-          android:text="@string/about_email"
-          android:padding="16dp"
-          android:id="@+id/about_email"
-          android:layout_marginRight="5dp"
-          android:layout_width="0dp"
-          android:layout_weight="1"
-          android:layout_height="match_parent" />
-      <com.google.android.material.button.MaterialButton
-          app:icon="@drawable/vector_bug"
-          android:fontFamily="@font/vazir"
-          android:text="@string/about_issue"
-          android:id="@+id/about_issue"
-          android:layout_marginLeft="5dp"
-          android:layout_width="0dp"
-          android:padding="16dp"
-          android:layout_weight="1"
-          android:layout_height="wrap_content" />
-      </LinearLayout>
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@color/app_bg"/>
-      <TextView
-          android:id="@+id/about_trademark1"
-          android:padding="8dp"
-          android:gravity="center"
-          android:text="@string/about_trademark1"
-          android:textDirection="rtl"
-          android:fontFamily="@font/vazir"
-          style="@style/Base.TextAppearance.AppCompat.Body1"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
-      <TextView
-          android:id="@+id/about_trademark2"
-          android:padding="8dp"
-          android:gravity="center"
-          android:textDirection="rtl"
-          android:fontFamily="@font/vazir"
-          style="@style/Base.TextAppearance.AppCompat.Body1"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+        <TextView
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:gravity="right"
+            android:text="@string/about_title"
+            android:textColor="@color/yellow" />
 
-  </LinearLayout>
+        <ir.radical_app.radical.classes.JustifiedTextView
+            android:id="@+id/about_text"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/vazir"
+            android:gravity="right"
+            android:padding="10dp"
+            android:textColor="@color/primary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/about_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/vazir"
+                android:padding="16dp"
+                android:text="@string/about_email"
+                app:icon="@drawable/vector_email" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/about_issue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="16dp"
+                android:text="@string/about_issue"
+                app:icon="@drawable/vector_bug" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/about_call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="16dp"
+                android:text="@string/about_call"
+                app:icon="@drawable/vector_call" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <ImageView
+                android:id="@+id/about_website"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/website" />
+            <ImageView
+                android:id="@+id/about_telegram"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/telegram" />
+
+            <ImageView
+                android:id="@+id/about_instagram"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/instagram" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/app_bg" />
+
+        <TextView
+            android:id="@+id/about_trademark1"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/about_trademark1"
+            android:textDirection="rtl" />
+
+        <TextView
+            android:id="@+id/about_trademark2"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textDirection="rtl" />
+
+    </LinearLayout>
 
 </ScrollView>

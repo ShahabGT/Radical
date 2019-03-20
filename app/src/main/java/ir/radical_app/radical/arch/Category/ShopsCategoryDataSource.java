@@ -28,12 +28,14 @@ public class ShopsCategoryDataSource extends PageKeyedDataSource<Integer, ShopsC
                     public void onResponse(Call<ShopsCategoryResponse> call, Response<ShopsCategoryResponse> response) {
                         if(response.body() != null){
                                 callback.onResult(response.body().getData(), null, START + SIZE);
+                        }else{
+                            SpecificCategoryFragment.showEmpty("فروشگاهی موجود نیست!");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ShopsCategoryResponse> call, Throwable t) {
-                        SpecificCategoryFragment.showEmpty();
+                        SpecificCategoryFragment.showEmpty("فروشگاهی موجود نیست!");
 
                     }
                 });

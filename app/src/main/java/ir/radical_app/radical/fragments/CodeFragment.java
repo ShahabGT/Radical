@@ -2,29 +2,21 @@ package ir.radical_app.radical.fragments;
 
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
 import ir.radical_app.radical.activities.MainActivity;
 import ir.radical_app.radical.classes.Const;
 import ir.radical_app.radical.classes.MySharedPreference;
@@ -54,9 +46,7 @@ public class CodeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_code, container, false);
-        bringToFront(v);
         init(v);
-      //  backgroundAnimation(v);
 
         return v;
     }
@@ -213,19 +203,7 @@ public class CodeFragment extends Fragment {
                     }
                 });
     }
-    private void backgroundAnimation(View v){
-        ConstraintLayout constraintLayout = v.findViewById(R.id.code_layout);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-        animationDrawable.setExitFadeDuration(4000);
-        animationDrawable.setEnterFadeDuration(2000);
-        animationDrawable.start();
-    }
-    private void bringToFront(View v){
-        ImageView imageView = v.findViewById(R.id.code_logo);
-        imageView.bringToFront();
-        imageView.requestLayout();
-        imageView.invalidate();
-    }
+
     private String convertToTimeFormat(long millisecond){
         Date date = new Date(millisecond);
         DateFormat formatter = new SimpleDateFormat("mm:ss", Locale.ENGLISH);

@@ -201,7 +201,6 @@ public interface Api {
             @Field("number") String number,
             @Field("accesstoken") String accessToken,
             @Field("shop_id") String shopId,
-            @Field("plan_id") String planId,
             @Field("amount") String amount,
             @Field("discount") String discount,
             @Field("pay") String pay,

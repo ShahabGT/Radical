@@ -34,6 +34,7 @@
             tools:text="99" />
     </LinearLayout>
     <LinearLayout
+        android:layout_marginRight="4dp"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -73,8 +74,8 @@
 
     <ImageView
         android:id="@+id/material_drawer_icon"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="right|center"
         />
 

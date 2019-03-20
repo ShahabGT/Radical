@@ -19,6 +19,7 @@ import ir.radical_app.radical.data.RetrofitClient;
 import ir.radical_app.radical.database.MyDatabase;
 import ir.radical_app.radical.dialogs.IntroDialog;
 import ir.radical_app.radical.dialogs.NewVersionDialog;
+import ir.radical_app.radical.dialogs.ProfileDialog;
 import ir.radical_app.radical.dialogs.UpgradeDialog;
 import ir.radical_app.radical.fragments.AboutFragment;
 import ir.radical_app.radical.fragments.BuyFragment;
@@ -51,6 +52,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -68,6 +70,10 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -99,12 +105,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView toolbarDiscount;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         assignToolbar();
         init();
+
+
 
 
     }
@@ -121,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         });
         introDialog.setCancelable(true);
         introDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        introDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
         introDialog.show();
         Window window = introDialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -129,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         NewVersionDialog newVersionDialog = new NewVersionDialog(this);
         newVersionDialog.setCancelable(true);
         newVersionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        newVersionDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
         newVersionDialog.show();
         Window window = newVersionDialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -141,16 +154,47 @@ public class MainActivity extends AppCompatActivity {
         doubleBackToExitPressedOnce = false;
 
       //  showGuide();
+     //   showCase();
         search();
         onClicks();
         validate();
         navigationDrawer();
     }
+    private void showCase(){
+        TapTargetView.showFor(this,                 // `this` is an Activity
+                TapTarget.forView(findViewById(R.id.toolbar_qr), "This is a target", "We have the best targets, believe me")
+                        // All options below are optional
+                        .outerCircleColor(R.color.red)      // Specify a color for the outer circle
+                        .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+                        .targetCircleColor(R.color.white)   // Specify a color for the target circle
+                        .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                        .titleTextColor(R.color.white)      // Specify the color of the title text
+                        .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                        .descriptionTextColor(R.color.red)  // Specify the color of the description text
+                        .textColor(R.color.blue)            // Specify a color for both the title and description text
+                        .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+                        .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                        .drawShadow(true)                   // Whether to draw a drop shadow or not
+                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                        .tintTarget(true)                   // Whether to tint the target view's color
+                        .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
+                        //.icon(R.drawable.vector_plan)                     // Specify a custom drawable to draw as the target
+                        .targetRadius(60),                  // Specify the target radius (in dp)
+                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);      // This call is optional
+                    }
+                });
+    }
     private void onClicks(){
         readQr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestCamera();
+                if(MySharedPreference.getInstance(MainActivity.this).getPlan()!=1)
+                    requestCamera();
+                else
+                    showUpgradeDialog();
             }
         });
 
@@ -258,17 +302,44 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
     }
+
+    private void initNavigationHeader(View v){
+       ImageView edit = v.findViewById(R.id.header_edit);
+       edit.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+
+               setFragment(new ProfileFragment());
+               drawer.closeDrawer();
+           }
+       });
+        String name=MySharedPreference.getInstance(MainActivity.this).getName();
+        if(name.isEmpty()){
+            name="کاربر رادیکال";
+        }
+        String number=MySharedPreference.getInstance(MainActivity.this).getNumber();
+       TextView hName = v.findViewById(R.id.header_name);
+       hName.setText(name);
+       TextView hNumber = v.findViewById(R.id.header_number);
+       hNumber.setText(number);
+
+
+
+    }
     private void navigationDrawer(){
         drawer = new DrawerBuilder()
                 .withActivity(this)
+                .withStickyHeader(R.layout.drawer_header)
+
                 .withHasStableIds(true)
                 .withDrawerGravity(Gravity.RIGHT)
-                .withAccountHeader(navigationHeader(),true)
+               // .withAccountHeader(navigationHeader(),true)
                 .withHeaderDivider(true)
                 .withSliderBackgroundColor(Color.parseColor("#ECEFF1"))
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(getString(R.string.navigation_mainpage)).withIcon(R.mipmap.navigation_mainpage).withSelectable(false).withIdentifier(1),
                         new PrimaryDrawerItem().withName(getString(R.string.navigation_profile)).withIcon(R.mipmap.navigation_profile).withSelectable(false).withIdentifier(2),
+                        new PrimaryDrawerItem().withName(getString(R.string.navigation_plan)).withIcon(R.mipmap.navigation_plan).withSelectable(false).withIdentifier(6),
                         new PrimaryDrawerItem().withName(getString(R.string.navigation_wallet)).withIcon(R.mipmap.navigation_wallet).withSelectable(false).withIdentifier(3),
 
                         new ExpandableDrawerItem().withName(getString(R.string.navigation_history)).withIcon(R.mipmap.navigation_history).withIdentifier(4).withSelectable(false).withSubItems(
@@ -278,7 +349,6 @@ public class MainActivity extends AppCompatActivity {
                         ),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withName(getString(R.string.navigation_catagory)).withIcon(R.mipmap.navigation_catagory).withSelectable(false).withIdentifier(5),
-                        new PrimaryDrawerItem().withName(getString(R.string.navigation_plan)).withIcon(R.mipmap.navigation_plan).withSelectable(false).withIdentifier(6),
                         new PrimaryDrawerItem().withName(getString(R.string.navigation_favorites)).withIcon(R.mipmap.navigation_favorites).withSelectable(false).withIdentifier(7),
                         new PrimaryDrawerItem().withName(getString(R.string.navigation_share)).withIcon(R.mipmap.navigation_share).withSelectable(false).withIdentifier(8),
                         new DividerDrawerItem(),
@@ -344,7 +414,10 @@ public class MainActivity extends AppCompatActivity {
 
                                 break;
                             case 92:
-                                setFragment(new SupportFragment());
+                                if(!MySharedPreference.getInstance(MainActivity.this).getName().isEmpty())
+                                    setFragment(new SupportFragment());
+                                else
+                                    showProfileDialog();
 
                                 break;
                             case 10:
@@ -374,6 +447,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build();
         drawer.setSelection(1,true);
+        initNavigationHeader(drawer.getStickyHeader());
 
     }
     @Override
@@ -519,6 +593,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        externalLinks();
+    }
+
     private void showGuide(){
         builder = new GuideView.Builder(this)
                 .setTitle("جستجو")
@@ -592,15 +673,14 @@ public class MainActivity extends AppCompatActivity {
                                         toolbarDiscount.setText(getString(R.string.toolbar_discount,amount));
                                     }
 
-                                    int myVersion =getVersionCode();
+                                    MySharedPreference.getInstance(MainActivity.this).setPlan(Integer.parseInt(response.body().getPlanid()));
+
+
+
                                     int newVersion = Integer.parseInt(response.body().getVersion());
+                                    MySharedPreference.getInstance(MainActivity.this).setNewVersion(newVersion);
+
                                     Intent intent = getIntent();
-
-                                    if(response.body().getName()!=null && !response.body().getName().isEmpty()){
-                                        MySharedPreference.getInstance(MainActivity.this).setName(response.body().getName());
-
-                                    }
-
                                     if(intent!=null && intent.getData()!=null){
                                         String id;
                                         if (intent.getData().toString().startsWith("https")){
@@ -608,12 +688,12 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                         else{
                                             id = intent.getData().toString().substring(27);
-
                                         }
 
                                         goToShop(id);
 
                                     }else{
+                                        int myVersion =getVersionCode();
                                         if(MySharedPreference.getInstance(MainActivity.this).getFirstBoot()){
                                             MySharedPreference.getInstance(MainActivity.this).setFirstBoot(false);
                                             showIntroDialog();
@@ -622,6 +702,12 @@ public class MainActivity extends AppCompatActivity {
                                                 showNewVersionDialog();
                                         }
                                     }
+
+                                    if(response.body().getName()!=null && !response.body().getName().isEmpty()){
+                                        MySharedPreference.getInstance(MainActivity.this).setName(response.body().getName());
+
+                                    }
+
                                 }else if(response.body().getMessage().equals("wrongaccess")){
                                     MyToast.Create(MainActivity.this,getString(R.string.access_error));
                                     MySharedPreference.getInstance(MainActivity.this).clear();
@@ -640,6 +726,23 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+    private void externalLinks(){
+        Intent intent = getIntent();
+        if(intent!=null && intent.getData()!=null){
+            String id;
+            if (intent.getData().toString().startsWith("https")){
+                id = intent.getData().toString().substring(32);
+            }
+            else{
+                id = intent.getData().toString().substring(27);
+            }
+
+            goToShop(id);
+
+        }
+    }
+
     private int getVersionCode(){
         int version=0;
         try {
@@ -656,11 +759,25 @@ public class MainActivity extends AppCompatActivity {
 
         upgradeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         upgradeDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        upgradeDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
 
         upgradeDialog.show();
         Window window = upgradeDialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
     }
+    private void showProfileDialog() {
+        ProfileDialog profileDialog = new ProfileDialog(MainActivity.this);
+
+        profileDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        profileDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        profileDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
+        profileDialog.show();
+        Window window = profileDialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+    }
+
 
     private void goToShop(String id){
         ShopFragment shopFragment = new ShopFragment();

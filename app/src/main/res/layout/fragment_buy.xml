@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.BuyFragment">
+
     <ScrollView
-        android:background="@color/app_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/app_bg">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <androidx.cardview.widget.CardView
-                app:layout_constraintHorizontal_chainStyle="packed"
                 android:id="@+id/shop_shop_card"
-                app:layout_constraintLeft_toRightOf="@id/shop_plan_card"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="8dp"
-                android:layout_width="0dp"
-                android:layout_height="200dp">
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,592 +34,581 @@
                     android:layout_height="match_parent">
 
                     <com.facebook.drawee.view.SimpleDraweeView
-                        android:layout_margin="8dp"
-
-                        android:scaleType="fitXY"
                         android:id="@+id/buy_shop_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_margin="8dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintDimensionRatio="16:10"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintDimensionRatio="16:10"
-                        app:layout_constraintBottom_toTopOf="@id/buy_shop_title"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:gravity="center"
                         android:id="@+id/buy_shop_title"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/vazir"
+                        android:gravity="center"
                         android:padding="8dp"
                         android:text=""
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/buy_shop_image" />
 
 
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/shops_row_id"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/shop_plan_card"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/shop_shop_card"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="8dp"
-                android:layout_width="0dp"
-                android:layout_height="200dp">
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/shop_price_card1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardElevation="8dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shop_shop_card">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_margin="8dp"
-                        android:src="@drawable/diamond"
-                        android:id="@+id/buy_plan_image"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/buy_plan_title"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp" />
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
 
                     <TextView
+                        android:id="@+id/buy_discount1_title1"
                         style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:gravity="center"
-                        android:id="@+id/buy_plan_title"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/vector_goods"
+                        android:fontFamily="@font/vazir"
+                        android:padding="5dp"
+                        android:text="عنوان تخفیف"
+                        android:textColor="@color/yellow"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/buy_discount1_title2"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/vazir"
                         android:padding="8dp"
-                        android:text=""
-                        android:textColor="@color/black"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/shop_price_card1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/shop_plan_card"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:padding="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:padding="5dp"
-                        android:id="@+id/buy_discount1_title1"
-                        android:textColor="@color/yellow"
-                        android:drawableRight="@drawable/vector_goods"
-                        style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:fontFamily="@font/vazir"
-                        android:text="عنوان تخفیف"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:padding="8dp"
-                        android:id="@+id/buy_discount1_title2"
-                        android:textColor="@color/black"
-                        style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:fontFamily="@font/vazir"
                         android:text="@string/buy_pay_title"
+                        android:textColor="@color/black"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount1_title1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount1_title1" />
+
                     <EditText
                         android:id="@+id/buy_discount1_amount"
-                        android:inputType="number"
-                        android:maxLength="10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:hint="@string/buy_amount_hint"
-                        android:fontFamily="@font/vazir"
-                        app:layout_constraintTop_toTopOf="@id/buy_discount1_title2"
+                        android:inputType="number"
+                        android:maxLength="10"
                         app:layout_constraintBottom_toBottomOf="@id/buy_discount1_title2"
-                        app:layout_constraintRight_toLeftOf="@id/buy_discount1_title2"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
-                        android:padding="8dp"
-                        android:id="@+id/buy_discount1_title3"
-                        android:textColor="@color/blue"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_discount"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount1_title2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
+                        app:layout_constraintRight_toLeftOf="@id/buy_discount1_title2"
+                        app:layout_constraintTop_toTopOf="@id/buy_discount1_title2" />
 
+                    <TextView
+                        android:id="@+id/buy_discount1_title3"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_discount"
+                        android:textColor="@color/blue"
+                        android:visibility="gone"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount1_title2" />
+
+                    <TextView
+                        android:id="@+id/buy_discount1_discount"
+
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:id="@+id/buy_discount1_discount"
-                        android:textColor="@color/green"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
                         android:text="0"
+                        android:textColor="@color/green"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toRightOf="@id/buy_discount1_title4"
                         app:layout_constraintRight_toLeftOf="@+id/buy_discount1_title3"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount1_title2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount1_title2" />
 
-                        android:padding="8dp"
+                    <TextView
                         android:id="@+id/buy_discount1_title4"
-                        android:textColor="@color/blue"
+
                         style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_currency"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount1_title2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_currency"
+                        android:textColor="@color/blue"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount1_title2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
-                android:visibility="gone"
                 android:id="@+id/shop_price_card2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:visibility="gone"
+                app:cardElevation="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/shop_price_card1"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                app:layout_constraintTop_toBottomOf="@id/shop_price_card1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
                     <TextView
-                        android:padding="5dp"
                         android:id="@+id/buy_discount2_title1"
-                        android:textColor="@color/yellow"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:drawableRight="@drawable/vector_goods"
-                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:fontFamily="@font/vazir"
+                        android:padding="5dp"
                         android:text="عنوان تخفیف"
+                        android:textColor="@color/yellow"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
-                        android:padding="8dp"
                         android:id="@+id/buy_discount2_title2"
-                        android:textColor="@color/black"
                         style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_pay_title"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount2_title1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_pay_title"
+                        android:textColor="@color/black"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount2_title1" />
+
                     <EditText
                         android:id="@+id/buy_discount2_amount"
-                        android:inputType="number"
-                        android:maxLength="10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:hint="@string/buy_amount_hint"
-                        android:fontFamily="@font/vazir"
-                        app:layout_constraintTop_toTopOf="@id/buy_discount2_title2"
+                        android:inputType="number"
+                        android:maxLength="10"
                         app:layout_constraintBottom_toBottomOf="@id/buy_discount2_title2"
-                        app:layout_constraintRight_toLeftOf="@id/buy_discount2_title2"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
+                        app:layout_constraintRight_toLeftOf="@id/buy_discount2_title2"
+                        app:layout_constraintTop_toTopOf="@id/buy_discount2_title2" />
 
-                        android:padding="8dp"
+                    <TextView
                         android:id="@+id/buy_discount2_title3"
-                        android:textColor="@color/blue"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_discount"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount2_title2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
 
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_discount"
+                        android:textColor="@color/blue"
+                        android:visibility="gone"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount2_title2" />
+
+                    <TextView
+                        android:id="@+id/buy_discount2_discount"
+
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:id="@+id/buy_discount2_discount"
-                        android:textColor="@color/green"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
                         android:text="0"
+                        android:textColor="@color/green"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toRightOf="@id/buy_discount2_title4"
                         app:layout_constraintRight_toLeftOf="@+id/buy_discount2_title3"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount2_title2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount2_title2" />
 
-                        android:padding="8dp"
+                    <TextView
                         android:id="@+id/buy_discount2_title4"
-                        android:textColor="@color/blue"
+
                         style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_currency"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount2_title2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_currency"
+                        android:textColor="@color/blue"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount2_title2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
-                android:visibility="gone"
                 android:id="@+id/shop_price_card3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:visibility="gone"
+                app:cardElevation="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/shop_price_card2"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                app:layout_constraintTop_toBottomOf="@id/shop_price_card2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
                     <TextView
-                        android:padding="5dp"
                         android:id="@+id/buy_discount3_title1"
-                        android:textColor="@color/yellow"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:drawableRight="@drawable/vector_goods"
-                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:fontFamily="@font/vazir"
+                        android:padding="5dp"
                         android:text="عنوان تخفیف"
+                        android:textColor="@color/yellow"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
-                        android:padding="8dp"
                         android:id="@+id/buy_discount3_title2"
-                        android:textColor="@color/black"
                         style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_pay_title"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount3_title1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_pay_title"
+                        android:textColor="@color/black"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount3_title1" />
+
                     <EditText
                         android:id="@+id/buy_discount3_amount"
-                        android:inputType="number"
-                        android:maxLength="10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:hint="@string/buy_amount_hint"
-                        android:fontFamily="@font/vazir"
-                        app:layout_constraintTop_toTopOf="@id/buy_discount3_title2"
+                        android:inputType="number"
+                        android:maxLength="10"
                         app:layout_constraintBottom_toBottomOf="@id/buy_discount3_title2"
-                        app:layout_constraintRight_toLeftOf="@id/buy_discount3_title2"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
+                        app:layout_constraintRight_toLeftOf="@id/buy_discount3_title2"
+                        app:layout_constraintTop_toTopOf="@id/buy_discount3_title2" />
 
-                        android:padding="8dp"
+                    <TextView
                         android:id="@+id/buy_discount3_title3"
-                        android:textColor="@color/blue"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_discount"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount3_title2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
 
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_discount"
+                        android:textColor="@color/blue"
+                        android:visibility="gone"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount3_title2" />
+
+                    <TextView
+                        android:id="@+id/buy_discount3_discount"
+
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:id="@+id/buy_discount3_discount"
-                        android:textColor="@color/green"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
                         android:text="0"
+                        android:textColor="@color/green"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toRightOf="@id/buy_discount3_title4"
                         app:layout_constraintRight_toLeftOf="@+id/buy_discount3_title3"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount3_title2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount3_title2" />
 
-                        android:padding="8dp"
+                    <TextView
                         android:id="@+id/buy_discount3_title4"
-                        android:textColor="@color/blue"
+
                         style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_currency"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount3_title2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_currency"
+                        android:textColor="@color/blue"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount3_title2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
-                android:visibility="gone"
                 android:id="@+id/shop_price_card4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:visibility="gone"
+                app:cardElevation="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/shop_price_card3"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                app:layout_constraintTop_toBottomOf="@id/shop_price_card3">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
                     <TextView
-                        android:padding="5dp"
                         android:id="@+id/buy_discount4_title1"
-                        android:textColor="@color/yellow"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:drawableRight="@drawable/vector_goods"
-                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:fontFamily="@font/vazir"
+                        android:padding="5dp"
                         android:text="عنوان تخفیف"
+                        android:textColor="@color/yellow"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
-                        android:padding="8dp"
                         android:id="@+id/buy_discount4_title2"
-                        android:textColor="@color/black"
                         style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_pay_title"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount4_title1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_pay_title"
+                        android:textColor="@color/black"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount4_title1" />
+
                     <EditText
                         android:id="@+id/buy_discount4_amount"
-                        android:inputType="number"
-                        android:maxLength="10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:hint="@string/buy_amount_hint"
-                        android:fontFamily="@font/vazir"
-                        app:layout_constraintTop_toTopOf="@id/buy_discount4_title2"
+                        android:inputType="number"
+                        android:maxLength="10"
                         app:layout_constraintBottom_toBottomOf="@id/buy_discount4_title2"
-                        app:layout_constraintRight_toLeftOf="@id/buy_discount4_title2"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
+                        app:layout_constraintRight_toLeftOf="@id/buy_discount4_title2"
+                        app:layout_constraintTop_toTopOf="@id/buy_discount4_title2" />
 
-                        android:padding="8dp"
+                    <TextView
                         android:id="@+id/buy_discount4_title3"
-                        android:textColor="@color/blue"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_discount"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount4_title2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
 
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_discount"
+                        android:textColor="@color/blue"
+                        android:visibility="gone"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount4_title2" />
+
+                    <TextView
+                        android:id="@+id/buy_discount4_discount"
+
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:id="@+id/buy_discount4_discount"
-                        android:textColor="@color/green"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
                         android:text="0"
+                        android:textColor="@color/green"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toRightOf="@id/buy_discount4_title4"
                         app:layout_constraintRight_toLeftOf="@+id/buy_discount4_title3"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount4_title2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount4_title2" />
 
-                        android:padding="8dp"
+                    <TextView
                         android:id="@+id/buy_discount4_title4"
-                        android:textColor="@color/blue"
+
                         style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_currency"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount4_title2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_currency"
+                        android:textColor="@color/blue"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount4_title2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
-                android:visibility="gone"
                 android:id="@+id/shop_price_card5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:visibility="gone"
+                app:cardElevation="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/shop_price_card4"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                app:layout_constraintTop_toBottomOf="@id/shop_price_card4">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
                     <TextView
-                        android:padding="5dp"
                         android:id="@+id/buy_discount5_title1"
-                        android:textColor="@color/yellow"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:drawableRight="@drawable/vector_goods"
-                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:fontFamily="@font/vazir"
+                        android:padding="5dp"
                         android:text="عنوان تخفیف"
+                        android:textColor="@color/yellow"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
-                        android:padding="8dp"
                         android:id="@+id/buy_discount5_title2"
-                        android:textColor="@color/black"
                         style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_pay_title"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount5_title1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_pay_title"
+                        android:textColor="@color/black"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount5_title1" />
+
                     <EditText
                         android:id="@+id/buy_discount5_amount"
-                        android:inputType="number"
-                        android:maxLength="10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:hint="@string/buy_amount_hint"
-                        android:fontFamily="@font/vazir"
-                        app:layout_constraintTop_toTopOf="@id/buy_discount5_title2"
+                        android:inputType="number"
+                        android:maxLength="10"
                         app:layout_constraintBottom_toBottomOf="@id/buy_discount5_title2"
-                        app:layout_constraintRight_toLeftOf="@id/buy_discount5_title2"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
+                        app:layout_constraintRight_toLeftOf="@id/buy_discount5_title2"
+                        app:layout_constraintTop_toTopOf="@id/buy_discount5_title2" />
 
-                        android:padding="8dp"
+                    <TextView
                         android:id="@+id/buy_discount5_title3"
-                        android:textColor="@color/blue"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_discount"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount5_title2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
 
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_discount"
+                        android:textColor="@color/blue"
+                        android:visibility="gone"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount5_title2" />
+
+                    <TextView
+                        android:id="@+id/buy_discount5_discount"
+
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:id="@+id/buy_discount5_discount"
-                        android:textColor="@color/green"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
                         android:text="0"
+                        android:textColor="@color/green"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toRightOf="@id/buy_discount5_title4"
                         app:layout_constraintRight_toLeftOf="@+id/buy_discount5_title3"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount5_title2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount5_title2" />
 
-                        android:padding="8dp"
+                    <TextView
                         android:id="@+id/buy_discount5_title4"
-                        android:textColor="@color/blue"
+
                         style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:text="@string/buy_currency"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/buy_discount5_title2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="@string/buy_currency"
+                        android:textColor="@color/blue"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/buy_discount5_title2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
+
             <View
 
-                app:layout_constraintTop_toBottomOf="@+id/shop_price_card5"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"/>
+                android:layout_height="80dp"
+                app:layout_constraintTop_toBottomOf="@+id/shop_price_card5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="#cc000000"
-        android:padding="12dp"
-        android:layout_height="wrap_content">
+        android:padding="12dp">
 
         <Button
             android:id="@+id/buy_footer_buy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fontFamily="@font/vazir"
             android:text="@string/buy_pay_btn"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

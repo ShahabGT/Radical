@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView2"
@@ -17,8 +16,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <com.tmall.ultraviewpager.UltraViewPager
                 android:id="@+id/shop_images_pager"
@@ -31,18 +29,20 @@
 
             <ImageView
                 android:id="@+id/shop_share"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:src="@mipmap/ic_share"
                 app:layout_constraintBottom_toBottomOf="@id/shop_images_pager"
                 app:layout_constraintLeft_toLeftOf="parent" />
-            <androidx.cardview.widget.CardView
+
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/shop_top_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/shop_images_pager">
@@ -52,73 +52,82 @@
                     android:layout_height="match_parent"
                     android:padding="5dp">
 
-                    <ImageView
-                        android:src="@drawable/vector_bookmark_empty"
-                        android:id="@+id/shop_bookmark"
-                        app:layout_constraintTop_toTopOf="@id/shop_name"
-                        app:layout_constraintBottom_toBottomOf="@id/shop_name"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp" />
 
                     <TextView
                         android:id="@+id/shop_name"
-                        style="@style/Base.TextAppearance.AppCompat.Medium"
+                        style="@style/Base.TextAppearance.AppCompat.Title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/vazir"
                         android:gravity="right"
                         android:padding="8dp"
-                        android:text="اسم فروشگاه"
+                        android:text="عنوان"
                         android:textColor="@color/black"
                         android:textDirection="rtl"
-                        app:layout_constraintLeft_toRightOf="@id/shop_bookmark"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.willy.ratingbar.ScaleRatingBar
+                        android:id="@+id/shop_RatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintRight_toLeftOf="@+id/shop_rate_title"
+                        app:layout_constraintTop_toBottomOf="@id/shop_name"
+                        app:srb_clearRatingEnabled="false"
+                        app:srb_clickable="true"
+                        app:srb_drawableEmpty="@drawable/empty"
+                        app:srb_drawableFilled="@drawable/filled"
+                        app:srb_isIndicator="false"
+                        app:srb_minimumStars="1"
+                        app:srb_numStars="5"
+                        app:srb_scrollable="true"
+                        app:srb_starHeight="20dp"
+                        app:srb_starPadding="5dp"
+                        app:srb_starWidth="20dp"
+                        app:srb_stepSize="1" />
+
+
+                    <TextView
+                        android:id="@+id/shop_rate_title"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="امتیاز"
+                        android:textColor="@color/yellow"
+                        app:layout_constraintBottom_toBottomOf="@id/shop_RatingBar"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/shop_RatingBar" />
 
                     <TextView
                         android:id="@+id/shop_category"
                         style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/vactor_tag"
                         android:fontFamily="@font/vazir"
                         android:gravity="right"
                         android:padding="8dp"
-                        android:text="دسته بندی"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textDirection="rtl"
+                        app:layout_constraintLeft_toRightOf="@+id/shop_bookmark"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/shop_RatingBar" />
+
+                    <ImageView
+                        android:id="@+id/shop_bookmark"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/vector_bookmark_empty"
+                        app:layout_constraintBottom_toBottomOf="@+id/shop_category"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/shop_name" />
-                    <com.willy.ratingbar.ScaleRatingBar
-                        android:id="@+id/shop_RatingBar"
-                        app:layout_constraintTop_toBottomOf="@id/shop_category"
-                        app:layout_constraintRight_toRightOf="parent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srb_numStars="5"
-                        app:srb_minimumStars="1"
-                        app:srb_starWidth="26dp"
-                        app:srb_starHeight="26dp"
-                        app:srb_starPadding="5dp"
-                        app:srb_stepSize="1"
-                        app:srb_isIndicator="false"
-                        app:srb_clickable="true"
-                        app:srb_scrollable="true"
-                        app:srb_clearRatingEnabled="false"
-                        app:srb_drawableEmpty="@drawable/empty"
-                        app:srb_drawableFilled="@drawable/filled">
-                    </com.willy.ratingbar.ScaleRatingBar>
-                    <TextView
-                        android:id="@+id/shop_rate_title"
-                        app:layout_constraintRight_toLeftOf="@id/shop_RatingBar"
-                        app:layout_constraintTop_toTopOf="@id/shop_RatingBar"
-                        app:layout_constraintBottom_toBottomOf="@id/shop_RatingBar"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:fontFamily="@font/vazir"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        app:layout_constraintTop_toTopOf="@id/shop_category" />
+
                     <TextView
                         android:id="@+id/shop_description"
                         style="@style/Base.TextAppearance.AppCompat.Small"
@@ -132,7 +141,7 @@
                         android:textDirection="rtl"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/shop_RatingBar" />
+                        app:layout_constraintTop_toBottomOf="@id/shop_category" />
 
 
                     <TextView
@@ -140,10 +149,12 @@
                         style="@style/Base.TextAppearance.AppCompat.Small"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/vector_clock"
+                        android:drawablePadding="4dp"
                         android:fontFamily="@font/vazir"
                         android:gravity="right"
                         android:padding="8dp"
-                        android:text="ساعت کاری"
+                        android:text="ساعات کاری"
                         android:textColor="@color/black"
                         android:textDirection="rtl"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -152,13 +163,15 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/shop_discount_card"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/shop_top_card">
@@ -168,330 +181,356 @@
                     android:layout_height="match_parent"
                     android:padding="5dp">
 
-                    <ImageView
-                        android:layout_marginRight="8dp"
-                        android:id="@+id/shop_diamond_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/diamond"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/shop_diamond_title"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_diamond_image"
-                        app:layout_constraintRight_toRightOf="@id/shop_diamond_image"
-                        app:layout_constraintTop_toBottomOf="@id/shop_diamond_image"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:fontFamily="@font/vazir"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:text="VIP"
-                        android:textColor="@color/black" />
-                    <ImageView
-                        android:layout_marginRight="22dp"
-                        android:id="@+id/shop_bronze_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/bronze"
-                        app:layout_goneMarginRight="8dp"
-                        app:layout_constraintRight_toLeftOf="@id/shop_diamond_image"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/shop_bronze_title"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_bronze_image"
-                        app:layout_constraintRight_toRightOf="@id/shop_bronze_image"
-                        app:layout_constraintTop_toBottomOf="@id/shop_bronze_image"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:fontFamily="@font/vazir"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:text="عادی"
-                        android:textColor="@color/black" />
-
-                    <View
-                        android:id="@+id/shop_diamond_line"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:visibility="gone"
+                        android:id="@+id/shop_discount1_layout"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_margin="8dp"
-                        android:background="@color/app_bg"
+                        android:background="@drawable/discount_circle"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/shop_diamond_title" />
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/shop_diamond_discount1"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/round_shape"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="99%"
-                        android:textColor="@color/blue"
-                        app:layout_constraintRight_toRightOf="@id/shop_diamond_image"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_diamond_image"
-                        app:layout_constraintTop_toBottomOf="@id/shop_diamond_line" />
-                    <TextView
-                        android:visibility="gone"
+                        <TextView
+                            android:id="@+id/shop_discount1"
+                            style="@style/Base.TextAppearance.AppCompat.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/vazir"
+                            android:text="7%"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
 
-                        android:id="@+id/shop_bronze_discount1"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/round_shape_bronze"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="99%"
-                        android:textColor="@color/bronze"
-                        app:layout_constraintRight_toRightOf="@id/shop_bronze_image"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_bronze_image"
-                        app:layout_constraintTop_toBottomOf="@id/shop_diamond_line" />
+                        <TextView
+                            android:id="@+id/shop_discount1_caption"
+                            style="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/vazir"
+                            android:text="تخفیف"
 
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                     <TextView
                         android:visibility="gone"
 
-                        android:id="@+id/shop_diamond_discount1_title1"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:id="@+id/shop_discount1_title"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_margin="16dp"
                         android:fontFamily="@font/vazir"
-                        android:padding="8dp"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/shop_bronze_discount1"
-                        app:layout_constraintEnd_toStartOf="@+id/shop_bronze_discount1"
-                        app:layout_constraintTop_toTopOf="@+id/shop_bronze_discount1" />
+                        app:layout_constraintBottom_toBottomOf="@+id/shop_discount1_layout"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/shop_discount1_layout" />
+                    <View
+                        android:visibility="gone"
 
+                        android:layerType="software"
+                        android:id="@+id/shop_discount1_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:background="#DBDBDB"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shop_discount1_layout" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:visibility="gone"
+
+                        android:id="@+id/shop_discount2_layout"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/discount_circle"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/shop_discount1_line">
+
+                        <TextView
+                            android:id="@+id/shop_discount2"
+                            style="@style/Base.TextAppearance.AppCompat.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/vazir"
+                            android:text="7%"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/shop_discount2_caption"
+                            style="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/vazir"
+                            android:text="تخفیف"
+
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                     <TextView
                         android:visibility="gone"
 
-                        android:id="@+id/shop_diamond_discount2"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/round_shape"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="99%"
-                        android:textColor="@color/blue"
-                        app:layout_constraintRight_toRightOf="@id/shop_diamond_image"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_diamond_image"
-                        app:layout_constraintTop_toBottomOf="@id/shop_diamond_discount1" />
-                    <TextView
-                        android:visibility="gone"
-
-                        android:id="@+id/shop_bronze_discount2"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/round_shape_bronze"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="99%"
-                        android:textColor="@color/bronze"
-                        app:layout_constraintRight_toRightOf="@id/shop_bronze_discount1"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_bronze_discount1"
-                        app:layout_constraintTop_toBottomOf="@id/shop_bronze_discount1"/>
-
-                    <TextView
-                        android:visibility="gone"
-
-                        android:id="@+id/shop_diamond_discount1_title2"
-
-                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:id="@+id/shop_discount2_title"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
+                        android:layout_margin="16dp"
                         android:fontFamily="@font/vazir"
-                        android:padding="8dp"
-                        android:text="تخفیف 2"
+                        android:text="تخفیف 1"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/shop_diamond_discount2"
-                        app:layout_constraintRight_toLeftOf="@id/shop_bronze_discount2"
-                        app:layout_constraintTop_toTopOf="@+id/shop_diamond_discount2" />
+                        app:layout_constraintBottom_toBottomOf="@+id/shop_discount2_layout"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/shop_discount2_layout" />
+                    <View
+                        android:visibility="gone"
 
+                        android:id="@+id/shop_discount2_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:background="#DBDBDB"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shop_discount2_layout" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:visibility="gone"
+
+                        android:id="@+id/shop_discount3_layout"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/discount_circle"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/shop_discount2_line">
+
+                        <TextView
+                            android:id="@+id/shop_discount3"
+                            style="@style/Base.TextAppearance.AppCompat.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/vazir"
+                            android:text="7%"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/shop_discount3_caption"
+                            style="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/vazir"
+                            android:text="تخفیف"
+
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                     <TextView
                         android:visibility="gone"
 
-                        android:id="@+id/shop_diamond_discount3"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/round_shape"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="99%"
-                        android:textColor="@color/blue"
-                        app:layout_constraintRight_toRightOf="@id/shop_diamond_image"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_diamond_image"
-                        app:layout_constraintTop_toBottomOf="@id/shop_diamond_discount2" />
-                    <TextView
-                        android:visibility="gone"
-
-                        android:id="@+id/shop_bronze_discount3"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/round_shape_bronze"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="99%"
-                        android:textColor="@color/bronze"
-                        app:layout_constraintRight_toRightOf="@id/shop_bronze_discount2"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_bronze_discount2"
-                        app:layout_constraintTop_toBottomOf="@id/shop_bronze_discount2"/>
-
-                    <TextView
-                        android:visibility="gone"
-
-                        android:id="@+id/shop_diamond_discount1_title3"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:id="@+id/shop_discount3_title"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
+                        android:layout_margin="16dp"
                         android:fontFamily="@font/vazir"
-                        android:padding="8dp"
-                        android:text="تخفیف 3"
+                        android:text="تخفیف 1"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/shop_diamond_discount3"
-                        app:layout_constraintRight_toLeftOf="@id/shop_bronze_discount3"
-                        app:layout_constraintTop_toTopOf="@+id/shop_diamond_discount3" />
+                        app:layout_constraintBottom_toBottomOf="@+id/shop_discount3_layout"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/shop_discount3_layout" />
+                    <View
+                        android:visibility="gone"
 
+                        android:id="@+id/shop_discount3_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:background="#DBDBDB"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shop_discount3_layout" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:visibility="gone"
+
+                        android:id="@+id/shop_discount4_layout"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/discount_circle"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/shop_discount3_line">
+
+                        <TextView
+                            android:id="@+id/shop_discount4"
+                            style="@style/Base.TextAppearance.AppCompat.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/vazir"
+                            android:text="7%"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/shop_discount4_caption"
+                            style="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/vazir"
+                            android:text="تخفیف"
+
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                     <TextView
                         android:visibility="gone"
 
-                        android:id="@+id/shop_diamond_discount4"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/round_shape"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="99%"
-                        android:textColor="@color/blue"
-                        app:layout_constraintRight_toRightOf="@id/shop_diamond_image"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_diamond_image"
-                        app:layout_constraintTop_toBottomOf="@id/shop_diamond_discount3" />
-                    <TextView
-                        android:visibility="gone"
-
-                        android:id="@+id/shop_bronze_discount4"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/round_shape_bronze"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="99%"
-                        android:textColor="@color/bronze"
-                        app:layout_constraintRight_toRightOf="@id/shop_bronze_discount3"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_bronze_discount3"
-                        app:layout_constraintTop_toBottomOf="@id/shop_bronze_discount3"/>
-
-                    <TextView
-                        android:visibility="gone"
-
-                        android:id="@+id/shop_diamond_discount1_title4"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:id="@+id/shop_discount4_title"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
+                        android:layout_margin="16dp"
                         android:fontFamily="@font/vazir"
-                        android:padding="8dp"
-                        android:text="تخفیف 4"
+                        android:text="تخفیف 1"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/shop_diamond_discount4"
-                        app:layout_constraintRight_toLeftOf="@id/shop_bronze_discount4"
-                        app:layout_constraintTop_toTopOf="@+id/shop_diamond_discount4" />
+                        app:layout_constraintBottom_toBottomOf="@+id/shop_discount4_layout"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/shop_discount4_layout" />
+                    <View
+                        android:visibility="gone"
+
+                        android:id="@+id/shop_discount4_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:background="#DBDBDB"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shop_discount4_layout" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:visibility="gone"
+
+                        android:id="@+id/shop_discount5_layout"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/discount_circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/shop_discount4_line">
+
+                        <TextView
+                            android:id="@+id/shop_discount5"
+                            style="@style/Base.TextAppearance.AppCompat.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/vazir"
+                            android:text="7%"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/shop_discount5_caption"
+                            style="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/vazir"
+                            android:text="تخفیف"
+
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
                         android:visibility="gone"
 
-                        android:id="@+id/shop_diamond_discount5"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/round_shape"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="99%"
-                        android:textColor="@color/blue"
-                        app:layout_constraintRight_toRightOf="@id/shop_diamond_image"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_diamond_image"
-                        app:layout_constraintTop_toBottomOf="@id/shop_diamond_discount4" />
-                    <TextView
-                        android:visibility="gone"
-
-                        android:id="@+id/shop_bronze_discount5"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/round_shape_bronze"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="99%"
-                        android:textColor="@color/bronze"
-                        app:layout_constraintRight_toRightOf="@id/shop_bronze_discount4"
-                        app:layout_constraintLeft_toLeftOf="@id/shop_bronze_discount4"
-                        app:layout_constraintTop_toBottomOf="@id/shop_bronze_discount4"/>
-
-                    <TextView
-                        android:visibility="gone"
-
-                        android:id="@+id/shop_diamond_discount1_title5"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:id="@+id/shop_discount5_title"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
+                        android:layout_margin="16dp"
                         android:fontFamily="@font/vazir"
-                        android:padding="8dp"
-                        android:text="تخفیف 5"
+                        android:text="تخفیف 1"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/shop_diamond_discount5"
-                        app:layout_constraintRight_toLeftOf="@id/shop_bronze_discount5"
-                        app:layout_constraintTop_toTopOf="@+id/shop_diamond_discount5" />
+                        app:layout_constraintBottom_toBottomOf="@+id/shop_discount5_layout"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/shop_discount5_layout" />
+                    <View
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"/>
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/shop_bottom_card"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/shop_discount_card">
@@ -572,7 +611,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <View
                 android:layout_width="match_parent"
@@ -583,23 +622,22 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
     </ScrollView>
+
     <TextView
-        android:layout_margin="16dp"
-        android:layout_gravity="bottom"
         android:id="@+id/shop_buy"
-        android:drawablePadding="8dp"
-        android:drawableRight="@drawable/vector_buy"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:textColor="@color/black"
-        android:background="@drawable/buy_bg"
-        android:fontFamily="@font/vazir"
-        android:text="@string/shop_buy"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:background="@drawable/buy_bg"
+        android:drawableRight="@drawable/vector_buy"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/vazir"
+        android:paddingLeft="32dp"
+        android:paddingTop="8dp"
+        android:paddingRight="32dp"
+        android:paddingBottom="8dp"
+        android:text="@string/shop_buy"
+        android:textColor="@color/black" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

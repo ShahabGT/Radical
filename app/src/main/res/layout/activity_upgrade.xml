@@ -24,6 +24,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
+            app:lottie_enableMergePathsForKitKatAndAbove="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/glasses" />
 
@@ -54,19 +55,97 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/upgrade_title" />
 
-        <TextView
-            android:id="@+id/upgrade_cost"
-            style="@style/Base.TextAppearance.AppCompat.Medium"
+
+        <RadioGroup
+            android:id="@+id/upgrade_radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:fontFamily="@font/vazir"
-            android:gravity="center"
-            android:text="@string/upgrade_cost"
-            android:textColor="@color/green"
+            android:gravity="right"
+            android:orientation="vertical"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/upgrade_description" />
+            app:layout_constraintTop_toBottomOf="@+id/upgrade_description">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/upgrade_radio3"
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/vazir"
+                android:gravity="right|center"
+                android:textColor="@color/green" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/upgrade_radio7"
+
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/vazir"
+                android:gravity="right|center"
+                android:textColor="@color/green" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/upgrade_radio15"
+
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/vazir"
+                android:gravity="right|center"
+                android:textColor="@color/green" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/upgrade_radio30"
+
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/vazir"
+                android:gravity="right|center"
+                android:textColor="@color/green" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/upgrade_radio60"
+
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/vazir"
+                android:gravity="right|center"
+                android:textColor="@color/green" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/upgrade_radio90"
+
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/vazir"
+                android:gravity="right|center"
+                android:textColor="@color/green" />
+
+        </RadioGroup>
+
 
         <TextView
             android:id="@+id/upgrade_wallet"
@@ -80,7 +159,7 @@
             android:textColor="@color/blue"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/upgrade_cost" />
+            app:layout_constraintTop_toBottomOf="@id/upgrade_radio_group" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/upgrade_buy"

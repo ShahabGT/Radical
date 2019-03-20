@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">Radical</string>
 
-    <string name="category_image_url">https://radical-app.ir/api/images/category/%s.png</string>
+    <string name="category_image_url">https://radical-app.ir/api/images/categories/%s.png</string>
     <string name="main_image_url">https://radical-app.ir/api/images/shops/%s/main.JPG</string>
-    <string name="shop_image_url">https://radical-app.ir/api/images/shops/%s/%d.JPG</string>
+    <string name="shop_image_url">https://radical-app.ir/api/images/shops/%s/%s.JPG</string>
     <string name="eng_digits">1234567890abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_@.-</string>
 
     <string name="search_hint">جستجو</string>
 
     <string name="txt_share">اشتراک از طریق</string>
+    <string name="txt_start">شروع</string>
+    <string name="txt_letsgo">بزن بریم</string>
     <string name="txt_qr">برای ادامه، لطفا بارکد داخل فروشگاه را اسکن کنید!</string>
     <string name="txt_sent">کد تایید با موفقیت ارسال شد!</string>
     <string name="txt_loading">...</string>
@@ -28,6 +30,7 @@
 
     <string name="number_error">لطفا شماره تلفن را بررسی کنید!</string>
     <string name="name_error">لطفا نام را بررسی کنید!</string>
+    <string name="profile_error">قبل از برقراری ارتباط با پشتیبانی حساب کاربری خود را تکمیل کنید</string>
     <string name="email_error">لطفا ایمیل را بررسی کنید!</string>
     <string name="color_error">لطفا رنگ مورد علاقه خود را انتخاب کنید!</string>
     <string name="data_error">خطا در اطلاعات برنامه! لطفا دوباره وارد شوید</string>
@@ -53,11 +56,11 @@
     <string name="navigation_profile">حساب کاربری</string>
     <string name="navigation_wallet">کیف پول</string>
     <string name="navigation_history">تاریخچه خرید</string>
-    <string name="navigation_history_sub1">ارتقاء طرح</string>
-    <string name="navigation_history_sub2">خرید از فروشگاه</string>
+    <string name="navigation_history_sub1">تاریخچه خرید اشتراک</string>
+    <string name="navigation_history_sub2">تاریخچه خرید از فروشگاه</string>
     <string name="navigation_history_sub3">آمار و اطلاعات</string>
     <string name="navigation_catagory">دسته بندی ها</string>
-    <string name="navigation_plan">ارتقاء طرح</string>
+    <string name="navigation_plan">وضعیت اشتراک</string>
     <string name="navigation_favorites">مکان های نشان شده</string>
     <string name="navigation_share">معرفی به دوستان</string>
     <string name="navigation_support">پیام ها/پشتیبانی</string>
@@ -70,9 +73,9 @@
 
     <string name="login_reg">ثبت نام</string>
     <string name="login_login">ورود</string>
-    <string name="login_number">شماره تلفن</string>
+    <string name="login_number">شماره تلفن خود را وارد کنید</string>
     <string name="login_text">ورود به رادیکال</string>
-    <string name="login_text2">جهت ورود به اپلیکیشن رادیکال و استفاده از خدمات آن لطفا شماره تلفن همراه خود را وارد کنید و منتظر دریافت کد از طریق پیامک باشید</string>
+    <string name="login_text2">لطفا شماره تلفن خود را وارد کنید و منتظر دریافت کد از طریق پیامک باشید</string>
 
     <string name="reg_number">شماره تلفن</string>
     <string name="reg_invite">کد معرف (اختیاری)</string>
@@ -80,7 +83,8 @@
     <string name="reg_name">نام و نام خانوادگی</string>
 
 
-    <string name="code_text">کد تایید به شماره تلفن شما ارسال شد. \n لطفا کد دریافتی را در کادر زیر وارد کنید</string>
+    <string name="code_text">کد به شماره تلفن شما ارسال شد
+لطفا کد را در کادر زیر وارد کنید</string>
     <string name="code_reg">تایید</string>
     <string name="code_code">کد تایید</string>
     <string name="code_resend">ارسال مجدد کد</string>
@@ -97,6 +101,7 @@
 
     <string name="about_email">ارسال ایمیل</string>
     <string name="about_issue">گزارش مشکل</string>
+    <string name="about_call">تماس با پشتیبانی</string>
     <string name="about_trademark1">تمامی حقوق این محصول متعلق به شرکت تاجران نوین تسنیم میباشد</string>
     <string name="about_trademark2">توسعه دهنده و برنامه نویس سمت سرور: شهاب عظیمی</string>
     <string name="about_trademark3">ورژن %s ، 1397</string>
@@ -104,28 +109,29 @@
     <string name="profile_phone">شماره تلفن</string>
     <string name="profile_email">ایمیل</string>
     <string name="profile_gender">جنسیت</string>
-    <string name="profile_plan">نوع حساب</string>
+    <string name="profile_plan">وضعیت اشتراک</string>
     <string name="profile_job">شغل</string>
     <string name="profile_edu">تحصیلات</string>
     <string name="profile_region">محله زندگی</string>
     <string name="profile_color">رنگ مورد علاقه</string>
     <string name="profile_color_select">انتخاب رنگ</string>
     <string name="profile_color_select_title">رنگ مورد علاقه خود را انتخاب کنید</string>
-    <string name="profile_time">زمان باقی مانده طرح</string>
+    <string name="profile_time">زمان باقی مانده اشتراک</string>
     <string name="profile_giftcode">شماره معرف</string>
     <string name="profile_sex_male">آقا</string>
     <string name="profile_sex_female">خانم</string>
     <string name="profile_save">ذخیره</string>
 
 
+    <string name="wallet_title">کیف پول</string>
     <string name="wallet_text">موجودی کیف پول شما:</string>
-    <string name="wallet_buy">ارتقاء حساب کاربری</string>
+    <string name="wallet_buy">خرید اشتراک</string>
     <string name="wallet_info_title">راه های افزایش موجودی کیف پول</string>
     <string name="wallet_info2_title">موارد استفاده از کیف پول</string>
-    <string name="wallet_info_text1">* تکمیل کردن حساب کاربری</string>
-    <string name="wallet_info_text2">* معرفی رادیکال به دوستان خود</string>
-    <string name="wallet_info_text3">* خرید از فروشگاه ها</string>
-    <string name="wallet_info2_text1">* در حال حاضر می توانید از موجود خود جهت خرید طرح استفاده کنید</string>
+    <string name="wallet_info_text1">تکمیل کردن حساب کاربری</string>
+    <string name="wallet_info_text2">معرفی رادیکال به دوستان خود</string>
+    <string name="wallet_info_text3">خرید از فروشگاه ها</string>
+    <string name="wallet_info2_text1">در حال حاضر می توانید از موجود خود جهت اشتراک استفاده کنید</string>
 
 
     <string name="share_info_title">با معرفی </string>
@@ -134,7 +140,6 @@
     <string name="share_info_text2">5 نفر، 10،900 تومان</string>
     <string name="share_info_text3">7 نفر، 16،350 تومان</string>
     <string name="share_info_text4">جایزه بگیرید!</string>
-
 
 
     <string name="giftcode_title">کد معرفی شما:</string>
@@ -147,11 +152,23 @@
     <string name="giftcode_7">معرفی 7 نفر</string>
     <string name="giftcode_7_text">+16,350 تومان \n اضافه به کیف پول</string>
     <string name="giftcode_warning">توجه: فقط یکبار می توانید از این تخفیف استفاده کنید!</string>
-    <string name="giftcode_share">سلام! بعد از ثبت نام در اپلیکیشن رادیکال این شماره رو %s به عنوان معرف خودت داخل حساب کاربریت وارد کن.</string>
+    <string name="giftcode_shareOLD">سلام! بعد از ثبت نام در اپلیکیشن رادیکال این شماره رو %s به عنوان معرف خودت داخل حساب کاربریت وارد کن.</string>
+    <string name="giftcode_share">اپلیکیشن رادیکال خیلی به در من خورد، اگه میخوای هزینه هاتو کم کنی حتما نصبش کن \n
+کد معرف من: %s \n
+لینک دانلود: %s \n
+(همیشه نیازت میشه)
+</string>
 
-    <string name="plan_title">ارتقاء طرح</string>
-    <string name="plan_text">با ارتقاء طرح خود از بالاترین درصد تخفیف ها بهره مند شوید</string>
+    <string name="plan_title">اشتراک VIP</string>
+    <string name="plan_text">با خرید اشتراک زمان دار از تمامی تخفیف های فروشگاه ها بصورت نامحدود استفاده کنید</string>
     <string name="plan_buy">خرید کنید</string>
+    <string name="plan_account">مشاهده اشتراک</string>
+
+    <string name="profile_dialog_title">ارتباط با پشتیبانی</string>
+    <string name="profile_dialog_text">قبل از برقراری ارتباط با پشتیبانی، لازم است حساب کاربری خود را تکمیل کنید</string>
+    <string name="profile_dialog_profile">تکمیل</string>
+
+
 
     <string name="intro_dialog_title">خوش آمدید</string>
     <string name="intro_dialog_show">مشاهده راهنما</string>
@@ -168,11 +185,16 @@
     <string name="amount_model">%s تومان</string>
     <string name="discount_model">%s %</string>
 
-    <string name="shop_diamond_title">تخفیف های VIP</string>
-    <string name="shop_bronze_title">تخفیف های عادی</string>
+    <string name="shop_discounts">تخفیف های این مرکز:</string>
     <string name="shop_rate_title">%s ستاره از  %d امتیاز</string>
     <string name="shop_buy">خرید کنید</string>
-    <string name="shop_share">فروشگاه %s رو داخل رادیکال ببین و از تخفیف هاش استفاده کن. \n %s</string>
+    <string name="shop_shareOLD">فروشگاه %s رو داخل رادیکال ببین و از تخفیف هاش استفاده کن. \n %s</string>
+    <string name="shop_share">من یه سر به %s زدم خیلی خوب بود  %sهم تخفیف داره  \n
+آدرس: %s \n
+تلفن تماس: %s \n
+(همیشه نیازت میشه) \n
+%s
+</string>
 
 
     <string name="buy_plan">حساب کاربری شما: %s</string>
@@ -200,7 +222,6 @@
     <string name="newversion_dialog_text">دوست عزیز نسخه جدید رادیکال منتشر شده، پیشنهاد میکنم که حتما دانلود کنی!</string>
 
 
-
     <string name="buy_dialog_text">مبلغ قابل پرداخت:</string>
     <string name="buy_dialog_discount_text">مبلغ قابل پرداخت با %d درصد تخفیف:</string>
     <string name="buy_dialog_buy">پرداخت</string>
@@ -216,6 +237,7 @@
     <string name="upgrade_buy">خرید آنلاین</string>
     <string name="upgrade_buy_wallet">خرید با استفاده از کیف پول</string>
     <string name="upgrade_cancel">انصراف</string>
+    <string name="upgrade_radio_model">اشتراک %s روزه: %s تومان</string>
 
     <string name="stats_title1">تعداد خرید برای هر ماه در سال</string>
     <string name="stats_title2">میزان تخفیف کسب شده در هر ماه:</string>
@@ -225,6 +247,17 @@
     <string name="stats_counttotaltitle">"تعداد کل خرید ها تا امروز:"</string>
     <string name="stats_sumtotalyeartitle">"کل تخفیف کسب شده در سال %s :"</string>
     <string name="stats_sumtotaltitle">"کل تخفیف کسب شده تا امروز:"</string>
+
+    <string name="onboarding2_title">صرفه جویی در هزینه ها</string>
+    <string name="onboarding2_text">رادیکال همیشه همراهته که هزینه های ماهیانه و سالانتو تا 40% کاهش بدی</string>
+
+    <string name="onboarding3_title">همه چیز از نوع بهترین</string>
+    <string name="onboarding3_text">بهترین مراکز خدماتی و فروشگاهی در اختیار شماست</string>
+
+    <string name="onboarding4_title">ساده ترین کاربری</string>
+    <string name="onboarding4_text">مثل آب خوردن تخفیف بگیر \n
+از این به بعد همه چی فرق میکنه!
+</string>
 
 
     <string-array name="jobs">
@@ -268,6 +301,9 @@
         <item>کسری</item>
         <item>طاق بستان</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

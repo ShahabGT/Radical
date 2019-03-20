@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import com.tmall.ultraviewpager.UltraViewPager;
 import com.tmall.ultraviewpager.transformer.UltraScaleTransformer;
@@ -147,6 +148,8 @@ public class HomeFragment extends Fragment {
         if(!cancel){
             dialog = new LoadingDialog(getContext());
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
             dialog.setCancelable(false);
             dialog.show();
         }else{

@@ -64,9 +64,11 @@ public class MyUtils {
         long buyDate = stringToDate(buy);
         long expDate = stringToDate(exp);
         long nowDate = stringToDate(now);
-        long remaining = nowDate-buyDate;
+     //   long remaining = nowDate-buyDate;
         long res = expDate-buyDate;
-        return ((int) (res / (1000*60*60*24)))-((int) (remaining / (1000*60*60*24)));
+     //   return ((int) (res / (1000*60*60*24)))-((int) (remaining / (1000*60*60*24)));
+        long remaining = expDate - nowDate;
+        return (int) (remaining / (1000*60*60*24));
     }
 
     private static long stringToDate(String data){

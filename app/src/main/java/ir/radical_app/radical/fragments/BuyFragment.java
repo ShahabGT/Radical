@@ -1,13 +1,16 @@
 package ir.radical_app.radical.fragments;
 
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,14 +22,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.facebook.drawee.view.SimpleDraweeView;
-
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -55,16 +56,18 @@ public class BuyFragment extends Fragment {
     private TextView discountTitle1,discountTitle2,discountTitle3,discountTitle4,discountTitle5;
     private String qrId;
 
+    private SoundPool soundPool;
+    private int sound;
+
     public void setQrId(String qrId) {
         this.qrId = qrId;
     }
 
-    private String shopId,planId;
+    private String shopId;
 
     private SimpleDraweeView shopImage;
-    private ImageView planImage;
     private Button buy;
-    private TextView shopName,planName;
+    private TextView shopName;
     private CardView card1,card2,card3,card4,card5;
 
     private ArrayList<String> discountPercents = new ArrayList<>();
@@ -89,10 +92,21 @@ public class BuyFragment extends Fragment {
     }
 
     private void init(View v){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ALARM)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(audioAttributes)
+                    .setMaxStreams(2)
+                    .build();
+        }else {
+            soundPool = new SoundPool(2, AudioManager.STREAM_ALARM,0);
+        }
+        sound = soundPool.load(getActivity(),R.raw.notification,1);
         shopImage = v.findViewById(R.id.buy_shop_image);
         shopName = v.findViewById(R.id.buy_shop_title);
-        planName = v.findViewById(R.id.buy_plan_title);
-        planImage = v.findViewById(R.id.buy_plan_image);
         buy=v.findViewById(R.id.buy_footer_buy);
 
         card1 = v.findViewById(R.id.shop_price_card1);
@@ -122,7 +136,6 @@ public class BuyFragment extends Fragment {
         discountAmount5 = v.findViewById(R.id.buy_discount5_discount);
 
 
-        animation();
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +162,8 @@ public class BuyFragment extends Fragment {
             dialog = new LoadingDialog(getContext());
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.setCancelable(false);
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
             dialog.show();
         }else{
             dialog.dismiss();
@@ -179,6 +194,7 @@ public class BuyFragment extends Fragment {
                                 switch (response.body().getData().getMessage()){
                                     case "ok":
                                         parseData(response.body());
+                                        soundPool.play(sound, 0.99f, 0.99f, 1, 0, 0.99f);
 
                                         break;
 
@@ -262,17 +278,6 @@ public class BuyFragment extends Fragment {
             }
         };
     }
-    private void animation(){
-        ObjectAnimator alpha = ObjectAnimator.ofFloat(
-                planImage,
-                "alpha",
-                0.1f,1f
-        );
-        alpha.setDuration(1200);
-        alpha.setRepeatCount(ValueAnimator.INFINITE);
-        alpha.setRepeatMode(ValueAnimator.REVERSE);
-        alpha.start();
-    }
     private String getDecimalFormattedString(String value){
         StringTokenizer lst = new StringTokenizer(value, ".");
         String str1 = value;
@@ -311,21 +316,11 @@ public class BuyFragment extends Fragment {
     private void parseData(ShopDetailsModel response){
         ShopData data = response.getData();
         shopId = data.getShopId();
-        planId = data.getPlan();
         ArrayList<PlanData> plans = response.getPlans();
         Uri uri = Uri.parse(getString(R.string.main_image_url,data.getShopId()));
         shopImage.setImageURI(uri);
         shopName.setText(data.getName());
-        switch (data.getPlan()){
-            case "1":
-                planName.setText(getString(R.string.buy_plan,"عادی"));
-                planImage.setImageDrawable(getResources().getDrawable(R.drawable.bronze));
-                break;
-            case "2":
-                planName.setText(getString(R.string.buy_plan,"VIP"));
-                planImage.setImageDrawable(getResources().getDrawable(R.drawable.diamond));
-                break;
-        }
+
         switch (plans.size()){
             case 5:
                 discountTitles.add(plans.get(4).getDescription());
@@ -405,7 +400,7 @@ public class BuyFragment extends Fragment {
             }
             discount = amount - pay;
             RetrofitClient.getInstance().getApi()
-                    .buyFromShop(number,accessToken,shopId,planId,amount+"",discount+"",pay+"",prices,pricesDiscounts,discountPercents,discountTitles)
+                    .buyFromShop(number,accessToken,shopId,amount+"",discount+"",pay+"",prices,pricesDiscounts,discountPercents,discountTitles)
                     .enqueue(new Callback<JsonResponse>() {
                         @Override
                         public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
@@ -475,6 +470,4 @@ public class BuyFragment extends Fragment {
             }
         });
     }
-
-
 }

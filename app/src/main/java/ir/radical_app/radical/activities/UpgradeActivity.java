@@ -1,6 +1,7 @@
 package ir.radical_app.radical.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatRadioButton;
 import ir.radical_app.radical.classes.MySharedPreference;
 import ir.radical_app.radical.classes.MyToast;
 import ir.radical_app.radical.classes.MyUtils;
@@ -22,6 +23,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
@@ -29,10 +31,13 @@ import com.google.android.material.button.MaterialButton;
 public class UpgradeActivity extends AppCompatActivity {
 
     private MaterialButton buy,buyWallet,cancel;
-    private TextView costTitle,walletTitle;
+    private TextView walletTitle;
     private int myWallet;
-    private int planCost;
     private LoadingDialog dialog;
+    private RadioGroup radioGroup;
+    private AppCompatRadioButton radio3,radio7,radio15,radio30,radio60,radio90;
+    private int[] plansCost= new int[6];
+    private int selectedIndex=-1;
 
 
     @Override
@@ -43,11 +48,17 @@ public class UpgradeActivity extends AppCompatActivity {
     }
 
     private void init(){
-        costTitle = findViewById(R.id.upgrade_cost);
         walletTitle = findViewById(R.id.upgrade_wallet);
         buy = findViewById(R.id.upgrade_buy);
         buyWallet = findViewById(R.id.upgrade_buy_wallet);
         cancel = findViewById(R.id.upgrade_cancel);
+        radioGroup = findViewById(R.id.upgrade_radio_group);
+        radio3 = findViewById(R.id.upgrade_radio3);
+        radio7 = findViewById(R.id.upgrade_radio7);
+        radio15 = findViewById(R.id.upgrade_radio15);
+        radio30 = findViewById(R.id.upgrade_radio30);
+        radio60 = findViewById(R.id.upgrade_radio60);
+        radio90 = findViewById(R.id.upgrade_radio90);
 
 
         onClicks();
@@ -66,22 +77,49 @@ public class UpgradeActivity extends AppCompatActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBuyDialog(planCost+"",false);
+                if(selectedIndex==-1){
+                    MyToast.Create(UpgradeActivity.this,"not selected");
+                }else{
+                    showBuyDialog(plansCost[selectedIndex]+"",false);
+                }
             }
         });
 
         buyWallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBuyDialog((planCost-myWallet)+"",true);
+                if(selectedIndex==-1){
+                    MyToast.Create(UpgradeActivity.this,"not selected");
+                }else{
+                    int cost = plansCost[selectedIndex]-myWallet;
+                    if(cost<100){
+                        MyToast.Create(UpgradeActivity.this,"low cost");
+                    }else{
+                        showBuyDialog(cost+"",false);
+
+                    }
+                }
             }
         });
+
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                View radioButton = group.findViewById(group.getCheckedRadioButtonId());
+                selectedIndex = group.indexOfChild(radioButton);
+
+            }
+        });
+
     }
 
     private void loadingDialog(boolean cancel){
         if(!cancel){
             dialog = new LoadingDialog(UpgradeActivity.this);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
             dialog.setCancelable(false);
             dialog.show();
         }else{
@@ -108,8 +146,18 @@ public class UpgradeActivity extends AppCompatActivity {
                         public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
                             if(response.isSuccessful()){
                                 if(response.body().getMessage().equals("ok")){
-                                    costTitle.setText(getString(R.string.upgrade_cost, MyUtils.moneySeparator(response.body().getAmount())));
-                                    planCost = Integer.parseInt(response.body().getAmount());
+                                    plansCost[0]=Integer.parseInt(response.body().getAmount3());
+                                    plansCost[1]=Integer.parseInt(response.body().getAmount7());
+                                    plansCost[2]=Integer.parseInt(response.body().getAmount15());
+                                    plansCost[3]=Integer.parseInt(response.body().getAmount());
+                                    plansCost[4]=Integer.parseInt(response.body().getAmount60());
+                                    plansCost[5]=Integer.parseInt(response.body().getAmount90());
+                                    radio3.setText(getString(R.string.upgrade_radio_model,"3",MyUtils.moneySeparator(plansCost[0]+"")));
+                                    radio7.setText(getString(R.string.upgrade_radio_model,"7",MyUtils.moneySeparator(plansCost[1]+"")));
+                                    radio15.setText(getString(R.string.upgrade_radio_model,"15",MyUtils.moneySeparator(plansCost[2]+"")));
+                                    radio30.setText(getString(R.string.upgrade_radio_model,"30",MyUtils.moneySeparator(plansCost[3]+"")));
+                                    radio60.setText(getString(R.string.upgrade_radio_model,"60",MyUtils.moneySeparator(plansCost[4]+"")));
+                                    radio90.setText(getString(R.string.upgrade_radio_model,"90",MyUtils.moneySeparator(plansCost[5]+"")));
                                     getWallet();
                                 }else{
                                     loadingDialog(true);
@@ -187,6 +235,7 @@ public class UpgradeActivity extends AppCompatActivity {
         buyDialog.setCanceledOnTouchOutside(false);
         buyDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         buyDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        buyDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         buyDialog.show();
         Window window = buyDialog.getWindow();

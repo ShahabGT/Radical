@@ -10,11 +10,13 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -54,6 +56,8 @@ public class ProfileFragment extends Fragment {
     private int isFirst=0,color=0;
     private LoadingDialog dialog;
     private MyDatabase myDatabase;
+    private CardView cardTime;
+    private int plan = MySharedPreference.getInstance(getContext()).getPlan();
 
 
     public ProfileFragment() {
@@ -73,6 +77,8 @@ public class ProfileFragment extends Fragment {
         if(!cancel){
             dialog = new LoadingDialog(getContext());
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
             dialog.setCancelable(false);
             dialog.show();
         }else{
@@ -97,7 +103,13 @@ public class ProfileFragment extends Fragment {
         save = v.findViewById(R.id.profile_save);
         avatar = v.findViewById(R.id.profile_avatar);
         genderSwitch = v.findViewById(R.id.profile_switch);
+        cardTime = v.findViewById(R.id.profile_cardtime);
         myDatabase = new MyDatabase(getContext());
+
+        if(plan!=1){
+            cardTime.setVisibility(View.VISIBLE);
+        }
+
         onClicks();
         if(MyUtils.checkInternet(getContext()))
         getData();

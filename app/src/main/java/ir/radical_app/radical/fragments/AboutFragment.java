@@ -18,17 +18,22 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 
 import androidx.fragment.app.FragmentManager;
+import ir.radical_app.radical.activities.MainActivity;
 import ir.radical_app.radical.activities.SplashActivity;
 import ir.radical_app.radical.classes.JustifiedTextView;
 import ir.radical_app.radical.classes.MySharedPreference;
 import ir.radical_app.radical.classes.MyToast;
 import ir.radical_app.radical.data.RetrofitClient;
 import ir.radical_app.radical.dialogs.LoadingDialog;
+import ir.radical_app.radical.dialogs.ProfileDialog;
 import ir.radical_app.radical.models.JsonResponse;
 import ir.radical_app.radical.R;
 import retrofit2.Call;
@@ -39,7 +44,8 @@ import retrofit2.Response;
 public class AboutFragment extends Fragment {
 
     private JustifiedTextView text;
-    private MaterialButton email,bug;
+    private MaterialButton email,bug,call;
+    private ImageView telegram,instagram,website;
     private LoadingDialog dialog;
     private TextView tradeMark;
 
@@ -79,6 +85,11 @@ public class AboutFragment extends Fragment {
 
         email = v.findViewById(R.id.about_email);
         bug = v.findViewById(R.id.about_issue);
+        call = v.findViewById(R.id.about_call);
+
+        telegram = v.findViewById(R.id.about_telegram);
+        instagram = v.findViewById(R.id.about_instagram);
+        website = v.findViewById(R.id.about_website);
 
 
         getData();
@@ -100,7 +111,43 @@ public class AboutFragment extends Fragment {
         bug.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment(new SupportFragment());
+                if(!MySharedPreference.getInstance(getContext()).getName().isEmpty())
+                    setFragment(new SupportFragment());
+                else
+                    showProfileDialog();
+
+            }
+        });
+
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intentAction("tel:08337290216");
+
+            }
+        });
+
+        telegram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intentAction("https://t.me/radical_app");
+
+            }
+        });
+
+        instagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intentAction("https://instagram.com/radical_app");
+
+            }
+        });
+
+        website.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intentAction("https://radical-app.ir");
+
             }
         });
     }
@@ -109,6 +156,8 @@ public class AboutFragment extends Fragment {
         if(!cancel){
             dialog = new LoadingDialog(getContext());
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
             dialog.setCancelable(false);
             dialog.show();
         }else{
@@ -174,6 +223,24 @@ public class AboutFragment extends Fragment {
 
 
 
+    }
+
+    private void showProfileDialog() {
+        ProfileDialog profileDialog = new ProfileDialog(getActivity());
+
+        profileDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        profileDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
+        profileDialog.show();
+        Window window = profileDialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+    }
+
+    private void intentAction(String id){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(id));
+        startActivity(intent);
     }
 
 

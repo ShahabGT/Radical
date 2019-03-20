@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
 import ir.radical_app.radical.classes.Const;
 import ir.radical_app.radical.data.RetrofitClient;
+import ir.radical_app.radical.fragments.SpecificCategoryFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,11 +31,16 @@ public class SearchDataSource extends PageKeyedDataSource<Integer, SearchItem> {
 
                             callback.onResult(response.body().getData(), null, START + SIZE);
 
+                        }else {
+                            SpecificCategoryFragment.showEmpty("فروشگاهی موجود نیست!");
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<SearchResponse> call, Throwable t) {
+                        SpecificCategoryFragment.showEmpty("فروشگاهی موجود نیست!");
+
                     }
                 });
 
