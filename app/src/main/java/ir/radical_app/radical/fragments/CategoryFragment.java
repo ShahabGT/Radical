@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import ir.radical_app.radical.adapters.CategoryAdapter;
-import ir.radical_app.radical.classes.SpacesItemDecoration;
 import ir.radical_app.radical.database.MyDatabase;
 import ir.radical_app.radical.R;
 
@@ -29,7 +29,7 @@ public class CategoryFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_category, container, false);
 
@@ -48,9 +48,6 @@ public class CategoryFragment extends Fragment {
     private void loadData(){
         adapter = new CategoryAdapter(getContext(),myDatabase.getCategories(),getActivity());
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3, RecyclerView.VERTICAL,false));
-       // recyclerView.setLayoutManager(new GridLayoutManager( getContext(),3));
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
-        recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
         recyclerView.setAdapter(adapter);
 
     }

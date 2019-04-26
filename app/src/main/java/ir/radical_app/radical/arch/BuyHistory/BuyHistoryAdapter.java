@@ -1,26 +1,25 @@
 package ir.radical_app.radical.arch.BuyHistory;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.facebook.drawee.view.SimpleDraweeView;
-
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import ir.radical_app.radical.classes.DateConverter;
+import ir.radical_app.radical.classes.MyToast;
 import ir.radical_app.radical.classes.MyUtils;
 import ir.radical_app.radical.dialogs.ReceiptDialog;
 import ir.radical_app.radical.R;
@@ -47,34 +46,40 @@ public class BuyHistoryAdapter extends PagedListAdapter<BuyItem, BuyHistoryAdapt
         final BuyItem item = getItem(position);
 
         if (item != null) {
+            holder.layout.setVisibility(View.GONE);
+
             holder.name.setText(item.getName());
-            holder.total.setText(mCtx.getString(R.string.amount_model,MyUtils.moneySeparator(item.getTotalAmount())));
-            holder.discount.setText(mCtx.getString(R.string.amount_model,MyUtils.moneySeparator(item.getTotalDiscount())));
-            holder.pay.setText(mCtx.getString(R.string.amount_model,MyUtils.moneySeparator(item.getTotalPay())));
-            Uri uri = Uri.parse(mCtx.getString(R.string.main_image_url,item.getShopId()));
-            holder.pic.setImageURI(uri);
+            holder.total.setText(mCtx.getString(R.string.amount_model,MyUtils.Companion.moneySeparator(item.getTotalAmount())));
+            holder.discount.setText(mCtx.getString(R.string.amount_model,MyUtils.Companion.moneySeparator(item.getTotalDiscount())));
+            holder.pay.setText(mCtx.getString(R.string.amount_model,MyUtils.Companion.moneySeparator(item.getTotalPay())));
+            holder.pay2.setText(mCtx.getString(R.string.amount_model,MyUtils.Companion.moneySeparator(item.getTotalPay())));
             String date = item.getDate();
             DateConverter dateConverter = new DateConverter();
             dateConverter.gregorianToPersian(Integer.parseInt(date.substring(0,4)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(8,10)));
-            holder.date.setText(mCtx.getString(R.string.messages_model,dateConverter.toString(),date.substring(11)));
+            holder.date.setText(mCtx.getString(R.string.messages_model3,dateConverter.toString(),date.substring(11)));
             holder.shopBuyId.setText(item.getShopBuyId());
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                ShopActivity.shopId=holder.id.getText().toString();
-//                mCtx.startActivity(new Intent(mCtx, ShopActivity.class));
+            holder.layout.setOnClickListener(View-> {
+                    if(!MyUtils.Companion.checkInternet(mCtx)){
+                        MyToast.Companion.create(mCtx,mCtx.getString(R.string.internet_error));
+                        return;
+                    }
                     showReceiptDialog(Integer.parseInt(item.getTotalAmount()),Integer.parseInt(item.getTotalDiscount()),
                             Integer.parseInt(item.getTotalPay()),item.getName(),item.getShopBuyId());
-                }
             });
 
-        } else {
-            Toast.makeText(mCtx, "Item is null", Toast.LENGTH_LONG).show();
+            holder.itemView.setOnClickListener(View-> {
+                    if(holder.layout.getVisibility()==View.GONE){
+                        holder.icon.setImageResource(R.drawable.vector_top);
+                        holder.layout.setVisibility(View.VISIBLE);
+                    }else{
+                        holder.icon.setImageResource(R.drawable.vector_bottom);
+                        holder.layout.setVisibility(View.GONE);
+
+                    }
+            });
+
         }
-
-
-
     }
     private void showReceiptDialog(int amount,int discount,int pay,String shopName,String shopBuyId) {
         ReceiptDialog receiptDialog = new ReceiptDialog(mCtx);
@@ -84,20 +89,15 @@ public class BuyHistoryAdapter extends PagedListAdapter<BuyItem, BuyHistoryAdapt
         receiptDialog.setShopName(shopName);
         receiptDialog.setShopBuyId(shopBuyId);
         receiptDialog.setFromHistory(true);
-        receiptDialog.setCanceledOnTouchOutside(false);
         receiptDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         receiptDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        receiptDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
 
         receiptDialog.show();
         Window window = receiptDialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        receiptDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                    receiptDialog.dismiss();
-                return true;
-            }
-        });
+
     }
 
 
@@ -108,6 +108,7 @@ public class BuyHistoryAdapter extends PagedListAdapter<BuyItem, BuyHistoryAdapt
                     return oldItem.getShopId().equals(newItem.getShopId());
                 }
 
+                @SuppressLint("DiffUtilEquals")
                 @Override
                 public boolean areContentsTheSame(BuyItem oldItem, BuyItem newItem) {
                     return oldItem.equals(newItem);
@@ -117,17 +118,21 @@ public class BuyHistoryAdapter extends PagedListAdapter<BuyItem, BuyHistoryAdapt
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView name,date,total,discount,pay,shopBuyId;
-            private SimpleDraweeView pic;
+        private TextView name,date,total,discount,pay,pay2,shopBuyId;
+        private ImageView icon;
+        private ConstraintLayout layout;
 
-         ItemViewHolder(View v) {
+
+        ItemViewHolder(View v) {
             super(v);
-            pic = v.findViewById(R.id.buy_row_image);
             name = v.findViewById(R.id.buy_row_name);
+            icon = v.findViewById(R.id.buy_row_icon);
+            layout = v.findViewById(R.id.buy_row_layout);
             date = v.findViewById(R.id.buy_row_date);
             total = v.findViewById(R.id.buy_row_total);
             discount = v.findViewById(R.id.buy_row_discount);
             pay = v.findViewById(R.id.buy_row_pay);
+            pay2 = v.findViewById(R.id.buy_row_pay2);
             shopBuyId = v.findViewById(R.id.buy_row_shop_buy_id);
         }
     }

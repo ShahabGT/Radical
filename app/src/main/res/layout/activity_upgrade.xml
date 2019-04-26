@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
     android:layout_height="match_parent"
     android:background="@color/app_bg">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".activities.UpgradeActivity">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/upgrade_anim"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="16:9"
+        <ImageView
+            android:id="@+id/upgrade_top"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/vip_top"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_enableMergePathsForKitKatAndAbove="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/glasses" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/upgrade_badge"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/vip_badge"
+            app:layout_constraintBottom_toBottomOf="@id/upgrade_top"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upgrade_top" />
+
 
         <TextView
             android:id="@+id/upgrade_title"
@@ -36,9 +43,12 @@
             android:fontFamily="@font/vazir"
             android:gravity="center"
             android:text="@string/upgrade_title"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/upgrade_description"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/upgrade_anim" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/upgrade_description"
@@ -50,152 +60,406 @@
             android:gravity="center"
             android:lineSpacingExtra="5dp"
             android:text="@string/upgrade_description"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/upgrade_badge"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/upgrade_title" />
 
 
-        <RadioGroup
-            android:id="@+id/upgrade_radio_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:gravity="right"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/upgrade_description">
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/upgrade_radio3"
-                style="@style/Base.TextAppearance.AppCompat.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/vazir"
-                android:gravity="right|center"
-                android:textColor="@color/green" />
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/upgrade_radio7"
-
-                style="@style/Base.TextAppearance.AppCompat.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/vazir"
-                android:gravity="right|center"
-                android:textColor="@color/green" />
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/upgrade_radio15"
-
-                style="@style/Base.TextAppearance.AppCompat.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/vazir"
-                android:gravity="right|center"
-                android:textColor="@color/green" />
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/upgrade_radio30"
-
-                style="@style/Base.TextAppearance.AppCompat.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/vazir"
-                android:gravity="right|center"
-                android:textColor="@color/green" />
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/upgrade_radio60"
-
-                style="@style/Base.TextAppearance.AppCompat.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/vazir"
-                android:gravity="right|center"
-                android:textColor="@color/green" />
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/upgrade_radio90"
-
-                style="@style/Base.TextAppearance.AppCompat.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/vazir"
-                android:gravity="right|center"
-                android:textColor="@color/green" />
-
-        </RadioGroup>
-
-
         <TextView
-            android:id="@+id/upgrade_wallet"
-            style="@style/Base.TextAppearance.AppCompat.Medium"
-            android:layout_width="match_parent"
+            android:id="@+id/upgrade_title2"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:padding="8dp"
+            android:text="@string/upgrade_title2"
+            android:textColor="#611F00"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upgrade_badge" />
+
+        <LinearLayout
+            android:id="@+id/upgrade_linear"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical"
+            android:padding="12dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upgrade_title2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/upgrade_three"
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selectable_item"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/upgrade_three_check"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/checked2"
+                        android:visibility="invisible"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_three_title"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="3 روزه"
+                        android:textColor="@color/black"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_three_price"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="4dp"
+                        android:gravity="center"
+                        android:text="2000 تومان"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/upgrade_two"
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selectable_item"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/upgrade_two_check"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/checked2"
+                        android:visibility="invisible"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_two_title"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="3 روزه"
+                        android:textColor="@color/black"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_two_price"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="4dp"
+                        android:text="2000 تومان"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/upgrade_one"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selectable_item"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/upgrade_one_check"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/checked2"
+                        android:visibility="invisible"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_one_title"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="3 روزه"
+                        android:textColor="@color/black"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_one_price"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="4dp"
+                        android:text="2000 تومان"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/upgrade_six"
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selectable_item"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/upgrade_six_check"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/checked2"
+                        android:visibility="invisible"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_six_title"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="3 روزه"
+                        android:textColor="@color/black"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_six_price"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="4dp"
+                        android:text="2000 تومان"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/upgrade_five"
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selectable_item"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/upgrade_five_check"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/checked2"
+                        android:visibility="invisible"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_five_title"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="3 روزه"
+                        android:textColor="@color/black"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_five_price"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="4dp"
+                        android:gravity="center"
+                        android:text="2000 تومان"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/upgrade_four"
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selectable_item"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/upgrade_four_check"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/checked2"
+                        android:visibility="invisible"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_four_title"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        android:text="3 روزه"
+                        android:textColor="@color/black"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/upgrade_four_price"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vazir"
+                        android:padding="4dp"
+                        android:text="2000 تومان"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/upgrade_wallet_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="4dp"
+            android:fontFamily="@font/vazir"
+            android:text="@string/upgrade_wallet_btn"
+            android:textColor="@color/black"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/upgrade_pay_btn"
+            app:layout_constraintTop_toBottomOf="@id/upgrade_linear" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/upgrade_pay_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/vazir"
+            android:text="@string/upgrade_pay_btn"
+            android:textColor="@color/black"
+            app:layout_constraintLeft_toRightOf="@id/upgrade_wallet_btn"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upgrade_linear" />
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_margin="16dp"
-            android:fontFamily="@font/vazir"
-            android:gravity="center"
-            android:text="@string/upgrade_cost"
-            android:textColor="@color/blue"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/upgrade_radio_group" />
+            app:layout_constraintTop_toBottomOf="@id/upgrade_wallet_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/selected_plan"
+                android:id="@+id/upgrade_wallet"
+                android:padding="8dp"
+                android:text="موجودی کیف پول شما"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:fontFamily="@font/vazir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/upgrade_buy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="5dp"
-            android:fontFamily="@font/vazir"
-            android:text="@string/upgrade_buy"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/upgrade_wallet" />
+        </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/upgrade_buy_wallet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:fontFamily="@font/vazir"
-            android:text="@string/upgrade_buy_wallet"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/upgrade_buy" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/upgrade_cancel"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:fontFamily="@font/vazir"
-            android:text="@string/upgrade_cancel"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/upgrade_buy_wallet" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

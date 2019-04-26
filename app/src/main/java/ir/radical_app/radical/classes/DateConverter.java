@@ -2,9 +2,7 @@ package ir.radical_app.radical.classes;
 
 import android.annotation.SuppressLint;
 
-/**
- * FuLLKade.COM
- */
+
 public class DateConverter {
 
     private int day, month, year;

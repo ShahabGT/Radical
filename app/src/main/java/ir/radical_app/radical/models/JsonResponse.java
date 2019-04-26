@@ -7,12 +7,14 @@ public class JsonResponse {
     private String message;
 
     private String name;
+    private String family;
     @SerializedName("category_id")
     private String categoryId;
     private String sex;
     private String email;
     private String planid;
     private String buydate;
+    private String remaining;
     private String expdate;
     private String nowdate;
     private String amount3;
@@ -23,6 +25,10 @@ public class JsonResponse {
     private String amount90;
     private String invitecode;
     private String count;
+    @SerializedName("social_count")
+    private String socialCount;
+    @SerializedName("invite_count")
+    private String inviteCount;
     private String sum;
     private String version;
     private String urgent;
@@ -31,6 +37,27 @@ public class JsonResponse {
     private String job;
     private String region;
     private String description;
+    private String merchant;
+
+    public String getSocialCount() {
+        return socialCount;
+    }
+
+    public String getInviteCount() {
+        return inviteCount;
+    }
+
+    public String getFamily() {
+        return family;
+    }
+
+    public String getRemaining() {
+        return remaining;
+    }
+
+    public String getMerchant() {
+        return merchant;
+    }
 
     public String getAmount3() {
         return amount3;

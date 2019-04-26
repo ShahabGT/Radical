@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:shape="rectangle">
+
+            <solid android:color="@color/yellow" />
+
+        </shape>
+
+
+    </item>
+
+    <item>
+        <shape
+            android:layout_width="25dp"
+
+            android:layout_height="match_parent"
+            android:shape="oval">
+
+            <solid android:color="@color/red" />
+
+
+        </shape>
+
+
+    </item>
+
+
+
+</layer-list>

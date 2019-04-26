@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black"
     android:layout_width="match_parent"
     android:layout_height="@dimen/material_drawer_item_primary">
 
@@ -18,9 +19,10 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/material_drawer_arrow"
             android:layout_width="25dp"
-            android:layout_gravity="right|center"
-            android:layout_height="25dp" />
+            android:layout_height="25dp"
+            android:layout_gravity="right|center" />
     </LinearLayout>
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/material_drawer_icon"
         android:layout_width="30dp"
@@ -30,35 +32,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_marginRight="4dp"
-        android:textColor="@color/white"
         android:id="@+id/material_drawer_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
         android:fontFamily="@font/vazir"
         android:gravity="center_vertical|start"
         android:lines="1"
         android:singleLine="true"
+        android:textColor="@color/white"
         android:textDirection="anyRtl"
         android:textSize="@dimen/material_drawer_item_primary_text"
         app:layout_constraintBottom_toTopOf="@id/material_drawer_description"
-        app:layout_constraintRight_toLeftOf="@id/material_drawer_icon"
         app:layout_constraintLeft_toRightOf="@id/material_drawer_arrow_container"
+        app:layout_constraintRight_toLeftOf="@id/material_drawer_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Some drawer text" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_marginRight="4dp"
-
-        android:textColor="@color/white"
         android:id="@+id/material_drawer_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
         android:fontFamily="@font/vazir"
         android:gravity="center_vertical|start"
         android:lines="1"
         android:singleLine="true"
+        android:textColor="@color/white"
         android:textDirection="anyRtl"
         android:textSize="@dimen/material_drawer_item_primary_description"
         app:layout_constraintBottom_toBottomOf="parent"

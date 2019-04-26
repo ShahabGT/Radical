@@ -1,5 +1,6 @@
 package ir.radical_app.radical.arch.Search;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -7,15 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.willy.ratingbar.ScaleRatingBar;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+import ir.radical_app.radical.classes.MyToast;
+import ir.radical_app.radical.classes.MyUtils;
 import ir.radical_app.radical.fragments.ShopFragment;
 import ir.radical_app.radical.R;
 
@@ -64,22 +65,19 @@ public class SearchAdapter extends PagedListAdapter<SearchItem, SearchAdapter.It
             Toast.makeText(mCtx, "Item is null", Toast.LENGTH_LONG).show();
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.itemView.setOnClickListener(View-> {
+                if(!MyUtils.Companion.checkInternet(mCtx)){
+                    MyToast.Companion.create(mCtx,mCtx.getString(R.string.internet_error));
+                    return;
+                }
                 ShopFragment shopFragment = new ShopFragment();
                 shopFragment.setShopId(holder.id.getText().toString());
-//                FragmentManager fm = activity.getSupportFragmentManager();
-//                while(fm.getBackStackEntryCount()>1)
-//                    fm.popBackStackImmediate();
-//
 
                 activity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fadein,R.anim.fadeout,R.anim.fadein,R.anim.fadeout)
                         .add(R.id.main_container,shopFragment)
                         .addToBackStack(null)
                         .commit();
-            }
         });
 
     }
@@ -92,6 +90,7 @@ public class SearchAdapter extends PagedListAdapter<SearchItem, SearchAdapter.It
                     return oldItem.getShopId().equals(newItem.getShopId());
                 }
 
+                @SuppressLint("DiffUtilEquals")
                 @Override
                 public boolean areContentsTheSame(SearchItem oldItem, SearchItem newItem) {
                     return oldItem.equals(newItem);

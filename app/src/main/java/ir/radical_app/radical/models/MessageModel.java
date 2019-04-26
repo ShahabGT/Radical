@@ -4,12 +4,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class MessageModel {
 
+    private String id;
+    private String read;
     private String message;
     private String title;
     @SerializedName("sender_user_id")
     private String sender;
     @SerializedName("receiver_user_id")
     private String receiver;
+
+    public String getRead() {
+        return read;
+    }
+
+    public void setRead(String read) {
+        this.read = read;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public void setReceiver(String receiver) {
         this.receiver = receiver;

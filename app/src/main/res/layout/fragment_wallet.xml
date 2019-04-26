@@ -73,10 +73,10 @@
 
                 <ImageView
                     android:id="@+id/wallet_info2_checked"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="4dp"
-                    android:src="@drawable/checked"
+                    android:src="@mipmap/ic_left"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/wallet_info2_text1" />
 
@@ -115,7 +115,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:cardBackgroundColor="#E8FFFFFF"
+            app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -141,63 +141,143 @@
 
                 <ImageView
                     android:id="@+id/wallet_info_checked1"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="4dp"
-                    android:src="@drawable/checked"
+                    android:src="@mipmap/ic_left"
+                    app:layout_constraintBottom_toBottomOf="@id/wallet_info_text1"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/wallet_info_text1" />
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/wallet_info_text1"
-                    style="@style/Base.TextAppearance.AppCompat.Small"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/vazir"
-                    android:gravity="right"
                     android:text="@string/wallet_info_text1"
                     android:textColor="@color/black"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@+id/wallet_info_checked1"
-                    app:layout_constraintTop_toBottomOf="@id/wallet_info_title" />
-                <ImageView
-                    android:id="@+id/wallet_info_checked2"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="4dp"
-                    android:src="@drawable/checked"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/wallet_info_text2" />
+                    app:layout_constraintTop_toBottomOf="@id/wallet_info_title"
+                    app:rippleColor="@color/yellow" />
+
                 <TextView
-                    android:id="@+id/wallet_info_text2"
+                    android:id="@+id/wallet_info_text1_sub"
                     style="@style/Base.TextAppearance.AppCompat.Small"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/vazir"
+                    android:gravity="center"
+                    android:text="@string/wallet_info_text1_sub"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/wallet_info_checked1"
+                    app:layout_constraintTop_toBottomOf="@id/wallet_info_text1" />
+
+                <ImageView
+                    android:id="@+id/wallet_info_checked2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@mipmap/ic_left"
+                    app:layout_constraintBottom_toBottomOf="@+id/wallet_info_text2"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/wallet_info_text2" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/wallet_info_text2"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/vazir"
-                    android:gravity="right"
                     android:text="@string/wallet_info_text2"
                     android:textColor="@color/black"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@+id/wallet_info_checked2"
-                    app:layout_constraintTop_toBottomOf="@id/wallet_info_text1" />
+                    app:layout_constraintTop_toBottomOf="@id/wallet_info_text1_sub"
+                    app:rippleColor="@color/yellow" />
+
+                <TextView
+                    android:id="@+id/wallet_info_text2_sub"
+                    style="@style/Base.TextAppearance.AppCompat.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/vazir"
+                    android:gravity="center"
+                    android:text="@string/wallet_info_text2_sub"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/wallet_info_checked2"
+                    app:layout_constraintTop_toBottomOf="@id/wallet_info_text2" />
+
                 <ImageView
                     android:id="@+id/wallet_info_checked3"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="4dp"
-                    android:src="@drawable/checked"
+                    android:src="@mipmap/ic_left"
+                    app:layout_constraintBottom_toBottomOf="@+id/wallet_info_text3"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/wallet_info_text3" />
-                <TextView
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/wallet_info_text3"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/vazir"
+                    android:text="@string/wallet_info_text3"
+                    android:textColor="@color/black"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/wallet_info_checked3"
+                    app:layout_constraintTop_toBottomOf="@id/wallet_info_text2_sub"
+                    app:rippleColor="@color/yellow" />
+
+                <TextView
+                    android:id="@+id/wallet_info_text3_sub"
+                    style="@style/Base.TextAppearance.AppCompat.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/vazir"
+                    android:gravity="center"
+                    android:text="@string/wallet_info_text3_sub"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/wallet_info_checked3"
+                    app:layout_constraintTop_toBottomOf="@id/wallet_info_text3" />
+
+                <ImageView
+                    android:id="@+id/wallet_info_checked4"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@mipmap/ic_left"
+                    app:layout_constraintBottom_toBottomOf="@+id/wallet_info_text4"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/wallet_info_text4" />
+
+                <TextView
+                    android:id="@+id/wallet_info_text4"
                     style="@style/Base.TextAppearance.AppCompat.Small"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -206,18 +286,48 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/vazir"
-                    android:gravity="right"
-                    android:text="@string/wallet_info_text3"
+                    android:gravity="center"
+                    android:text="@string/wallet_info_text4"
                     android:textColor="@color/black"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/wallet_info_checked3"
-                    app:layout_constraintTop_toBottomOf="@id/wallet_info_text2" />
+                    app:layout_constraintRight_toLeftOf="@+id/wallet_info_checked4"
+                    app:layout_constraintTop_toBottomOf="@id/wallet_info_text3_sub" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/wallet_info_checked4"
+                    app:layout_constraintTop_toBottomOf="@id/wallet_info_text4">
+
+                    <ImageView
+                        android:id="@+id/wallet_telegram"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/telegram" />
+
+                    <ImageView
+                        android:id="@+id/wallet_instagram"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/instagram" />
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_get_card" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

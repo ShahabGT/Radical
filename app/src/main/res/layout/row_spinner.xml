@@ -2,8 +2,9 @@
 
 <TextView android:padding="5dp"
     android:gravity="center"
-    android:textColor="@color/black"
+    android:textColor="#611F00"
     android:fontFamily="@font/vazir"
+    android:text="شغل"
     android:id="@+id/text1"
     style="@style/Base.TextAppearance.AppCompat.Small"
     android:layout_width="match_parent"

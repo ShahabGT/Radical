@@ -1,7 +1,6 @@
 package ir.radical_app.radical.dialogs;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,14 +12,15 @@ import androidx.fragment.app.FragmentActivity;
 import ir.radical_app.radical.activities.UpgradeActivity;
 import ir.radical_app.radical.R;
 import ir.radical_app.radical.classes.MySharedPreference;
+import ir.radical_app.radical.classes.MyToast;
+import ir.radical_app.radical.classes.MyUtils;
 import ir.radical_app.radical.fragments.ProfileFragment;
-import ir.radical_app.radical.fragments.SpecificCategoryFragment;
 
 public class UpgradeDialog extends Dialog {
 
-    private MaterialButton buy,cancel;
+    private MaterialButton buy,cancel,upgrade;
     private FragmentActivity context;
-    private int userPlan = MySharedPreference.getInstance(getContext()).getPlan();
+    private int userPlan = MySharedPreference.Companion.getInstance(getContext()).getPlan();
 
 
     public UpgradeDialog(@NonNull FragmentActivity context) {
@@ -38,8 +38,10 @@ public class UpgradeDialog extends Dialog {
     }
     private void init(){
         buy = findViewById(R.id.plan_buy);
+        upgrade = findViewById(R.id.plan_upgrade);
         if(userPlan==2){
             buy.setText(getContext().getString(R.string.plan_account));
+            upgrade.setVisibility(View.VISIBLE);
         }
         cancel = findViewById(R.id.plan_cancel);
         onClicks();
@@ -47,9 +49,12 @@ public class UpgradeDialog extends Dialog {
 
     private void onClicks(){
         if(userPlan==2) {
-            buy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            buy.setOnClickListener(View-> {
+
+                    if(!MyUtils.Companion.checkInternet(getContext())){
+                        MyToast.Companion.create(getContext(),getContext().getString(R.string.internet_error));
+                        return;
+                    }
                     ProfileFragment profileFragment = new ProfileFragment();
                     context.getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.fadein, R.anim.fadeout, R.anim.fadein, R.anim.fadeout)
@@ -57,26 +62,37 @@ public class UpgradeDialog extends Dialog {
                             .addToBackStack(null)
                             .commit();
                     dismiss();
-                }
+
             });
-        }else{
-            buy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            upgrade.setOnClickListener(View-> {
+
+                    if(!MyUtils.Companion.checkInternet(getContext())){
+                        MyToast.Companion.create(getContext(),getContext().getString(R.string.internet_error));
+                        return;
+                    }
                     context.startActivity(new Intent(context, UpgradeActivity.class));
                     dismiss();
-                }
+
             });
+        }else{
+            buy.setOnClickListener(View-> {
+
+                    if(!MyUtils.Companion.checkInternet(getContext())){
+                        MyToast.Companion.create(getContext(),getContext().getString(R.string.internet_error));
+                        return;
+                    }
+                    context.startActivity(new Intent(context, UpgradeActivity.class));
+                    dismiss();
+
+            });
+
 
 
         }
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        cancel.setOnClickListener(View->
+                dismiss()
+        );
 
     }
 }

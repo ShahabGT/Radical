@@ -17,14 +17,14 @@ public class BookmarkDataSource extends PageKeyedDataSource<Integer, BookmarkIte
     private String accessToken;
 
 
-    public BookmarkDataSource(String number, String accessToken){
+    BookmarkDataSource(String number, String accessToken){
         this.number=number;
         this.accessToken=accessToken;
     }
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, BookmarkItem> callback) {
-        RetrofitClient.getInstance()
+        RetrofitClient.Companion.getInstance()
                 .getApi()
                 .getBookmarks(START,SIZE, number,accessToken)
                 .enqueue(new Callback<BookmarkResponse>() {
@@ -58,7 +58,7 @@ public class BookmarkDataSource extends PageKeyedDataSource<Integer, BookmarkIte
     @Override
     public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, BookmarkItem> callback) {
 
-        RetrofitClient.getInstance()
+        RetrofitClient.Companion.getInstance()
                 .getApi()
                 .getBookmarks(params.key,SIZE,number,accessToken)
                 .enqueue(new Callback<BookmarkResponse>() {

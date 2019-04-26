@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#232e33</color>
     <color name="colorAccent">#efb303</color>
 
+    <color name="selected_plan">#008262</color>
+
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="yellow_light">#FFF594</color>
@@ -21,7 +23,7 @@
     <drawable name="clicked_gray">#80e0e0e0</drawable>
 
     <color name="app_bg">#ECEFF1</color>
-    <color name="progress_bg">#B0B0B4</color>
+    <color name="progress_bg">#EFF1F5</color>
     <color name="rate_bg">#9A000000</color>
 
     <!-- OVERWRITE THESE COLORS FOR A LIGHT THEME -->

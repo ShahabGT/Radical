@@ -3,7 +3,6 @@ package ir.radical_app.radical.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import ir.radical_app.radical.fragments.LoginFragment;
 import ir.radical_app.radical.R;
-
 import android.os.Bundle;
 
 public class LoginActivity extends AppCompatActivity {

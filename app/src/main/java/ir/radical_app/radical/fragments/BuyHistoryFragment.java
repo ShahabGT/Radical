@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -38,7 +37,7 @@ public class BuyHistoryFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_buy_history, container, false);
 
@@ -47,8 +46,8 @@ public class BuyHistoryFragment extends Fragment {
     }
 
     private void init(View v){
-        emptyView = v.findViewById(R.id.empty_view);
-        emptyViewText = v.findViewById(R.id.empty_text);
+        emptyView = v.findViewById(R.id.buy_history_empty_view);
+        emptyViewText = v.findViewById(R.id.buy_history_empty_text);
         recyclerView = v.findViewById(R.id.buy_history_recycler);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -56,8 +55,8 @@ public class BuyHistoryFragment extends Fragment {
     }
 
     private void showData(){
-        String number = MySharedPreference.getInstance(getContext()).getNumber();
-        String accessToken = MySharedPreference.getInstance(getContext()).getAccessToken();
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
         BuyHistoryViewModel viewModel = ViewModelProviders.of(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override

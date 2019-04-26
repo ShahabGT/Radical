@@ -37,25 +37,12 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/loading_anim"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
-            app:lottie_speed="0.5"
+            app:lottie_speed="1"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/loading2"
             app:lottie_autoPlay="true" />
-        <ProgressBar
-            android:visibility="gone"
-            android:indeterminateDrawable="@drawable/progressbar_circle"
-            android:layout_margin="8dp"
-            android:id="@+id/custom_loading"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:indeterminate="true" />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

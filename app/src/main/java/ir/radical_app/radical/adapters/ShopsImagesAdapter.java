@@ -5,9 +5,7 @@ import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.facebook.drawee.view.SimpleDraweeView;
-
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import ir.radical_app.radical.R;
@@ -35,7 +33,8 @@ public class ShopsImagesAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    @NonNull
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         SimpleDraweeView imageView = new SimpleDraweeView(context);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         String pos= (position+1)+"";
@@ -47,7 +46,7 @@ public class ShopsImagesAdapter extends PagerAdapter {
 
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position,@NonNull Object object) {
         container.removeView((SimpleDraweeView) object);
     }
 }

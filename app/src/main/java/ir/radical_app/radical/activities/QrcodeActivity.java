@@ -19,11 +19,17 @@ import java.util.List;
 public class QrcodeActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler  {
 
     private ZXingScannerView mScannerView;
+    private String shopid="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_qrcode);
+
+        try {
+            shopid = getIntent().getExtras().getString("shopid","");
+        } catch (Exception e) {
+            shopid="";
+        }
 
         readBarcode();
 
@@ -48,9 +54,11 @@ public class QrcodeActivity extends AppCompatActivity implements ZXingScannerVie
     @Override
     public void handleResult(Result rawResult) {
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("qrCode",rawResult.getText());
-            setResult(Activity.RESULT_OK,returnIntent);
+            returnIntent.putExtra("qrCode", rawResult.getText());
+            returnIntent.putExtra("shopid", shopid+"");
+            setResult(Activity.RESULT_OK, returnIntent);
             QrcodeActivity.this.finish();
+
     }
 
     @Override

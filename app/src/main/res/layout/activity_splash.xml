@@ -23,7 +23,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         android:src="@drawable/radical_logo"
         app:layout_constraintBottom_toTopOf="@id/splash_title"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="200dp" />
     <TextView
         android:id="@+id/splash_title"

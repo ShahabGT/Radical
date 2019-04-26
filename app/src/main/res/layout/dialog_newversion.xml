@@ -4,77 +4,70 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
     app:cardCornerRadius="5dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    app:cardElevation="5dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.airbnb.lottie.LottieAnimationView
-            app:lottie_enableMergePathsForKitKatAndAbove="true"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/new_anim"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:lottie_speed="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_enableMergePathsForKitKatAndAbove="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/newversion"
-            app:lottie_autoPlay="true" />
+            app:lottie_rawRes="@raw/newversion2"
+            app:lottie_speed="0.5" />
+
         <TextView
-            android:textColor="@android:color/black"
             android:id="@+id/newversion_dialog_description"
             style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/vazir"
             android:gravity="right"
             android:padding="8dp"
             android:text="@string/newversion_dialog_text"
+            android:textColor="@android:color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/new_anim"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-        <com.google.android.material.button.MaterialButton
-            android:layout_margin="5dp"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            android:id="@+id/newversion_dialog_show"
-            android:fontFamily="@font/vazir"
-            android:text="@string/newversion_dialog_show"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/btn_shape1"
+            app:layout_constraintTop_toBottomOf="@id/new_anim" />
+
+        <ImageView
+            android:id="@+id/newversion_dialog_playstore"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:src="@drawable/playstore"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/newversion_dialog_cancel"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toRightOf="@+id/newversion_dialog_bazzar"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/newversion_dialog_description" />
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_margin="5dp"
-
-            android:id="@+id/newversion_dialog_cancel"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        <ImageView
+            android:id="@+id/newversion_dialog_bazzar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/btn_shape1"
-            android:fontFamily="@font/vazir"
-            android:padding="8dp"
-            android:text="@string/newversion_dialog_cancel"
+            android:src="@drawable/bazaar"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/newversion_dialog_show"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/newversion_dialog_playstore"
             app:layout_constraintTop_toBottomOf="@id/newversion_dialog_description" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.cardview.widget.CardView>

@@ -1,5 +1,6 @@
 package ir.radical_app.radical.arch.Bookmark;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+import ir.radical_app.radical.classes.MyToast;
+import ir.radical_app.radical.classes.MyUtils;
 import ir.radical_app.radical.fragments.ShopFragment;
 import ir.radical_app.radical.R;
 
@@ -61,22 +64,19 @@ public class BookmarkAdapter extends PagedListAdapter<BookmarkItem, BookmarkAdap
             Toast.makeText(mCtx, "Item is null", Toast.LENGTH_LONG).show();
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.itemView.setOnClickListener(View-> {
+                if(!MyUtils.Companion.checkInternet(mCtx)){
+                    MyToast.Companion.create(mCtx,mCtx.getString(R.string.internet_error));
+                    return;
+                }
                 ShopFragment shopFragment = new ShopFragment();
                 shopFragment.setShopId(holder.id.getText().toString());
-//                FragmentManager fm = activity.getSupportFragmentManager();
-//                while(fm.getBackStackEntryCount()>1)
-//                    fm.popBackStackImmediate();
-
 
                 activity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fadein,R.anim.fadeout,R.anim.fadein,R.anim.fadeout)
                         .add(R.id.main_container,shopFragment)
                         .addToBackStack(null)
                         .commit();
-            }
         });
 
     }
@@ -89,6 +89,7 @@ public class BookmarkAdapter extends PagedListAdapter<BookmarkItem, BookmarkAdap
                     return oldItem.getShopId().equals(newItem.getShopId());
                 }
 
+                @SuppressLint("DiffUtilEquals")
                 @Override
                 public boolean areContentsTheSame(BookmarkItem oldItem, BookmarkItem newItem) {
                     return oldItem.equals(newItem);

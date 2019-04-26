@@ -4,7 +4,6 @@ package ir.radical_app.radical.onboarding;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -12,17 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import ir.radical_app.radical.R;
-import ir.radical_app.radical.classes.MyToast;
-
-import static ir.radical_app.radical.classes.Const.onboarding;
-
+import ir.radical_app.radical.classes.Const;
 
 public class Onboarding2 extends Fragment {
     private ImageView backbtn;
@@ -31,8 +25,8 @@ public class Onboarding2 extends Fragment {
     private TextView text,title;
     private boolean fromBack;
 
-    public void setFromBack(boolean fromBack) {
-        this.fromBack = fromBack;
+    void setFromBack() {
+        this.fromBack = true;
     }
 
     public Onboarding2() {
@@ -40,7 +34,7 @@ public class Onboarding2 extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_onboarding2, container, false);
 
@@ -73,20 +67,13 @@ public class Onboarding2 extends Fragment {
         round1=v.findViewById(R.id.onboarding2_round1);
         round2= v.findViewById(R.id.onboarding2_round2);
 
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backAnimation();
-            }
-        });
+        backbtn.setOnClickListener(View->
+                backAnimation()
+        );
 
-        nextbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nextAnimation();
-            }
-        });
-
+        nextbtn.setOnClickListener(View->
+                nextAnimation()
+        );
 
     }
 
@@ -216,12 +203,12 @@ public class Onboarding2 extends Fragment {
                     @Override
                     public void run() {
                         Onboarding1 onboarding1 = new Onboarding1();
-                        onboarding1.setFromBack(true);
+                        onboarding1.setFromBack();
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.fadein,R.anim.fadeout)
                                 .replace(R.id.intro_container, onboarding1)
-                                .commit();
-                        onboarding=2;
+                                .commitNow();
+                        Const.Companion.setOnboarding(2);
                     }
                 },400);
             }
@@ -276,17 +263,16 @@ public class Onboarding2 extends Fragment {
         animatorSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                new Handler().postDelayed(()-> {
+
                         Onboarding3 onboarding3 = new Onboarding3();
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.enter_right,R.anim.exit_left)
                                 .replace(R.id.intro_container, onboarding3)
-                                .commit();
-                        onboarding=3;
+                                .commitNow();
+                        Const.Companion.setOnboarding(3);
                     }
-                },200);
+                ,200);
             }
 
             @Override

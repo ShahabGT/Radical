@@ -6,6 +6,7 @@ import ir.radical_app.radical.arch.Bookmark.BookmarkResponse;
 import ir.radical_app.radical.arch.Category.ShopsCategoryResponse;
 import ir.radical_app.radical.arch.Search.SearchResponse;
 import ir.radical_app.radical.arch.BuyHistory.BuyHistoryResponse;
+import ir.radical_app.radical.arch.Upgrade.UpgradeResponse;
 import ir.radical_app.radical.models.BuyDetailsModel;
 import ir.radical_app.radical.models.CategoryModel;
 import ir.radical_app.radical.models.ChatModel;
@@ -53,12 +54,12 @@ public interface Api {
             @Field("number") String number,
             @Field("accesstoken") String accessToken,
             @Field("name") String name,
-            @Field("sex") String sex,
+            @Field("family") String family,
+            @Field("sex") int sex,
             @Field("email") String email,
             @Field("education") int education,
             @Field("job") int job,
             @Field("region") int region,
-            @Field("color") int color,
             @Field("invitecode") String inviteCode,
             @Field("isfirst") int isfirst
     );
@@ -158,6 +159,8 @@ public interface Api {
     @POST("validation.php")
     Call<JsonResponse> validate(
             @Field("platform") String platform,
+            @Field("version") int version,
+            @Field("platform_version") String platformVersion,
             @Field("number") String number,
             @Field("accesstoken") String accessToken
 
@@ -222,6 +225,16 @@ public interface Api {
     //___________________________________________
 
     @FormUrlEncoded
+    @POST("getupgradehistory.php")
+    Call<UpgradeResponse> getUpgradeHistory(
+            @Field("number") String number,
+            @Field("accesstoken") String accessToken,
+            @Field("start") int start,
+            @Field("size") int size
+    );
+    //___________________________________________
+
+    @FormUrlEncoded
     @POST("getbuydetails.php")
     Call<BuyDetailsModel> getBuyDetails(
             @Field("number") String number,
@@ -264,6 +277,57 @@ public interface Api {
             @Field("number") String number,
             @Field("accesstoken") String accessToken,
             @Field("giftcode") String giftcode
+    );
+
+    //___________________________________________
+
+    @FormUrlEncoded
+    @POST("initbuy.php")
+    Call<JsonResponse> upgrade(
+            @Field("number") String number,
+            @Field("accesstoken") String accessToken,
+            @Field("plan") int plan,
+            @Field("giftcode") String giftcode,
+            @Field("wallet") int wallet,
+            @Field("description") String description,
+            @Field("amount") String amount
+    );
+
+    //___________________________________________
+
+    @FormUrlEncoded
+    @POST("buywallet.php")
+    Call<JsonResponse> upgradeWallet(
+            @Field("number") String number,
+            @Field("accesstoken") String accessToken,
+            @Field("plan") int plan,
+            @Field("wallet") int wallet,
+            @Field("description") String description);
+
+    //___________________________________________
+
+    @FormUrlEncoded
+    @POST("getgift.php")
+    Call<JsonResponse> getGift(
+            @Field("number") String number,
+            @Field("accesstoken") String accessToken,
+            @Field("count") String count);
+    //___________________________________________
+
+    @FormUrlEncoded
+    @POST("getsocialgift.php")
+    Call<JsonResponse> getSocialGift(
+            @Field("number") String number,
+            @Field("accesstoken") String accessToken
+    );
+
+    //___________________________________________
+
+    @FormUrlEncoded
+    @POST("getsocialgift2.php")
+    Call<JsonResponse> getSocialGift2(
+            @Field("number") String number,
+            @Field("accesstoken") String accessToken
     );
 
 }

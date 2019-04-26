@@ -20,9 +20,9 @@ public class ShopsCategoryDataSource extends PageKeyedDataSource<Integer, ShopsC
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, ShopsCategoryItem> callback) {
-        RetrofitClient.getInstance()
+        RetrofitClient.Companion.getInstance()
                 .getApi()
-                .getCategoryShops(START,SIZE, Const.category)
+                .getCategoryShops(START,SIZE, Const.Companion.getCategory())
                 .enqueue(new Callback<ShopsCategoryResponse>() {
                     @Override
                     public void onResponse(Call<ShopsCategoryResponse> call, Response<ShopsCategoryResponse> response) {
@@ -50,9 +50,9 @@ public class ShopsCategoryDataSource extends PageKeyedDataSource<Integer, ShopsC
     @Override
     public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, ShopsCategoryItem> callback) {
 
-        RetrofitClient.getInstance()
+        RetrofitClient.Companion.getInstance()
                 .getApi()
-                .getCategoryShops(params.key,SIZE,Const.category)
+                .getCategoryShops(params.key,SIZE,Const.Companion.getCategory())
                 .enqueue(new Callback<ShopsCategoryResponse>() {
                     @Override
                     public void onResponse(Call<ShopsCategoryResponse> call, Response<ShopsCategoryResponse> response) {

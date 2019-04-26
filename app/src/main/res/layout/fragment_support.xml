@@ -1,49 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_linear"
     android:layout_width="match_parent"
-    android:background="@color/app_bg"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    android:id="@+id/main_linear"
-    android:layout_height="match_parent"
     tools:context=".fragments.SupportFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:id="@+id/support_recycler"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/support_recycler" />
+        app:layout_constraintBottom_toTopOf="@+id/support_send_linear"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/support_call"
+        android:layout_width="wrap_content"
+        app:fabSize="mini"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/vector_call_black"
+        app:layout_constraintBottom_toTopOf="@id/support_send_linear"
+
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/support_send_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="6dp"
+        app:layout_constraintRight_toRightOf="parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_margin="5dp"
-        android:visibility="gone"
-        android:padding="5dp"
-        android:background="@drawable/shape_send"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_margin="5dp"
-        android:padding="12dp"
-        android:background="@drawable/shape_send"
-        android:layout_height="wrap_content">
         <ImageView
-            android:layout_width="wrap_content"
-            android:src="@mipmap/ic_send"
             android:id="@+id/support_send"
-            android:layout_height="wrap_content" />
+            android:layout_width="45dp"
+            android:layout_height="60dp"
+            android:padding="4dp"
+            android:src="@drawable/sendmessage" />
+
         <EditText
             android:id="@+id/support_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="8dp"
             android:layout_weight="1"
+            android:background="@null"
             android:fontFamily="@font/vazir"
             android:hint="متن مورد نظر"
             android:inputType="textCapSentences|textMultiLine"
@@ -53,7 +73,8 @@
             android:text="" />
 
 
-
     </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

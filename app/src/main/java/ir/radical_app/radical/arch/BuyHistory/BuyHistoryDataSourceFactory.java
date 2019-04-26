@@ -11,7 +11,7 @@ public class BuyHistoryDataSourceFactory extends DataSource.Factory {
     private String number;
     private String accessToken;
 
-    public BuyHistoryDataSourceFactory(String number, String accessToken){
+    BuyHistoryDataSourceFactory(String number, String accessToken){
         this.number=number;
         this.accessToken=accessToken;
 

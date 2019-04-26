@@ -6,28 +6,22 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-
-import com.tmall.ultraviewpager.UltraViewPager;
-import com.tmall.ultraviewpager.transformer.UltraScaleTransformer;
-
 import java.util.ArrayList;
-
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
 import ir.radical_app.radical.activities.ErrorActivity;
 import ir.radical_app.radical.activities.SplashActivity;
-import ir.radical_app.radical.adapters.CategoryAdapter;
+import ir.radical_app.radical.adapters.CategoryAdapter2;
 import ir.radical_app.radical.adapters.MainViewPager;
 import ir.radical_app.radical.arch.Shops.ShopsAdapter;
 import ir.radical_app.radical.arch.Shops.ShopsItem;
@@ -40,6 +34,7 @@ import ir.radical_app.radical.dialogs.LoadingDialog;
 import ir.radical_app.radical.models.CategoryModel;
 import ir.radical_app.radical.models.JsonResponse;
 import ir.radical_app.radical.R;
+import ir.radical_app.radical.models.SliderResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,15 +42,13 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
-    private MainViewPager adapter;
-    int[] images = new int[]{R.drawable.t1,R.drawable.t2,R.drawable.t3,R.drawable.t4,R.drawable.t5};
     private RecyclerView recyclerView;
-    private  UltraViewPager ultraViewPager;
     private LinearLayoutManager layoutManager;
     private LoadingDialog dialog;
-    private  RecyclerView categoryRecyclerView;
-    private CategoryAdapter categoryAdapter;
+    private RecyclerView categoryRecyclerView;
+    private CategoryAdapter2 categoryAdapter;
     private MyDatabase myDatabase;
+    private View v;
 
 
 
@@ -64,57 +57,30 @@ public class HomeFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_home, container, false);
+        v =  inflater.inflate(R.layout.fragment_home, container, false);
         myDatabase = new MyDatabase(getContext());
-        getCategories();
-      //  initViewPager(v);
 
-        //showData(v);
-        init(v);
+        init();
         return v;
     }
 
-    private void init(View v){
+    private void init(){
         recyclerView = v.findViewById(R.id.home_recycler);
         categoryRecyclerView = v.findViewById(R.id.home_category_recycler);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        //   recyclerView.setHasFixedSize(true);
 
-        //     recyclerView.setNestedScrollingEnabled(false);
+        getCategories();
 
-//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//            }
-//
-//            @Override
-//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                if (layoutManager.findFirstVisibleItemPosition() > 0) {
-//                    ultraViewPager.setVisibility(View.GONE);
-//                } else {
-//                    ultraViewPager.setVisibility(View.VISIBLE);
-//
-//                }
-//            }
-//        });
-        showData();
+
 
     }
 
-    private void showData(){
+    private void showData(PagerAdapter pagerAdapter){
         ShopsViewModel itemViewModel = ViewModelProviders.of(this).get(ShopsViewModel.class);
-        final ShopsAdapter adapter = new ShopsAdapter(getContext(),getActivity());
-//        itemViewModel.itemPagedList.observeForever(new Observer<PagedList<ShopsItem>>() {
-//            @Override
-//            public void onChanged(PagedList<ShopsItem> shopsItems) {
-//                adapter.submitList(shopsItems);
-//
-//            }
-//        });
+        final ShopsAdapter adapter = new ShopsAdapter(getContext(),getActivity(),pagerAdapter);
         itemViewModel.itemPagedList.observe(this, new Observer<PagedList<ShopsItem>>() {
 
             @Override
@@ -125,25 +91,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-
-    private void initViewPager(View v){
-        ultraViewPager = v.findViewById(R.id.ultra_viewpager);
-        ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
-        adapter = new MainViewPager(getContext(),images);
-        ultraViewPager.setAdapter(adapter);
-        ultraViewPager.setPageTransformer(false, new UltraScaleTransformer());
-        ultraViewPager.initIndicator();
-        ultraViewPager.getIndicator()
-                .setOrientation(UltraViewPager.Orientation.HORIZONTAL)
-                .setFocusColor(Color.GREEN)
-                .setNormalColor(Color.WHITE)
-                .setRadius((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()));
-        ultraViewPager.getIndicator().setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
-        ultraViewPager.getIndicator().build();
-        ultraViewPager.setInfiniteLoop(true);
-        ultraViewPager.setAutoScroll(5000);
-
-    }
     private void loadingDialog(boolean cancel){
         if(!cancel){
             dialog = new LoadingDialog(getContext());
@@ -158,16 +105,16 @@ public class HomeFragment extends Fragment {
     }
     private void getCategories(){
         loadingDialog(false);
-        String number = MySharedPreference.getInstance(getContext()).getNumber();
-        String accessToken = MySharedPreference.getInstance(getContext()).getAccessToken();
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
 
         if(number.isEmpty() || accessToken.isEmpty()){
-            MyToast.Create(getContext(),getString(R.string.data_error));
-            MySharedPreference.getInstance(getContext()).clear();
+            MyToast.Companion.create(getContext(),getString(R.string.data_error));
+            MySharedPreference.Companion.getInstance(getContext()).clear();
             startActivity(new Intent(getActivity(), SplashActivity.class));
             getActivity().finish();
         }else{
-            RetrofitClient.getInstance().getApi()
+            RetrofitClient.Companion.getInstance().getApi()
                     .getCategories().enqueue(new Callback<CategoryModel>() {
                 @Override
                 public void onResponse(Call<CategoryModel> call, Response<CategoryModel> response) {
@@ -176,14 +123,12 @@ public class HomeFragment extends Fragment {
                         if(response.body().getList().size()>5){
 
                             ArrayList<JsonResponse> list = response.body().getList();
-//                            JsonResponse jsonResponse = new JsonResponse();
-//                            jsonResponse.setName("همه");
-//                            jsonResponse.setCategoryId("0");
-//                            list.add(jsonResponse);
-//                            list.addAll(response.body().getList());
-                            categoryAdapter = new CategoryAdapter(getContext(),list,getActivity());
-                            categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+                            ArrayList<SliderResponse> slider = response.body().getSlider();
+
+                            categoryAdapter = new CategoryAdapter2(getContext(),list,getActivity());
+                            categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,true));
                             categoryRecyclerView.setAdapter(categoryAdapter);
+                            showData(new MainViewPager(getActivity(),slider));
                             myDatabase.deleteCategoriesTable();
                             myDatabase.saveCategories(list);
                         }else{

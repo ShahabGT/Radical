@@ -15,9 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import ir.radical_app.radical.R;
-
-import static ir.radical_app.radical.classes.Const.onboarding;
-
+import ir.radical_app.radical.classes.Const;
 
 public class Onboarding3 extends Fragment {
     private ImageView backbtn;
@@ -26,12 +24,12 @@ public class Onboarding3 extends Fragment {
     private ImageView logo,shape;
     private TextView text,title;
 
-    public void setFromBack(boolean fromBack) {
-        this.fromBack = fromBack;
+    void setFromBack() {
+        this.fromBack = true;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_onboarding3, container, false);
 
@@ -54,26 +52,23 @@ public class Onboarding3 extends Fragment {
 
     private void init(View v){
         backbtn = getActivity().findViewById(R.id.intro_backbtn);
+        backbtn.setVisibility(View.VISIBLE);
         nextbtn = getActivity().findViewById(R.id.intro_nextbtn);
+        nextbtn.show();
 
         logo = v.findViewById(R.id.onboarding3_logo);
         shape = v.findViewById(R.id.onboarding3_shape);
         text = v.findViewById(R.id.onboarding3_text);
         title = v.findViewById(R.id.onboarding3_title);
 
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backAnimation();
-            }
-        });
+        backbtn.setOnClickListener(View->
+                backAnimation()
 
-        nextbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nextAnimation();
-            }
-        });
+        );
+
+        nextbtn.setOnClickListener(View->
+                nextAnimation()
+        );
 
     }
 
@@ -146,19 +141,18 @@ public class Onboarding3 extends Fragment {
         animatorSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                new Handler().postDelayed(()-> {
+
                         Onboarding2 onboarding2 = new Onboarding2();
-                        onboarding2.setFromBack(true);
+                        onboarding2.setFromBack();
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.enter_left,R.anim.exit_right)
                                 .replace(R.id.intro_container, onboarding2)
-                                .commit();
-                        onboarding=2;
-                    }
-                },200);
+                                .commitNow();
+                        Const.Companion.setOnboarding(2);
 
+                    }
+                ,200);
             }
 
             @Override
@@ -248,17 +242,17 @@ public class Onboarding3 extends Fragment {
         animatorSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                new Handler().postDelayed(()-> {
+
                         Onboarding4 onboarding4 = new Onboarding4();
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.enter_right,R.anim.exit_left)
                                 .replace(R.id.intro_container, onboarding4)
-                                .commit();
-                        onboarding=4;
+                                .commitNow();
+                        Const.Companion.setOnboarding(4);
+
                     }
-                },200);
+                ,200);
 
             }
 

@@ -18,7 +18,7 @@ public class ShopsDataSource extends PageKeyedDataSource<Integer, ShopsItem> {
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, ShopsItem> callback) {
-        RetrofitClient.getInstance()
+        RetrofitClient.Companion.getInstance()
                 .getApi()
                 .getShops(START,SIZE, "")
                 .enqueue(new Callback<ShopsResponse>() {
@@ -47,7 +47,7 @@ public class ShopsDataSource extends PageKeyedDataSource<Integer, ShopsItem> {
     @Override
     public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, ShopsItem> callback) {
 
-        RetrofitClient.getInstance()
+        RetrofitClient.Companion.getInstance()
                 .getApi()
                 .getShops(params.key,SIZE,"")
                 .enqueue(new Callback<ShopsResponse>() {

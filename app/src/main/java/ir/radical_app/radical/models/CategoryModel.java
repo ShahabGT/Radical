@@ -9,6 +9,17 @@ public class CategoryModel {
     @SerializedName("data")
     private ArrayList<JsonResponse> list;
 
+    @SerializedName("slider")
+    private ArrayList<SliderResponse> slider;
+
+
+    public ArrayList<SliderResponse> getSlider() {
+        return slider;
+    }
+
+    public void setSlider(ArrayList<SliderResponse> slider) {
+        this.slider = slider;
+    }
 
     public ArrayList<JsonResponse> getList() {
         return list;

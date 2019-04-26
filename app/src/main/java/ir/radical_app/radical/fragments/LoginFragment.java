@@ -2,6 +2,8 @@ package ir.radical_app.radical.fragments;
 
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +32,7 @@ public class LoginFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
         init(v);
@@ -46,20 +48,17 @@ public class LoginFragment extends Fragment {
     }
 
     private void onClicks(){
-        fLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyUtils.hideKeyboard(getActivity());
+        fLogin.setOnClickListener(View-> {
+                MyUtils.Companion.hideKeyboard(getActivity());
                 String n = fNumber.getText().toString();
                 if(n.length()<11 || !n.startsWith("09") ){
-                    MyToast.Create(getContext(),getString(R.string.number_error));
+                    MyToast.Companion.create(getContext(),getString(R.string.number_error));
                 }else{
-                    if(!MyUtils.checkInternet(getContext()))
-                        MyToast.Create(getContext(),getString(R.string.internet_error));
+                    if(!MyUtils.Companion.checkInternet(getContext()))
+                        MyToast.Companion.create(getContext(),getString(R.string.internet_error));
                     else
                         doLogin(n);
                 }
-            }
         });
     }
 
@@ -68,7 +67,7 @@ public class LoginFragment extends Fragment {
         fLogin.setEnabled(false);
         fLogin.setText(getString(R.string.txt_loading));
 
-        RetrofitClient.getInstance().getApi().doLogin(number)
+        RetrofitClient.Companion.getInstance().getApi().doLogin(number)
                 .enqueue(new Callback<JsonResponse>() {
                     @Override
                     public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
@@ -77,21 +76,20 @@ public class LoginFragment extends Fragment {
                         fNumber.setEnabled(true);
                         fLogin.setEnabled(true);
                         if (response.isSuccessful()){
-                            switch (response.body().getMessage()){
-                                case "ok":
-                                    MySharedPreference.getInstance(getContext()).setNumber(number);
-                                    getActivity().getSupportFragmentManager()
-                                            .beginTransaction()
-                                            .setCustomAnimations(R.anim.fadein,R.anim.fadeout)
-                                            .replace(R.id.login_container,new CodeFragment())
-                                            .commit();
-                                    break;
+                            if(response.body().getMessage().equals("ok")){
+                                MySharedPreference.Companion.getInstance(getContext()).setNumber(number);
+                                getActivity().getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .setCustomAnimations(R.anim.fadein,R.anim.fadeout)
+                                        .replace(R.id.login_container,new CodeFragment())
+                                        .commit();
 
-                                    default:
-                                        MyToast.Create(getContext(),getString(R.string.general_error));
+                            }else{
+                                MyToast.Companion.create(getContext(),getString(R.string.general_error));
                             }
+
                         }else{
-                            MyToast.Create(getContext(),getString(R.string.general_error));
+                            MyToast.Companion.create(getContext(),getString(R.string.general_error));
                         }
                     }
 
@@ -101,7 +99,7 @@ public class LoginFragment extends Fragment {
 
                         fNumber.setEnabled(true);
                         fLogin.setEnabled(true);
-                        MyToast.Create(getContext(),getString(R.string.general_error));
+                        MyToast.Companion.create(getContext(),getString(R.string.general_error));
 
                     }
                 });

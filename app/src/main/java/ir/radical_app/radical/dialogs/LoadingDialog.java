@@ -8,11 +8,9 @@ import ir.radical_app.radical.R;
 
 public class LoadingDialog extends Dialog {
 
-    private Context context;
 
     public LoadingDialog(@NonNull Context context) {
         super(context);
-        this.context=context;
     }
 
     @Override

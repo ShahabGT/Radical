@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.AudioManager;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -26,6 +25,10 @@ import ir.radical_app.radical.database.MyDatabase;
 import ir.radical_app.radical.models.MessageModel;
 import ir.radical_app.radical.R;
 
+import static ir.radical_app.radical.classes.Const.RADICAL_BROADCAST;
+import static ir.radical_app.radical.classes.Const.RADICAL_BROADCAST_MESSAGE_EXTRA;
+import static ir.radical_app.radical.classes.Const.RADICAL_BROADCAST_SUPPORT_EXTRA;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
@@ -35,34 +38,47 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String title = data.get("title");
         String body = data.get("body");
         String sender = data.get("sender")+"";
-
+        sender=sender.trim();
         MessageModel model = new MessageModel();
         model.setMessage(body);
         model.setTitle(title);
         model.setSender(sender);
         model.setDate(date);
         MyDatabase myDatabase = new MyDatabase(this);
-        myDatabase.saveMessage(model);
-        if(sender.equals("admin"))
-            createNotification("پیام جدید","پیام جدید از طرف پشتیانی");
-        else
-            createNotification(title,body);
+        Intent intent = new Intent();
+        intent.setAction(RADICAL_BROADCAST);
+
+        if(sender.contains("admin")||sender.equals("1")) {
+            model.setRead("0");
+            myDatabase.saveSupport(model);
+            intent.putExtra(RADICAL_BROADCAST_SUPPORT_EXTRA,"new");
+            sendBroadcast(intent);
+            createNotification("پیام جدید", "پیام جدید از طرف پشتیانی","support");
+
+        }
+        else {
+            myDatabase.saveMessage(model);
+            intent.putExtra(RADICAL_BROADCAST_MESSAGE_EXTRA,"new");
+            sendBroadcast(intent);
+            createNotification(title, body,"notification");
+        }
 
     }
+
 
     @Override
     public void onNewToken(String s) {
-        MySharedPreference.getInstance(this).setFBToken(s);
+        MySharedPreference.Companion.getInstance(this).setFBToken(s);
         super.onNewToken(s);
     }
 
-    private void createNotification(String title, String message){
+    private void createNotification(String title, String message,String intentValue){
 
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("notidata",intentValue);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-        //Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Uri alarmSound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.notification);;
+        Uri alarmSound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.notification);
         createNotificationChannel();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, Const.CHANNEL_CODE);
 

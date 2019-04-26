@@ -11,7 +11,7 @@ public class BookmarkDataSourceFactory extends DataSource.Factory {
     private String number;
     private String accessToken;
 
-    public BookmarkDataSourceFactory(String number, String accessToken){
+    BookmarkDataSourceFactory(String number, String accessToken){
         this.number=number;
         this.accessToken=accessToken;
 

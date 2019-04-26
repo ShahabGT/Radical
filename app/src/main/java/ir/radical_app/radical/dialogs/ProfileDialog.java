@@ -1,7 +1,6 @@
 package ir.radical_app.radical.dialogs;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import com.google.android.material.button.MaterialButton;
@@ -36,9 +35,8 @@ public class ProfileDialog extends Dialog {
 
     private void onClicks(){
 
-        profile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        profile.setOnClickListener(View-> {
+
                     ProfileFragment profileFragment = new ProfileFragment();
                     context.getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.fadein, R.anim.fadeout, R.anim.fadein, R.anim.fadeout)
@@ -46,15 +44,12 @@ public class ProfileDialog extends Dialog {
                             .addToBackStack(null)
                             .commit();
                     dismiss();
-                }
+
             });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        cancel.setOnClickListener(View->
+                dismiss()
+        );
 
     }
 }

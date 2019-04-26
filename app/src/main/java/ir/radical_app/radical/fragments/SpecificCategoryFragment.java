@@ -1,14 +1,15 @@
 package ir.radical_app.radical.fragments;
 
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,7 @@ import ir.radical_app.radical.arch.Search.SearchItem;
 import ir.radical_app.radical.arch.Search.SearchViewModel;
 import ir.radical_app.radical.classes.MySharedPreference;
 import ir.radical_app.radical.R;
+import ir.radical_app.radical.dialogs.InfoDialog;
 
 
 public class SpecificCategoryFragment extends Fragment {
@@ -50,11 +52,29 @@ public class SpecificCategoryFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_specific_category, container, false);
         init(v);
         return v;
+    }
+
+    private void showInfoDialog() {
+        if(MySharedPreference.Companion.getInstance(getContext()).getFirstFavorite()){
+            MySharedPreference.Companion.getInstance(getContext()).setFirstFavorite();
+        }else{
+            return;
+        }
+
+
+        InfoDialog introDialog = new InfoDialog(getContext(),"مراکز مورد علاقتو که قبلا نشانه گذاری کردی میتونی ببینی");
+        introDialog.setCancelable(true);
+        introDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        introDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
+        introDialog.show();
+        Window window = introDialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
     private void init(View v){
@@ -90,8 +110,8 @@ public class SpecificCategoryFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
     private void showBookmarkData(){
-        String number = MySharedPreference.getInstance(getContext()).getNumber();
-        String accessToken = MySharedPreference.getInstance(getContext()).getAccessToken();
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
         BookmarkViewModel viewModel = ViewModelProviders.of(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
@@ -108,6 +128,8 @@ public class SpecificCategoryFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(adapter);
+        showInfoDialog();
+
     }
     private void showCategoryData(){
         ShopsCategoryViewModel itemViewModel = ViewModelProviders.of(this).get(ShopsCategoryViewModel.class);

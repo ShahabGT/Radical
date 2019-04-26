@@ -6,15 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.facebook.drawee.view.SimpleDraweeView;
-
 import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import ir.radical_app.radical.classes.Const;
+import ir.radical_app.radical.classes.MyToast;
+import ir.radical_app.radical.classes.MyUtils;
 import ir.radical_app.radical.fragments.SpecificCategoryFragment;
 import ir.radical_app.radical.models.JsonResponse;
 import ir.radical_app.radical.R;
@@ -44,25 +43,26 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         JsonResponse model = list.get(position);
-//        if(model.getName().length()>9)
-//            holder.title.setText(model.getName().substring(0,10)+"...");
-//        else
-            holder.title.setText(model.getName());
-
+        holder.title.setText(model.getName());
         holder.id.setText(model.getCategoryId());
         Uri uri = Uri.parse(context.getString(R.string.category_image_url,model.getCategoryId()));
         holder.pic.setImageURI(uri);
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Const.category=holder.id.getText().toString();
+        holder.itemView.setOnClickListener(View-> {
+
+                if(!MyUtils.Companion.checkInternet(context)){
+                    MyToast.Companion.create(context,context.getString(R.string.internet_error));
+                    return;
+                }
+
+
+                Const.Companion.setCategory(holder.id.getText().toString());
                 activity.getSupportFragmentManager().beginTransaction()
                         .add(R.id.main_container, new SpecificCategoryFragment())
                         .addToBackStack(null)
                         .commit();
-            }
+
         });
 
     }

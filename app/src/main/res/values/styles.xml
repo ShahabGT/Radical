@@ -18,4 +18,8 @@
         <item name="android:windowExitAnimation">@anim/bottom_down</item>
     </style>
 
+    <style name="PieChartFont" parent="@android:style/TextAppearance.Medium">
+        <item name="android:fontFamily">@font/vazir</item>
+    </style>
+
 </resources>

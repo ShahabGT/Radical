@@ -29,33 +29,35 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <ImageView
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:id="@+id/share_share"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@mipmap/ic_share"
-                    app:layout_constraintLeft_toRightOf="@+id/share_title"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/share_code" />
 
-                    />
                 <TextView
                     android:id="@+id/share_title"
-                    style="@style/Base.TextAppearance.AppCompat.Large"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/vazir"
                     android:text="@string/giftcode_title"
                     android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/share_share"
-                    app:layout_constraintRight_toLeftOf="@+id/share_share"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintVertical_chainStyle="spread"
+                    app:layout_constraintBottom_toTopOf="@+id/share_share"
                     app:layout_constraintLeft_toRightOf="@+id/share_code"
-                    app:layout_constraintTop_toTopOf="@+id/share_share" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    app:layout_constraintLeft_toLeftOf="parent"
                     android:id="@+id/share_code"
                     style="@style/Base.TextAppearance.AppCompat.Large"
                     android:layout_width="wrap_content"
@@ -64,135 +66,149 @@
                     android:text="123-456-789"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/share_title"
+                    app:layout_constraintBottom_toTopOf="@+id/share_share"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@+id/share_title"
-                    app:layout_constraintTop_toTopOf="@+id/share_title" />
-
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-            <View
-                android:id="@+id/share_view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/primary"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/share_header" />
-
-            <TextView
-                android:id="@+id/share_count"
-                style="@style/Base.TextAppearance.AppCompat.Large"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/vazir"
-                android:text="@string/giftcode_count"
-                android:textColor="@color/primary"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/share_view" />
-
-            <TextView
-                android:id="@+id/share_title2"
-                style="@style/Base.TextAppearance.AppCompat.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/vazir"
-                android:text="@string/giftcode_title2"
-                android:textColor="@color/primary"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/share_count" />
-
-            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                android:id="@+id/share_progress"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="8dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/share_title2"
-                app:rcBackgroundColor="@color/progress_bg"
-                app:rcBackgroundPadding="8dp"
-                app:rcMax="7"
-                app:rcProgress="0"
-                app:rcProgressColor="@color/yellow"
-                app:rcRadius="15dp"
-                app:rcReverse="false" />
-
-            <LinearLayout
-                android:id="@+id/share_linear"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/share_progress_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:weightSum="7"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/share_progress">
+                app:layout_constraintTop_toBottomOf="@+id/share_header">
 
-                <TextView
-                    android:id="@+id/share_three"
-                    style="@style/Base.TextAppearance.AppCompat.Small"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:fontFamily="@font/vazir"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="3نفر" />
+                    android:padding="8dp">
 
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="25dp"
-                    android:background="@color/progress_bg" />
+                    <ImageView
+                        android:id="@+id/share_star"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="12dp"
+                        android:src="@drawable/star"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/share_five"
+                    <TextView
+                        android:fontFamily="@font/vazir"
+                        android:id="@+id/share_count"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="@string/giftcode_star_title"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@id/share_star"
+                        app:layout_constraintRight_toLeftOf="@id/share_star"
+                        app:layout_constraintTop_toTopOf="@+id/share_star" />
 
-                    style="@style/Base.TextAppearance.AppCompat.Small"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:fontFamily="@font/vazir"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="5نفر" />
+                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                        android:id="@+id/share_progress"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_margin="8dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/share_count"
+                        app:rcBackgroundColor="@color/progress_bg"
+                        app:rcBackgroundPadding="8dp"
+                        app:rcMax="7"
+                        app:rcProgress="0"
+                        app:rcProgressColor="@color/blue"
+                        app:rcRadius="15dp"
+                        app:rcReverse="false" />
 
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="25dp"
-                    android:background="@color/progress_bg" />
+                    <LinearLayout
+                        android:id="@+id/share_linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:weightSum="7"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/share_progress">
 
-                <TextView
-                    android:id="@+id/share_seven"
-                    style="@style/Base.TextAppearance.AppCompat.Small"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:fontFamily="@font/vazir"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="7نفر" />
+                        <TextView
+                            android:textColor="@color/black"
+                            android:id="@+id/share_three"
+                            style="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/vazir"
+                            android:gravity="right"
+                            android:padding="2dp"
+                            android:text="2نفر" />
 
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="25dp"
-                    android:background="@color/progress_bg" />
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="25dp"
+                            android:background="@color/progress_bg" />
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:id="@+id/share_five"
+                            style="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:fontFamily="@font/vazir"
+                            android:gravity="right"
+                            android:padding="2dp"
+                            android:text="5نفر" />
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="25dp"
+                            android:background="@color/progress_bg" />
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:id="@+id/share_seven"
+                            style="@style/Base.TextAppearance.AppCompat.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/vazir"
+                            android:gravity="right"
+                            android:padding="2dp"
+                            android:text="7نفر" />
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="25dp"
+                            android:background="@color/progress_bg" />
 
 
-            </LinearLayout>
+                    </LinearLayout>
 
-            <androidx.cardview.widget.CardView
+                    <TextView
+                        android:layout_marginTop="4dp"
+                        android:text="@string/giftcode_title2"
+                        android:fontFamily="@font/vazir"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/share_linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/share_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -200,7 +216,7 @@
                 app:cardCornerRadius="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/share_linear">
+                app:layout_constraintTop_toBottomOf="@id/share_progress_card">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -213,9 +229,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/vazir"
-                        android:gravity="right"
+                        android:gravity="center"
                         android:text="@string/share_info_title"
-                        android:textColor="@color/primary"
+                        android:textColor="@color/black"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -225,7 +241,7 @@
                         style="@style/Base.TextAppearance.AppCompat.Small"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
+                        android:layout_margin="8dp"
                         android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:text="@string/share_info_text1"
@@ -239,7 +255,7 @@
                         style="@style/Base.TextAppearance.AppCompat.Small"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
+                        android:layout_margin="8dp"
                         android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:text="@string/share_info_text2"
@@ -253,7 +269,7 @@
                         style="@style/Base.TextAppearance.AppCompat.Small"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
+                        android:layout_margin="8dp"
                         android:fontFamily="@font/vazir"
                         android:gravity="center"
                         android:text="@string/share_info_text3"
@@ -262,23 +278,9 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/share_info_text2" />
 
-                    <TextView
-                        android:id="@+id/share_info_text4"
-                        style="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:fontFamily="@font/vazir"
-                        android:gravity="left"
-                        android:text="@string/share_info_text4"
-                        android:textColor="@color/black"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/share_info_text3" />
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <View
                 android:layout_width="match_parent"

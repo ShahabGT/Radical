@@ -20,9 +20,9 @@ public class SearchDataSource extends PageKeyedDataSource<Integer, SearchItem> {
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, SearchItem> callback) {
-        RetrofitClient.getInstance()
+        RetrofitClient.Companion.getInstance()
                 .getApi()
-                .search(START,SIZE, Const.word)
+                .search(START,SIZE, Const.Companion.getWord())
                 .enqueue(new Callback<SearchResponse>() {
                     @Override
                     public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
@@ -54,9 +54,9 @@ public class SearchDataSource extends PageKeyedDataSource<Integer, SearchItem> {
     @Override
     public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, SearchItem> callback) {
 
-        RetrofitClient.getInstance()
+        RetrofitClient.Companion.getInstance()
                 .getApi()
-                .search(params.key,SIZE,Const.word)
+                .search(params.key,SIZE,Const.Companion.getWord())
                 .enqueue(new Callback<SearchResponse>() {
                     @Override
                     public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {

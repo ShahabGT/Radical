@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/message_dialog_logo"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:src="@drawable/radical_logo"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/message_dialog_title"
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:paddingRight="4dp"
+            android:text="عنوان"
+            app:layout_constraintBottom_toTopOf="@id/message_dialog_date"
+            app:layout_constraintRight_toLeftOf="@id/message_dialog_logo"
+            app:layout_constraintTop_toTopOf="@id/message_dialog_logo"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/message_dialog_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:paddingRight="4dp"
+
+            android:text="عنوان"
+            app:layout_constraintBottom_toBottomOf="@id/message_dialog_logo"
+            app:layout_constraintRight_toLeftOf="@id/message_dialog_logo"
+            app:layout_constraintTop_toBottomOf="@id/message_dialog_title" />
+
+        <View
+            android:id="@+id/message_dialog_line"
+            app:layout_constraintTop_toBottomOf="@id/message_dialog_logo"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/progress_bg"/>
+
+        <TextView
+            android:id="@+id/message_dialog_text"
+            android:verticalScrollbarPosition="right"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:fontFamily="@font/vazir"
+            android:padding="4dp"
+            android:textDirection="anyRtl"
+            android:gravity="right"
+            app:layout_constraintTop_toBottomOf="@id/message_dialog_line"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/message_dialog_back"
+            android:text="@string/txt_back"
+            android:textColor="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message_dialog_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

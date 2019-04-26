@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/receipt_payment_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/upgrade_row_logo"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:src="@drawable/radical_logo"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/upgrade_row_description"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:padding="5dp"
+            android:text="اسم طرح"
+            android:textColor="@color/black"
+            android:gravity="right"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/upgrade_row_date"
+            app:layout_constraintRight_toLeftOf="@id/upgrade_row_logo"
+            app:layout_constraintTop_toTopOf="@+id/upgrade_row_logo"
+            app:layout_constraintVertical_chainStyle="packed"
+
+            />
+
+        <TextView
+            android:id="@+id/upgrade_row_date"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:padding="5dp"
+            android:text="تاریخ خرید"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/upgrade_row_logo"
+            app:layout_constraintRight_toLeftOf="@id/upgrade_row_logo"
+            app:layout_constraintTop_toBottomOf="@+id/upgrade_row_description" />
+
+        <ImageView
+            android:id="@+id/upgrade_row_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/vector_bottom"
+            app:layout_constraintBottom_toBottomOf="@+id/upgrade_row_rescode"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upgrade_row_description" />
+
+        <TextView
+            android:id="@+id/upgrade_row_rescode_title"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
+            android:padding="5dp"
+            android:text="کد پیگیری:"
+            android:textColor="@color/green"
+            app:layout_constraintRight_toRightOf="@id/upgrade_row_date"
+            app:layout_constraintTop_toBottomOf="@id/upgrade_row_date" />
+
+        <TextView
+            android:id="@+id/upgrade_row_rescode"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/vazir"
+            android:padding="5dp"
+            android:text="0"
+            android:textColor="@color/green"
+            app:layout_constraintRight_toLeftOf="@+id/upgrade_row_rescode_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upgrade_row_date" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/upgrade_row_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upgrade_row_rescode">
+
+            <View
+                android:background="@color/app_bg"
+                android:id="@+id/buy_row_line"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:layout_marginTop="8dp"
+                android:id="@+id/upgrade_row_gift_title"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="5dp"
+                android:text="کد تخفیف استفاده شده:"
+                android:textColor="#B2B2B2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/buy_row_line" />
+
+            <TextView
+                android:id="@+id/upgrade_row_gift"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="5dp"
+                android:text="0"
+                android:textColor="#B2B2B2"
+                app:layout_constraintBottom_toBottomOf="@+id/upgrade_row_gift_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/upgrade_row_gift_title" />
+
+
+            <TextView
+                android:id="@+id/upgrade_row_wallet_title"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="5dp"
+                android:text="مبلغ استفاده شده از کیف پول:"
+                android:textColor="@color/red"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upgrade_row_gift_title" />
+
+            <TextView
+                android:id="@+id/upgrade_row_wallet"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="5dp"
+                android:text="0"
+                android:textColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="@+id/upgrade_row_wallet_title"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/upgrade_row_wallet_title" />
+
+            <TextView
+                android:id="@+id/upgrade_row_pay_title"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="5dp"
+                android:text="@string/receipt_pay2"
+                android:textColor="@color/green"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upgrade_row_wallet_title" />
+
+            <TextView
+                android:id="@+id/upgrade_row_pay"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:padding="5dp"
+                android:text="0"
+                android:textColor="@color/green"
+                app:layout_constraintBottom_toBottomOf="@+id/upgrade_row_pay_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/upgrade_row_pay_title" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/buy_row_shop_buy_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
+
+

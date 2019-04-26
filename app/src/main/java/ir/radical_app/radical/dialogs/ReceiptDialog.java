@@ -8,12 +8,13 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
+import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.material.card.MaterialCardView;
 import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import ir.radical_app.radical.activities.SplashActivity;
@@ -31,7 +32,7 @@ import retrofit2.Response;
 public class ReceiptDialog extends Dialog {
 
     private Context context;
-    private TextView tTotal,tDescount,tPay,tShopname,tTitle;
+    private TextView tTotal,tDescount,tPay,tShopname,tTitle,tTitle2;
     private ArrayList<String> discountPercents ;
     private ArrayList<String> discountTitles ;
     private ArrayList<String> prices;
@@ -41,6 +42,8 @@ public class ReceiptDialog extends Dialog {
     private int amount,pay,discount;
     private boolean fromHistory=false;
     private LoadingDialog dialog;
+    private LottieAnimationView animationView;
+    private MaterialCardView cardView;
 
 
 
@@ -89,8 +92,10 @@ public class ReceiptDialog extends Dialog {
     }
 
     private void init(){
-
+        cardView = findViewById(R.id.receipt_card1);
+        animationView = findViewById(R.id.ok_anim);
         tTitle = findViewById(R.id.receipt_title);
+        tTitle2 = findViewById(R.id.receipt_title2);
         tTotal = findViewById(R.id.receipt_total);
         tDescount = findViewById(R.id.receipt_discount);
         tShopname = findViewById(R.id.receipt_shop_title);
@@ -99,6 +104,7 @@ public class ReceiptDialog extends Dialog {
         if(!fromHistory){
             setData();
         }else{
+            cardView.setVisibility(View.GONE);
             getData();
         }
 
@@ -116,16 +122,16 @@ public class ReceiptDialog extends Dialog {
 
     private void getData(){
         loadingDialog(false);
-        String number = MySharedPreference.getInstance(getContext()).getNumber();
-        String accessToken = MySharedPreference.getInstance(getContext()).getAccessToken();
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
 
         if(number.isEmpty() || accessToken.isEmpty()){
-            MyToast.Create(getContext(),context.getString(R.string.data_error));
-            MySharedPreference.getInstance(getContext()).clear();
+            MyToast.Companion.create(getContext(),context.getString(R.string.data_error));
+            MySharedPreference.Companion.getInstance(getContext()).clear();
             context.startActivity(new Intent(context, SplashActivity.class));
             dismiss();
         }else{
-            RetrofitClient.getInstance().getApi()
+            RetrofitClient.Companion.getInstance().getApi()
                     .getBuyDetails(number,accessToken,shopBuyId)
                     .enqueue(new Callback<BuyDetailsModel>() {
                         @Override
@@ -151,21 +157,21 @@ public class ReceiptDialog extends Dialog {
                                         break;
 
                                     case "wrongaccess":
-                                        MySharedPreference.getInstance(getContext()).clear();
+                                        MySharedPreference.Companion.getInstance(getContext()).clear();
                                         context.startActivity(new Intent(context, SplashActivity.class));
                                         dismiss();
                                         break;
 
 
                                         default:
-                                            MyToast.Create(getContext(),context.getString(R.string.general_error));
+                                            MyToast.Companion.create(getContext(),context.getString(R.string.general_error));
                                             dismiss();
                                 }
 
 
                             }else{
                                 loadingDialog(true);
-                                MyToast.Create(getContext(),context.getString(R.string.general_error));
+                                MyToast.Companion.create(getContext(),context.getString(R.string.general_error));
                                 dismiss();
                             }
 
@@ -175,7 +181,7 @@ public class ReceiptDialog extends Dialog {
                         @Override
                         public void onFailure(Call<BuyDetailsModel> call, Throwable t) {
                             loadingDialog(true);
-                            MyToast.Create(getContext(),context.getString(R.string.general_error));
+                            MyToast.Companion.create(getContext(),context.getString(R.string.general_error));
                             dismiss();
 
                         }
@@ -189,12 +195,12 @@ public class ReceiptDialog extends Dialog {
 
     private void setData(){
         tTitle.setText(context.getString(R.string.receipt_ok));
-        tPay.setText(context.getString(R.string.amount_model, MyUtils.moneySeparator(pay+"")));
-        tDescount.setText(context.getString(R.string.amount_model, MyUtils.moneySeparator(discount+"")));
+        tPay.setText(context.getString(R.string.amount_model, MyUtils.Companion.moneySeparator(pay+"")));
+        tDescount.setText(context.getString(R.string.amount_model, MyUtils.Companion.moneySeparator(discount+"")));
         if(shopName.startsWith("فروشگاه"))
             shopName=shopName.replaceFirst("فروشگاه","");
-        tShopname.setText(context.getString(R.string.receipt_shop,shopName.trim()));
-        tTotal.setText(context.getString(R.string.amount_model, MyUtils.moneySeparator(amount+"")));
+        tShopname.setText(shopName.trim());
+        tTotal.setText(context.getString(R.string.amount_model, MyUtils.Companion.moneySeparator(amount+"")));
         makeTable();
     }
 
@@ -206,8 +212,10 @@ public class ReceiptDialog extends Dialog {
         for(int i = 0;i<discountTitles.size();i++){
             TableRow newRow = new TableRow(context);
             if(!pricesDiscounts.get(i).equals("0")) {
+
                 TextView t4 = new TextView(context);
-                t4.setText(MyUtils.moneySeparator(pricesDiscounts.get(i)));
+                t4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT));
+                t4.setText(MyUtils.Companion.moneySeparator(pricesDiscounts.get(i)));
                 t4.setTypeface(font);
                 t4.setBackgroundResource(R.drawable.cell_shape2);
 
@@ -215,7 +223,9 @@ public class ReceiptDialog extends Dialog {
                 newRow.addView(t4);
 
                 TextView t3 = new TextView(context);
-                t3.setText(MyUtils.moneySeparator(prices.get(i) ));
+                t3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT));
+
+                t3.setText(MyUtils.Companion.moneySeparator(prices.get(i) ));
                 t3.setTypeface(font);
                 t3.setBackgroundResource(R.drawable.cell_shape2);
 
@@ -224,6 +234,8 @@ public class ReceiptDialog extends Dialog {
                 newRow.addView(t3);
 
                 TextView t2 = new TextView(context);
+                t2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT));
+
                 t2.setText(discountTitles.get(i));
                 t2.setTypeface(font);
                 t2.setBackgroundResource(R.drawable.cell_shape2);
@@ -233,6 +245,8 @@ public class ReceiptDialog extends Dialog {
                 newRow.addView(t2);
 
                 TextView t1 = new TextView(context);
+                t1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT));
+
                 t1.setText(String.valueOf(row++));
                 t1.setTypeface(font);
                 t1.setBackgroundResource(R.drawable.cell_shape2);

@@ -18,14 +18,14 @@ public class BuyHistoryDataSource extends PageKeyedDataSource<Integer, BuyItem> 
     private String accessToken;
 
 
-    public BuyHistoryDataSource(String number, String accessToken){
+    BuyHistoryDataSource(String number, String accessToken){
         this.number=number;
         this.accessToken=accessToken;
     }
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, BuyItem> callback) {
-        RetrofitClient.getInstance()
+        RetrofitClient.Companion.getInstance()
                 .getApi()
                 .getBuyHistory(number,accessToken,START,SIZE )
                 .enqueue(new Callback<BuyHistoryResponse>() {
@@ -58,7 +58,7 @@ public class BuyHistoryDataSource extends PageKeyedDataSource<Integer, BuyItem> 
     @Override
     public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, BuyItem> callback) {
 
-        RetrofitClient.getInstance()
+        RetrofitClient.Companion.getInstance()
                 .getApi()
                 .getBuyHistory(number,accessToken,params.key,SIZE)
                 .enqueue(new Callback<BuyHistoryResponse>() {

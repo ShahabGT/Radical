@@ -19,14 +19,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.tmall.ultraviewpager.UltraViewPager;
 import com.tmall.ultraviewpager.transformer.UltraDepthScaleTransformer;
 import com.willy.ratingbar.BaseRatingBar;
 import com.willy.ratingbar.ScaleRatingBar;
-
 import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -38,7 +35,6 @@ import ir.radical_app.radical.adapters.ShopsImagesAdapter;
 import ir.radical_app.radical.classes.MySharedPreference;
 import ir.radical_app.radical.classes.MyToast;
 import ir.radical_app.radical.classes.MyUtils;
-import ir.radical_app.radical.classes.PermissionUtil;
 import ir.radical_app.radical.data.RetrofitClient;
 import ir.radical_app.radical.dialogs.LoadingDialog;
 import ir.radical_app.radical.dialogs.UpgradeDialog;
@@ -83,7 +79,7 @@ public class ShopFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_shop, container, false);
 
@@ -143,49 +139,32 @@ public class ShopFragment extends Fragment {
         onClicks();
     }
     private void rateListener(){
-        rate.setOnRatingChangeListener(new BaseRatingBar.OnRatingChangeListener() {
-            @Override
-            public void onRatingChange(BaseRatingBar baseRatingBar, float v) {
+        rate.setOnRatingChangeListener((BaseRatingBar baseRatingBar, float v)-> {
                 if(fromuser) {
                     updateRate(v + "");
-                    MyToast.Create(getContext(),"امتیاز شما: "+v);
+                    MyToast.Companion.create(getContext(),"امتیاز شما: "+v);
                 }
                 fromuser=true;
-            }
         });
     }
     private void onClicks() {
-        tel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intentAction("tel:"+tel.getText().toString());
-            }
-        });
-        instagram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intentAction("https://instagram.com/"+instagramID);
-            }
-        });
+        tel.setOnClickListener(View->
+                intentAction("tel:"+tel.getText().toString())
 
-        telegram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intentAction("https://t.me/"+telegramID);
+        );
+        instagram.setOnClickListener(View->
+                intentAction("https://instagram.com/"+instagramID)
 
-            }
-        });
-        website.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intentAction(websiteID);
+        );
 
-            }
-        });
+        telegram.setOnClickListener(View->
+                intentAction("https://t.me/"+telegramID)
+        );
+        website.setOnClickListener(View->
+                intentAction(websiteID)
+        );
 
-        bookmark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        bookmark.setOnClickListener(View-> {
                 updateBookmark();
                 if(bookmarkStat.equals("0")){
                     bookmark.setImageDrawable(getResources().getDrawable(R.drawable.vector_bookmark_full));
@@ -195,32 +174,24 @@ public class ShopFragment extends Fragment {
                     bookmark.setImageDrawable(getResources().getDrawable(R.drawable.vector_bookmark_empty));
                     bookmarkStat="0";
                 }
-
-            }
         });
 
-        buy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(MySharedPreference.getInstance(getContext()).getPlan()!=1)
+        buy.setOnClickListener(View-> {
+                if(MySharedPreference.Companion.getInstance(getContext()).getPlan()!=1)
                     requestCamera();
                 else
                     showUpgradeDialog();
-            }
         });
 
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyUtils.shareCode(getActivity(),
+        share.setOnClickListener(View->
+                MyUtils.Companion.shareCode(getActivity(),
                         getString(R.string.shop_share,
                                 name.getText().toString(),
                                 maxDiscount+"%",
                                 address.getText().toString(),
                                 tel.getText().toString(),
-                                "https://radical-app.ir/shops?id="+shopId));
-            }
-        });
+                                "https://radical-app.ir/shops?id="+shopId))
+        );
 
     }
     private void intentAction(String id){
@@ -243,18 +214,18 @@ public class ShopFragment extends Fragment {
     }
     private void getData(){
         loadingDialog(false);
-        String number = MySharedPreference.getInstance(getContext()).getNumber();
-        String accessToken = MySharedPreference.getInstance(getContext()).getAccessToken();
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
         if(shopId==null)
             shopId = "";
 
         if(number.isEmpty() || accessToken.isEmpty()){
-            MyToast.Create(getContext(),getString(R.string.data_error));
-            MySharedPreference.getInstance(getContext()).clear();
+            MyToast.Companion.create(getContext(),getString(R.string.data_error));
+            MySharedPreference.Companion.getInstance(getContext()).clear();
             startActivity(new Intent(getContext(), SplashActivity.class));
             getActivity().finish();
         }else{
-            RetrofitClient.getInstance().getApi()
+            RetrofitClient.Companion.getInstance().getApi()
                     .getShopDetails(shopId,number,accessToken)
                     .enqueue(new Callback<ShopDetailsModel>() {
                         @Override
@@ -267,14 +238,14 @@ public class ShopFragment extends Fragment {
                                         break;
 
                                     default:
-                                        MyToast.Create(getContext(),getString(R.string.general_error));
+                                        MyToast.Companion.create(getContext(),getString(R.string.general_error));
                                        getActivity().getSupportFragmentManager().popBackStackImmediate();
 
 
 
                                 }
                             }else{
-                                MyToast.Create(getContext(),getString(R.string.general_error));
+                                MyToast.Companion.create(getContext(),getString(R.string.general_error));
                                 getActivity().getSupportFragmentManager().popBackStackImmediate();
                             }
                         }
@@ -282,7 +253,7 @@ public class ShopFragment extends Fragment {
                         @Override
                         public void onFailure(Call<ShopDetailsModel> call, Throwable t) {
                             loadingDialog(true);
-                            MyToast.Create(getContext(),getString(R.string.general_error));
+                            MyToast.Companion.create(getContext(),getString(R.string.general_error));
                            getActivity().getSupportFragmentManager().popBackStackImmediate();
                         }
                     });
@@ -293,7 +264,7 @@ public class ShopFragment extends Fragment {
         ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
         adapter = new ShopsImagesAdapter(getContext(),shopId,size);
         ultraViewPager.setAdapter(adapter);
-        ultraViewPager.setPageTransformer(false, new UltraDepthScaleTransformer());
+        ultraViewPager.setPageTransformer(true, new UltraDepthScaleTransformer());
         ultraViewPager.initIndicator();
         ultraViewPager.getIndicator()
                 .setOrientation(UltraViewPager.Orientation.HORIZONTAL)
@@ -405,19 +376,19 @@ public class ShopFragment extends Fragment {
         rateListener();
     }
     private void updateBookmark(){
-        String number = MySharedPreference.getInstance(getContext()).getNumber();
-        String accessToken = MySharedPreference.getInstance(getContext()).getAccessToken();
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
         if(shopId==null)
             shopId = "";
 
 
         if(number.isEmpty() || accessToken.isEmpty()){
-            MyToast.Create(getContext(),getString(R.string.data_error));
-            MySharedPreference.getInstance(getContext()).clear();
+            MyToast.Companion.create(getContext(),getString(R.string.data_error));
+            MySharedPreference.Companion.getInstance(getContext()).clear();
             startActivity(new Intent(getContext(), SplashActivity.class));
             getActivity().finish();
         }else{
-            RetrofitClient.getInstance().getApi()
+            RetrofitClient.Companion.getInstance().getApi()
                     .updateBookmark(shopId,number,accessToken)
                     .enqueue(new Callback<JsonResponse>() {
                         @Override
@@ -463,17 +434,17 @@ public class ShopFragment extends Fragment {
     private void updateRate(String myRate){
         rate.setEnabled(false);
 
-        String number = MySharedPreference.getInstance(getContext()).getNumber();
-        String accessToken = MySharedPreference.getInstance(getContext()).getAccessToken();
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
         if(shopId==null)
             shopId = "";
         if(number.isEmpty() || accessToken.isEmpty()){
-            MyToast.Create(getContext(),getString(R.string.data_error));
-            MySharedPreference.getInstance(getContext()).clear();
+            MyToast.Companion.create(getContext(),getString(R.string.data_error));
+            MySharedPreference.Companion.getInstance(getContext()).clear();
             startActivity(new Intent(getContext(), SplashActivity.class));
             getActivity().finish();
         }else{
-            RetrofitClient.getInstance().getApi()
+            RetrofitClient.Companion.getInstance().getApi()
                     .updateRate(shopId,number,accessToken,myRate)
                     .enqueue(new Callback<JsonResponse>() {
                         @Override
@@ -487,7 +458,8 @@ public class ShopFragment extends Fragment {
                                     float mean = sum/count;
                                     fromuser=false;
                                     rate.setRating(mean);
-                                    rateTtile.setText(getString(R.string.shop_rate_title,mean+"",count));
+                                    rateTtile.setText(getString(R.string.shop_rate_title,String.valueOf(mean).substring(0,3),count));
+
                                 }
 
                             }
@@ -515,24 +487,16 @@ public class ShopFragment extends Fragment {
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getString(R.string.permission_camera));
         builder.setMessage(getString(R.string.permission_camera_message));
-        builder.setPositiveButton(getString(R.string.permission_allow), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                requestPermission();
-            }
-        });
-        builder.setNegativeButton(getString(R.string.permission_dismiss), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        builder.setPositiveButton(getString(R.string.permission_allow),(DialogInterface dialog, int which)->
+                requestPermission());
+        builder.setNegativeButton(getString(R.string.permission_dismiss),(DialogInterface dialog, int which)->
+                dialog.dismiss()
+        );
 
         alertDialog = builder.create();
         alertDialog.show();
     }
     private void requestCamera(){
-        PermissionUtil permissionUtil = new PermissionUtil(getActivity());
 
         if(checkPermission()!= PackageManager.PERMISSION_GRANTED){
 
@@ -541,11 +505,12 @@ public class ShopFragment extends Fragment {
                 showExplanation();
             }
 
-            else if(!permissionUtil.check("camera")){
+            else if(!MySharedPreference.Companion.getInstance(getContext()).getCameraPermission()){
                 requestPermission();
-                permissionUtil.update("camera");
+                MySharedPreference.Companion.getInstance(getContext()).setCameraPermission();
+
             }else{
-                MyToast.Create(getContext(),getString(R.string.permission_camera_toast));
+                MyToast.Companion.create(getContext(),getString(R.string.permission_camera_toast));
                 Intent intent = new Intent();
                 intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                 Uri uri = Uri.fromParts("package",getActivity().getPackageName(),null);
@@ -558,16 +523,18 @@ public class ShopFragment extends Fragment {
 
     }
     private void readQr() {
-        getActivity().startActivityForResult(new Intent(getContext(), QrcodeActivity.class),QR_REQUEST_CODE);
+        Intent intent = new Intent(getContext(), QrcodeActivity.class);
+        intent.putExtra("shopid",shopId);
+        getActivity().startActivityForResult(intent,QR_REQUEST_CODE);
+        getActivity().overridePendingTransition(R.anim.fadein,R.anim.fadeout);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case CAMERA_REQUEST_CODE:
-                if(grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-                    readQr();
-                }
+        if(requestCode==CAMERA_REQUEST_CODE){
+            if(grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                readQr();
+            }
         }
     }
 

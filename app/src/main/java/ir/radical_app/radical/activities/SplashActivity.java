@@ -1,8 +1,8 @@
 package ir.radical_app.radical.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import ir.radical_app.radical.classes.MySharedPreference;
 import ir.radical_app.radical.R;
+import ir.radical_app.radical.classes.MySharedPreference;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -31,21 +31,18 @@ public class SplashActivity extends AppCompatActivity {
         title = findViewById(R.id.splash_title);
         animation();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
 
-                if(!MySharedPreference.getInstance(SplashActivity.this).getIsLogin()){
-                    Intent intent = new Intent(SplashActivity.this, IntroActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.fadein,R.anim.fadeout);
-                    SplashActivity.this.finish();
-                }else{
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.fadein,R.anim.fadeout);
-                    SplashActivity.this.finish();
-                }
+            if(!MySharedPreference.Companion.getInstance(SplashActivity.this).getIsLogin()){
+                Intent intent = new Intent(SplashActivity.this, IntroActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein,R.anim.fadeout);
+                SplashActivity.this.finish();
+            }else{
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein,R.anim.fadeout);
+                SplashActivity.this.finish();
             }
         },1500);
 
@@ -74,9 +71,6 @@ public class SplashActivity extends AppCompatActivity {
         scaleX.start();
         scaleY.start();
         alpha.start();
-
-
-
     }
 
 }

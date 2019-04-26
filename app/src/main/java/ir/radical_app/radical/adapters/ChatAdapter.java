@@ -17,9 +17,9 @@ import ir.radical_app.radical.R;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
-    Context context;
-    Activity activity;
-    ArrayList<MessageModel> list;
+    private Context context;
+    private Activity activity;
+    private ArrayList<MessageModel> list;
 
     public ChatAdapter(Context context,  ArrayList<MessageModel> list){
         this.context=context;
@@ -33,6 +33,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+
     @NonNull
     @Override
     public ChatAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,7 +46,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ChatAdapter.ViewHolder holder, int position) {
         MessageModel messages = list.get(position);
         try {
-            if (messages.getSender().equals("1")) {
+            if (messages.getSender().equals("1")||messages.getSender().equals("admin")) {
                 holder.main.setGravity(Gravity.LEFT);
                 holder.message.setBackground(activity.getResources().getDrawable(R.drawable.shape_other));
             } else {
@@ -59,7 +60,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             DateConverter dateConverter = new DateConverter();
 
             dateConverter.gregorianToPersian(Integer.parseInt(date.substring(0,4)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(8,10)));
-          //  holder.time.setText(context.getString(R.string.messages_model,dateConverter.toString(),date.substring(11)));
             holder.time.setText(date.substring(11,16));
         }catch (Exception e){}
     }

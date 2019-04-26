@@ -4,31 +4,22 @@ package ir.radical_app.radical.onboarding;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationSet;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import ir.radical_app.radical.R;
+import ir.radical_app.radical.classes.Const;
 
-import static ir.radical_app.radical.classes.Const.onboarding;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Onboarding1 extends Fragment {
 
     private ImageView rings;
@@ -39,19 +30,17 @@ public class Onboarding1 extends Fragment {
 
     private boolean fromBack;
 
-    public void setFromBack(boolean fromBack) {
-        this.fromBack = fromBack;
+    void setFromBack() {
+        this.fromBack = true;
     }
 
     public Onboarding1() {
-        // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_onboarding1, container, false);
         init(v);
         return v;
@@ -75,12 +64,9 @@ public class Onboarding1 extends Fragment {
         title =v.findViewById(R.id.onboarding1_title);
 
 
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animations();
-            }
-        });
+        start.setOnClickListener(View->
+                animations()
+        );
 
     }
 
@@ -139,15 +125,15 @@ public class Onboarding1 extends Fragment {
         animatorSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                new Handler().postDelayed(()-> {
+
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.fadein,R.anim.fadeout)
                                 .replace(R.id.intro_container, new Onboarding2())
-                                .commit();
-                        onboarding=2;
-                    }
+                                .commitNow();
+                        Const.Companion.setOnboarding(2);
+
+
                 },400);
 
 

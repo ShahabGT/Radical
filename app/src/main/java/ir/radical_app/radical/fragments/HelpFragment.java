@@ -6,13 +6,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,7 +42,7 @@ public class HelpFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_help, container, false);
 
@@ -71,16 +70,16 @@ public class HelpFragment extends Fragment {
     }
     private void getData(){
         loadingDialog(false);
-        String number = MySharedPreference.getInstance(getContext()).getNumber();
-        String accessToken = MySharedPreference.getInstance(getContext()).getAccessToken();
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
 
         if(number.isEmpty() || accessToken.isEmpty()){
-            MyToast.Create(getContext(),getString(R.string.data_error));
-            MySharedPreference.getInstance(getContext()).clear();
+            MyToast.Companion.create(getContext(),getString(R.string.data_error));
+            MySharedPreference.Companion.getInstance(getContext()).clear();
             startActivity(new Intent(getActivity(), SplashActivity.class));
             getActivity().finish();
         }else{
-            RetrofitClient.getInstance().getApi()
+            RetrofitClient.Companion.getInstance().getApi()
                     .getHelp()
                     .enqueue(new Callback<HelpModel>() {
                         @Override
@@ -95,7 +94,7 @@ public class HelpFragment extends Fragment {
 
                             }else{
                                 getActivity().getSupportFragmentManager().popBackStackImmediate();
-                                MyToast.Create(getContext(),getString(R.string.general_error));
+                                MyToast.Companion.create(getContext(),getString(R.string.general_error));
                             }
                         }
 
@@ -103,7 +102,7 @@ public class HelpFragment extends Fragment {
                         public void onFailure(Call<HelpModel> call, Throwable t) {
                             loadingDialog(true);
                             getActivity().getSupportFragmentManager().popBackStackImmediate();
-                            MyToast.Create(getContext(),getString(R.string.general_error));
+                            MyToast.Companion.create(getContext(),getString(R.string.general_error));
                         }
                     });
         }

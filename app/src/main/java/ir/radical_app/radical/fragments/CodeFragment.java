@@ -3,8 +3,12 @@ package ir.radical_app.radical.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +47,7 @@ public class CodeFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_code, container, false);
         init(v);
@@ -56,9 +60,27 @@ public class CodeFragment extends Fragment {
         fCode = v.findViewById(R.id.code_code);
         fResend = v.findViewById(R.id.code_resend);
         fResend.setEnabled(false);
-        fNumber = MySharedPreference.getInstance(getContext()).getNumber();
+        fNumber = MySharedPreference.Companion.getInstance(getContext()).getNumber();
         initTimer();
         onClicks();
+
+        fCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length()==4)
+                    fCommit.callOnClick();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void initTimer(){
@@ -83,38 +105,32 @@ public class CodeFragment extends Fragment {
     }
 
     private void onClicks(){
-        fCommit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        fCommit.setOnClickListener(View-> {
                String c = fCode.getText().toString();
-                MyUtils.hideKeyboard(getActivity());
+                MyUtils.Companion.hideKeyboard(getActivity());
                 if(c.length()<4 || c.startsWith("0") ){
-                    MyToast.Create(getContext(),getString(R.string.wrongcode_error));
+                    MyToast.Companion.create(getContext(),getString(R.string.wrongcode_error));
                 }else{
-                    if(!MyUtils.checkInternet(getContext()))
-                        MyToast.Create(getContext(),getString(R.string.internet_error));
+                    if(!MyUtils.Companion.checkInternet(getContext()))
+                        MyToast.Companion.create(getContext(),getString(R.string.internet_error));
                     else {
-                        String FBToken = MySharedPreference.getInstance(getContext()).getFBToken();
+                        String FBToken = MySharedPreference.Companion.getInstance(getContext()).getFBToken();
                         if(FBToken.length()<3)
                             FBToken = FirebaseInstanceId.getInstance().getToken();
                         doAuth(c, fNumber,FBToken);
                     }
                 }
-            }
         });
 
-        fResend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!MyUtils.checkInternet(getContext())){
-                    MyToast.Create(getContext(),getString(R.string.internet_error));
+        fResend.setOnClickListener(View-> {
+                if(!MyUtils.Companion.checkInternet(getContext())){
+                    MyToast.Companion.create(getContext(),getString(R.string.internet_error));
 
                 }else {
                     fResend.setEnabled(false);
                     initTimer();
                     resendSMS(fNumber);
                 }
-            }
         });
 
 
@@ -125,7 +141,7 @@ public class CodeFragment extends Fragment {
         fCommit.setEnabled(false);
         fCommit.setText(getString(R.string.txt_loading));
 
-        RetrofitClient.getInstance().getApi().doAuth(number,FBToken,code)
+        RetrofitClient.Companion.getInstance().getApi().doAuth(number,FBToken,code)
                 .enqueue(new Callback<JsonResponse>() {
                     @Override
                     public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
@@ -135,31 +151,31 @@ public class CodeFragment extends Fragment {
                         if (response.isSuccessful()){
                             String res = response.body().getMessage();
                             if(res.contains(code)){
-                                MyToast.Create(getContext(),getString(R.string.txt_welcome));
+                                MyToast.Companion.create(getContext(),getString(R.string.txt_welcome));
                                 FirebaseMessaging.getInstance().subscribeToTopic(Const.FCM_TOPIC);
 
-                                MySharedPreference.getInstance(getContext()).setAccessToken(res);
-                                MySharedPreference.getInstance(getContext()).setIsLogin(true);
+                                MySharedPreference.Companion.getInstance(getContext()).setAccessToken(res);
+                                MySharedPreference.Companion.getInstance(getContext()).setIsLogin();
                                 startActivity(new Intent(getActivity(),MainActivity.class));
 
-                                getActivity().overridePendingTransition(R.anim.fadein,R.anim.fade_out);
+                                getActivity().overridePendingTransition(R.anim.fadein,R.anim.fadeout);
                                 getActivity().finish();
 
                             }else if(res.equals("noreg")){
-                                MyToast.Create(getContext(),getString(R.string.noreg_error));
+                                MyToast.Companion.create(getContext(),getString(R.string.noreg_error));
                                 getActivity().getSupportFragmentManager().beginTransaction()
                                         .replace(R.id.login_container,new LoginFragment())
                                         .setCustomAnimations(R.anim.fadein,R.anim.fadeout)
                                         .commitNow();
 
                             }else if(res.equals("wrongcode")){
-                                MyToast.Create(getContext(),getString(R.string.wrongcode_error));
+                                MyToast.Companion.create(getContext(),getString(R.string.wrongcode_error));
 
                             }else{
-                                MyToast.Create(getContext(),getString(R.string.general_error));
+                                MyToast.Companion.create(getContext(),getString(R.string.general_error));
                             }
                         }else{
-                            MyToast.Create(getContext(),getString(R.string.general_error));
+                            MyToast.Companion.create(getContext(),getString(R.string.general_error));
                         }
                     }
 
@@ -168,7 +184,7 @@ public class CodeFragment extends Fragment {
                         fCode.setEnabled(true);
                         fCommit.setEnabled(true);
                         fCommit.setText(getString(R.string.code_reg));
-                        MyToast.Create(getContext(),getString(R.string.general_error));
+                        MyToast.Companion.create(getContext(),getString(R.string.general_error));
 
                     }
                 });
@@ -178,16 +194,16 @@ public class CodeFragment extends Fragment {
 
     }
     private void resendSMS(String Number){
-        RetrofitClient.getInstance().getApi()
+        RetrofitClient.Companion.getInstance().getApi()
                 .resendSMS(Number)
                 .enqueue(new Callback<JsonResponse>() {
                     @Override
                     public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
                         if(response.isSuccessful()){
                             if(response.body().getMessage().equals("ok")){
-                                MyToast.Create(getContext(),getString(R.string.txt_sent));
+                                MyToast.Companion.create(getContext(),getString(R.string.txt_sent));
                             }else if(response.body().getMessage().equals("noreg")){
-                                MyToast.Create(getContext(),getString(R.string.general_error));
+                                MyToast.Companion.create(getContext(),getString(R.string.general_error));
                                 getActivity().getSupportFragmentManager()
                                         .beginTransaction().replace(R.id.login_container,new LoginFragment())
                                         .setCustomAnimations(R.anim.fadein,R.anim.fadeout)

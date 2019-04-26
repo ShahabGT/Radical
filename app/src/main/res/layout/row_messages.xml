@@ -1,52 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="12dp"
-    app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="10dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:padding="16dp"
-        android:layout_height="wrap_content">
-        <TextView
-            app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/message_logo"
+            android:layout_width="60dp"
+            android:padding="4dp"
+            android:layout_height="100dp"
+            android:src="@drawable/radical_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            app:layout_constraintVertical_chainStyle="packed"
             android:id="@+id/messages_row_title"
-            style="@style/Base.TextAppearance.AppCompat.Title"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/vazir"
-            android:textDirection="rtl"
             android:text="متن عنوان"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
+            android:paddingRight="4dp"
+            android:textDirection="anyRtl"
+            android:gravity="right"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/messages_row_message"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/messages_row_title"
+            app:layout_constraintRight_toLeftOf="@+id/message_logo"
+            app:layout_constraintTop_toTopOf="@+id/message_logo" />
+
+        <TextView
+            android:id="@+id/messages_row_message"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:paddingRight="4dp"
+            android:fontFamily="@font/vazir"
+            android:text="متن عنوان"
+            android:textColor="@color/material_drawer_header_selection_subtext"
+            android:textDirection="anyRtl"
+            android:gravity="right"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@id/message_logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/message_logo"
+            app:layout_constraintTop_toBottomOf="@id/messages_row_title" />
+        <TextView
+            android:gravity="center"
             android:id="@+id/messages_row_date"
             style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:fontFamily="@font/vazir"
-            android:textDirection="rtl"
+            android:maxLength="50"
             android:text="متن عنوان"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
+            android:textDirection="rtl"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/messages_row_date"
-            android:id="@+id/messages_row_message"
-            style="@style/Base.TextAppearance.AppCompat.Medium"
-            android:fontFamily="@font/vazir"
-            android:textDirection="rtl"
-            android:text="متن عنوان"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </com.google.android.material.card.MaterialCardView>

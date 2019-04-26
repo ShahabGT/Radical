@@ -4,124 +4,159 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/app_bg"
     android:clickable="true"
     android:focusable="true"
     tools:context=".fragments.AboutFragment">
 
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            style="@style/Base.TextAppearance.AppCompat.Large"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/vazir"
-            android:gravity="right"
-            android:text="@string/about_title"
-            android:textColor="@color/yellow" />
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/help_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
-        <ir.radical_app.radical.classes.JustifiedTextView
-            android:id="@+id/about_text"
-            style="@style/Base.TextAppearance.AppCompat.Medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/vazir"
-            android:gravity="right"
-            android:padding="10dp"
-            android:textColor="@color/primary" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/about_email"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/vazir"
-                android:padding="16dp"
-                android:text="@string/about_email"
-                app:icon="@drawable/vector_email" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/about_issue"
+            <TextView
+                android:id="@+id/help_title"
+                style="@style/Base.TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/vazir"
-                android:padding="16dp"
-                android:text="@string/about_issue"
-                app:icon="@drawable/vector_bug" />
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/about_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/about_call"
+            <TextView
+                android:id="@+id/about_text"
+                style="@style/Base.TextAppearance.AppCompat.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/vazir"
-                android:padding="16dp"
-                android:text="@string/about_call"
-                app:icon="@drawable/vector_call" />
+                android:gravity="right"
+                android:padding="10dp"
+                android:textColor="@color/primary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/about_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/vazir"
+                    android:padding="16dp"
+                    android:text="@string/about_email"
+                    app:icon="@drawable/vector_email" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/about_issue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/vazir"
+                    android:padding="16dp"
+                    android:text="@string/about_issue"
+                    app:icon="@drawable/vector_bug" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/about_call"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/vazir"
+                    android:padding="16dp"
+                    android:text="@string/about_call"
+                    app:icon="@drawable/vector_call" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/about_website"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/website" />
+
+                <ImageView
+                    android:id="@+id/about_telegram"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/telegram" />
+
+                <ImageView
+                    android:id="@+id/about_instagram"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/instagram" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/about_trademark1"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#80FFFFFF"
+                android:fontFamily="@font/vazir"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/about_trademark1"
+                android:textColor="@color/black"
+                android:textDirection="rtl"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/about_trademark2"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#80FFFFFF"
+                android:fontFamily="@font/vazir"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textDirection="rtl" />
+
+            <TextView
+                android:id="@+id/about_trademark3"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#80FFFFFF"
+                android:fontFamily="@font/vazir"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textDirection="rtl" />
+
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <ImageView
-                android:id="@+id/about_website"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/website" />
-            <ImageView
-                android:id="@+id/about_telegram"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/telegram" />
-
-            <ImageView
-                android:id="@+id/about_instagram"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/instagram" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/app_bg" />
-
-        <TextView
-            android:id="@+id/about_trademark1"
-            style="@style/Base.TextAppearance.AppCompat.Body1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/vazir"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/about_trademark1"
-            android:textDirection="rtl" />
-
-        <TextView
-            android:id="@+id/about_trademark2"
-            style="@style/Base.TextAppearance.AppCompat.Body1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/vazir"
-            android:gravity="center"
-            android:padding="8dp"
-            android:textDirection="rtl" />
-
-    </LinearLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

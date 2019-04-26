@@ -1,7 +1,5 @@
 package ir.radical_app.radical.fragments;
 
-
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,12 +21,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import ir.radical_app.radical.activities.SplashActivity;
@@ -63,12 +60,15 @@ public class BuyFragment extends Fragment {
         this.qrId = qrId;
     }
 
-    private String shopId;
+    public void setpShopId(String pShopId) {
+        this.pShopId = pShopId;
+    }
 
-    private SimpleDraweeView shopImage;
+    private String shopId,pShopId="";
+
     private Button buy;
     private TextView shopName;
-    private CardView card1,card2,card3,card4,card5;
+    private ConstraintLayout card1,card2,card3,card4,card5;
 
     private ArrayList<String> discountPercents = new ArrayList<>();
     private ArrayList<String> discountTitles = new ArrayList<>();
@@ -82,7 +82,7 @@ public class BuyFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_buy, container, false);
         init(v);
@@ -91,7 +91,7 @@ public class BuyFragment extends Fragment {
         return v;
     }
 
-    private void init(View v){
+    private void playSound(){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ALARM)
@@ -105,7 +105,17 @@ public class BuyFragment extends Fragment {
             soundPool = new SoundPool(2, AudioManager.STREAM_ALARM,0);
         }
         sound = soundPool.load(getActivity(),R.raw.notification,1);
-        shopImage = v.findViewById(R.id.buy_shop_image);
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundPool.play(sampleId, 0.99f, 0.99f, 1, 0, 0.99f);
+
+            }
+        });
+    }
+
+    private void init(View v){
+
         shopName = v.findViewById(R.id.buy_shop_title);
         buy=v.findViewById(R.id.buy_footer_buy);
 
@@ -136,10 +146,8 @@ public class BuyFragment extends Fragment {
         discountAmount5 = v.findViewById(R.id.buy_discount5_discount);
 
 
-        buy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(MyUtils.checkInternet(getContext())){
+        buy.setOnClickListener(View-> {
+                if(MyUtils.Companion.checkInternet(getContext())){
                     if(
                             !discount1.getText().toString().isEmpty()||
                                     !discount2.getText().toString().isEmpty()||
@@ -149,11 +157,10 @@ public class BuyFragment extends Fragment {
                     )
                         sendData();
                     else
-                        MyToast.Create(getContext(),getString(R.string.fillbuy_error));
+                        MyToast.Companion.create(getContext(),getString(R.string.fillbuy_error));
                 }
                 else
-                    MyToast.Create(getContext(),getString(R.string.internet_error));
-            }
+                    MyToast.Companion.create(getContext(),getString(R.string.internet_error));
         });
 
     }
@@ -171,56 +178,63 @@ public class BuyFragment extends Fragment {
     }
     private void getData(){
         loadingDialog(false);
-        String number = MySharedPreference.getInstance(getContext()).getNumber();
-        String accessToken = MySharedPreference.getInstance(getContext()).getAccessToken();
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
 
         if(number.isEmpty() || accessToken.isEmpty()){
-            MyToast.Create(getContext(),getString(R.string.data_error));
-            MySharedPreference.getInstance(getContext()).clear();
+            MyToast.Companion.create(getContext(),getString(R.string.data_error));
+            MySharedPreference.Companion.getInstance(getContext()).clear();
             startActivity(new Intent(getContext(), SplashActivity.class));
             getActivity().finish();
         }else if (qrId==null || qrId.isEmpty()){
-            MyToast.Create(getContext(),getString(R.string.general_error));
+            MyToast.Companion.create(getContext(),getString(R.string.general_error));
             getActivity().finish();
 
         }else{
-            RetrofitClient.getInstance().getApi()
+            RetrofitClient.Companion.getInstance().getApi()
                     .getShopQr(qrId,number,accessToken)
                     .enqueue(new Callback<ShopDetailsModel>() {
                         @Override
                         public void onResponse(Call<ShopDetailsModel> call, Response<ShopDetailsModel> response) {
                             if(response.isSuccessful()){
 
+
                                 switch (response.body().getData().getMessage()){
                                     case "ok":
+                                        if(!pShopId.isEmpty() && !response.body().getData().getShopId().equals(pShopId)){
+                                            loadingDialog(true);
+                                            MyToast.Companion.create(getContext(),getString(R.string.qr_error2));
+                                            getActivity().getSupportFragmentManager().popBackStackImmediate();
+                                            return;
+                                        }
                                         parseData(response.body());
-                                        soundPool.play(sound, 0.99f, 0.99f, 1, 0, 0.99f);
+                                        playSound();
 
                                         break;
 
                                     case "wrongqr":
                                         loadingDialog(true);
-                                        MyToast.Create(getContext(),getString(R.string.qr_error));
+                                        MyToast.Companion.create(getContext(),getString(R.string.qr_error));
                                         getActivity().getSupportFragmentManager().popBackStackImmediate();
                                         break;
 
                                     case "wrongaccess":
                                         loadingDialog(true);
-                                        MyToast.Create(getContext(),getString(R.string.data_error));
-                                        MySharedPreference.getInstance(getContext()).clear();
+                                        MyToast.Companion.create(getContext(),getString(R.string.data_error));
+                                        MySharedPreference.Companion.getInstance(getContext()).clear();
                                         startActivity(new Intent(getContext(), SplashActivity.class));
                                         getActivity().finish();
                                         break;
 
                                     default:
                                         loadingDialog(true);
-                                        MyToast.Create(getContext(),getString(R.string.general_error));
+                                        MyToast.Companion.create(getContext(),getString(R.string.general_error));
                                         getActivity().getSupportFragmentManager().popBackStackImmediate();
                                 }
 
 
                             }else{
-                                MyToast.Create(getContext(),getString(R.string.general_error));
+                                MyToast.Companion.create(getContext(),getString(R.string.general_error));
                                 getActivity().getSupportFragmentManager().popBackStackImmediate();
                             }
 
@@ -229,7 +243,7 @@ public class BuyFragment extends Fragment {
                         @Override
                         public void onFailure(Call<ShopDetailsModel> call, Throwable t) {
                             loadingDialog(true);
-                            MyToast.Create(getContext(),getString(R.string.general_error));
+                            MyToast.Companion.create(getContext(),getString(R.string.general_error));
                             getActivity().getSupportFragmentManager().popBackStackImmediate();
                         }
                     });
@@ -262,7 +276,7 @@ public class BuyFragment extends Fragment {
                             editText.setText("");
                         }
                         String str = editText.getText().toString().replaceAll(",", "");
-                        if (!value.equals(""))
+                        if (!value.isEmpty())
                             editText.setText(getDecimalFormattedString(str));
                         editText.setSelection(editText.getText().toString().length());
                     }
@@ -317,8 +331,6 @@ public class BuyFragment extends Fragment {
         ShopData data = response.getData();
         shopId = data.getShopId();
         ArrayList<PlanData> plans = response.getPlans();
-        Uri uri = Uri.parse(getString(R.string.main_image_url,data.getShopId()));
-        shopImage.setImageURI(uri);
         shopName.setText(data.getName());
 
         switch (plans.size()){
@@ -362,12 +374,12 @@ public class BuyFragment extends Fragment {
     }
     private void sendData(){
         loadingDialog(false);
-        String number = MySharedPreference.getInstance(getContext()).getNumber();
-        String accessToken = MySharedPreference.getInstance(getContext()).getAccessToken();
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
 
         if(number.isEmpty() || accessToken.isEmpty()){
-            MyToast.Create(getContext(),getString(R.string.data_error));
-            MySharedPreference.getInstance(getContext()).clear();
+            MyToast.Companion.create(getContext(),getString(R.string.data_error));
+            MySharedPreference.Companion.getInstance(getContext()).clear();
             startActivity(new Intent(getContext(), SplashActivity.class));
             getActivity().finish();
         }else{
@@ -399,7 +411,7 @@ public class BuyFragment extends Fragment {
                     pay += Integer.parseInt(pricesDiscounts.get(i));
             }
             discount = amount - pay;
-            RetrofitClient.getInstance().getApi()
+            RetrofitClient.Companion.getInstance().getApi()
                     .buyFromShop(number,accessToken,shopId,amount+"",discount+"",pay+"",prices,pricesDiscounts,discountPercents,discountTitles)
                     .enqueue(new Callback<JsonResponse>() {
                         @Override
@@ -413,26 +425,26 @@ public class BuyFragment extends Fragment {
                                         showReceiptDialog();
                                         break;
                                     case "wrongaccess":
-                                        MyToast.Create(getContext(),getString(R.string.data_error));
-                                        MySharedPreference.getInstance(getContext()).clear();
+                                        MyToast.Companion.create(getContext(),getString(R.string.data_error));
+                                        MySharedPreference.Companion.getInstance(getContext()).clear();
                                         startActivity(new Intent(getContext(), SplashActivity.class));
                                        getActivity().finish();
                                         break;
 
                                     default:
-                                        MyToast.Create(getContext(),getString(R.string.general_error));
+                                        MyToast.Companion.create(getContext(),getString(R.string.general_error));
 
 
                                 }
                             }else{
-                                MyToast.Create(getContext(),getString(R.string.general_error));
+                                MyToast.Companion.create(getContext(),getString(R.string.general_error));
                             }
                         }
 
                         @Override
                         public void onFailure(Call<JsonResponse> call, Throwable t) {
                             loadingDialog(true);
-                            MyToast.Create(getContext(),getString(R.string.general_error));
+                            MyToast.Companion.create(getContext(),getString(R.string.general_error));
                         }
                     });
 
@@ -456,9 +468,7 @@ public class BuyFragment extends Fragment {
         receiptDialog.show();
         Window window = receiptDialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        receiptDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+        receiptDialog.setOnKeyListener((DialogInterface dialog, int keyCode, KeyEvent event)-> {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     while(fm.getBackStackEntryCount()>1)
@@ -467,7 +477,6 @@ public class BuyFragment extends Fragment {
                     receiptDialog.dismiss();
                 }
                 return true;
-            }
         });
     }
 }
