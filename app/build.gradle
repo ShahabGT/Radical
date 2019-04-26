@@ -6,14 +6,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    signingConfigs {
-        releaseSign {
-            keyAlias 'radical'
-            keyPassword 'mykey@radical'
-            storeFile file('E:/radicalnewkey.jks')
-            storePassword 'radicalapp@radical'
-        }
-    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "ir.radical_app.radical"
