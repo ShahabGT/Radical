@@ -1,7 +1,7 @@
 
 # Radical
 <p align="center">
-  <img src="radicalbanner.png" width="350" />
+  <img src="banner.jpeg" width="350" />
 </p>
 Reduce the cost of living with Radical
 
