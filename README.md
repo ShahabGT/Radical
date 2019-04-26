@@ -23,10 +23,14 @@ And soon in your city :)
 
 # Download
 <p align="center">
+  <a href="https://play.google.com/store/apps/details?id=ir.radical_app.radical">
   <img src="playstore.png" width="350" />
+  </a>
 </p>
 <p align="center">
+   <a href="https://cafebazaar.ir/app/ir.radical_app.radical/ ">
   <img src="bazaar.png" width="350" />
+  </a>
 </p>
 
 # Developed By
