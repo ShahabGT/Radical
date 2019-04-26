@@ -6,14 +6,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    signingConfigs {
-        releaseSign {
-            keyAlias 'radical'
-            keyPassword 'mykey@radical'
-            storeFile file('E:/radicalnewkey.jks')
-            storePassword 'radicalapp@radical'
-        }
-    }
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "ir.radical_app.radical"
@@ -26,7 +19,6 @@ android {
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.releaseSign
         }
     }
     packagingOptions {
@@ -71,7 +63,7 @@ dependencies {
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
-    implementation 'com.airbnb.android:lottie:3.0.0-beta2'
+    implementation 'com.airbnb.android:lottie:3.0.1'
     implementation 'com.github.ome450901:SimpleRatingBar:1.4.2'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'android.arch.lifecycle:viewmodel:1.1.1'
