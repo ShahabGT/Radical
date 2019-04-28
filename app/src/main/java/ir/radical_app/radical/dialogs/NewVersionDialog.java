@@ -18,7 +18,7 @@ public class NewVersionDialog extends Dialog {
     private FragmentActivity context;
     private String urgent;
     private boolean doubleBackToExitPressedOnce;
-    private ImageView playstore,bazaar;
+    private ImageView playstore,myket;
 
 
     public NewVersionDialog(@NonNull FragmentActivity context, String urgent) {
@@ -34,7 +34,7 @@ public class NewVersionDialog extends Dialog {
         doubleBackToExitPressedOnce = false;
 
         playstore = findViewById(R.id.newversion_dialog_playstore);
-        bazaar = findViewById(R.id.newversion_dialog_bazzar);
+        myket = findViewById(R.id.newversion_dialog_myket);
         onClicks();
 
     }
@@ -51,12 +51,12 @@ public class NewVersionDialog extends Dialog {
 
         });
 
-        bazaar.setOnClickListener(View-> {
+        myket.setOnClickListener(View-> {
 
                 try {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("bazaar://details?id=" + PACKAGE_NAME)).setPackage("com.farsitel.bazaar"));
+                    context.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("myket://details?id=" + PACKAGE_NAME)));
                 } catch (Exception e) {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://cafebazaar.ir/app/" + PACKAGE_NAME)));
+                    context.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://myket.ir/app/" + PACKAGE_NAME)));
                 }
 
         });
