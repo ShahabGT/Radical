@@ -27,6 +27,10 @@ import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
+
+import java.util.Calendar;
 
 import ir.radical_app.radical.activities.SplashActivity;
 import ir.radical_app.radical.classes.MySharedPreference;
@@ -44,17 +48,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
     private EditText fName,fFamily,fEmail,fInviteCode;
-    private TextView fPlan,fExp,fNumber,saveText;
+    private TextView fPlan,fExp,fNumber,saveText,fBirth;
     private Spinner fJob,fEdu,fRegion,fSex;
     private int isFirst=0;
     private LoadingDialog dialog;
     private MyDatabase myDatabase;
     private MaterialCardView save;
     private ConstraintLayout cardTime;
-    private ImageView nEdit,fEdit,eEdit,jEdit,edEdit,rEdit;
+    private ImageView nEdit,fEdit,eEdit,jEdit,edEdit,rEdit,bEdit;
     private int plan ;
 
 
@@ -117,6 +121,7 @@ public class ProfileFragment extends Fragment {
         fEdu = v.findViewById(R.id.profile_edu);
         fRegion = v.findViewById(R.id.profile_region);
         fSex = v.findViewById(R.id.profile_sex);
+        fBirth = v.findViewById(R.id.profile_birthday);
         save = v.findViewById(R.id.profile_save);
         saveText = v.findViewById(R.id.profile_save_text);
         cardTime = v.findViewById(R.id.profile_cardtime);
@@ -128,6 +133,7 @@ public class ProfileFragment extends Fragment {
         jEdit = v.findViewById(R.id.profile_job_edit);
         edEdit = v.findViewById(R.id.profile_edu_edit);
         rEdit = v.findViewById(R.id.profile_region_edit);
+        bEdit = v.findViewById(R.id.profile_birthday_edit);
 
         if(plan!=1){
             cardTime.setVisibility(View.VISIBLE);
@@ -251,6 +257,13 @@ public class ProfileFragment extends Fragment {
             fRegion.setEnabled(false);
             fRegion.setBackground(null);
 
+
+
+        }
+        if(!MySharedPreference.Companion.getInstance(getContext()).getBirthday().isEmpty()){
+            fBirth.setText(MySharedPreference.Companion.getInstance(getContext()).getBirthday());
+            bEdit.setVisibility(View.VISIBLE);
+            fBirth.setEnabled(false);
         }
 
     }
@@ -290,6 +303,30 @@ public class ProfileFragment extends Fragment {
                 fRegion.setBackground(getResources().getDrawable(R.drawable.spinner_bg));
 
         });
+        bEdit.setOnClickListener(View->{
+            bEdit.setVisibility(View.GONE);
+            fBirth.setEnabled(true);
+        });
+        fBirth.setOnClickListener(View->{
+            PersianCalendar persianCalendar = new PersianCalendar();
+            DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
+                    this::onDateSet,
+                    persianCalendar.getPersianYear(),
+                    persianCalendar.getPersianMonth(),
+                    persianCalendar.getPersianDay()
+            );
+            PersianCalendar maxDate = new PersianCalendar();
+            maxDate.setPersianDate(1389,12,29);
+
+            PersianCalendar minDate = new PersianCalendar();
+            minDate.setPersianDate(1300,1,1);
+            datePickerDialog.setMaxDate(maxDate);
+            datePickerDialog.setMinDate(minDate);
+            datePickerDialog.setFirstDayOfWeek(Calendar.SATURDAY);
+
+            datePickerDialog.show(getActivity().getFragmentManager(), "Datepickerdialog");
+
+        });
         save.setOnClickListener(View-> {
 
                 MyUtils.Companion.hideKeyboard(getActivity());
@@ -298,6 +335,7 @@ public class ProfileFragment extends Fragment {
                     return;
                 }
                 String n = fName.getText().toString();
+                String b = fBirth.getText().toString();
                 String f = fFamily.getText().toString();
                 String e = fEmail.getText().toString();
                 String i = fInviteCode.getText().toString();
@@ -317,8 +355,10 @@ public class ProfileFragment extends Fragment {
                         fJob.getSelectedItemPosition()==0 ||fRegion.getSelectedItemPosition()==0 ) {
                     MyToast.Companion.create(getContext(),getString(R.string.form_error));
 
+                }else if(fBirth.getText().equals(getString(R.string.profile_birthday_select))) {
+                    MyToast.Companion.create(getContext(),getString(R.string.birthday_error));
                 }else{
-                    setData(n,f,e,i);
+                    setData(n,f,e,i,b);
                 }
 
         });
@@ -349,6 +389,7 @@ public class ProfileFragment extends Fragment {
                                     case "ok":
                                         String gender = response.body().getSex();
                                         String name = response.body().getName();
+                                        String birthday = response.body().getBirthday();
                                         String family = response.body().getFamily();
                                         String email = response.body().getEmail();
                                         String plan = response.body().getPlanid();
@@ -373,6 +414,7 @@ public class ProfileFragment extends Fragment {
                                         }
 
                                     MySharedPreference.Companion.getInstance(getContext()).setSex(gender);
+                                    MySharedPreference.Companion.getInstance(getContext()).setBirthday(birthday);
                                     MySharedPreference.Companion.getInstance(getContext()).setEmail(email);
                                     MySharedPreference.Companion.getInstance(getContext()).setName(name);
                                     MySharedPreference.Companion.getInstance(getContext()).setFamily(family);
@@ -415,7 +457,7 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private void setData(final String name,final String family,final String email,final String inviteCode){
+    private void setData(final String name,final String family,final String email,final String inviteCode,final String birthday){
         String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
         String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
 
@@ -438,8 +480,9 @@ public class ProfileFragment extends Fragment {
             fEdu.setEnabled(false);
             fJob.setEnabled(false);
             fSex.setEnabled(false);
+            fBirth.setEnabled(false);
             RetrofitClient.Companion.getInstance().getApi()
-                    .setProfile(number,accessToken,name,family,fSex.getSelectedItemPosition(),email,fEdu.getSelectedItemPosition(),fJob.getSelectedItemPosition(),fRegion.getSelectedItemPosition(),inviteCode,isFirst)
+                    .setProfile(number,accessToken,name,family,fSex.getSelectedItemPosition(),birthday,email,fEdu.getSelectedItemPosition(),fJob.getSelectedItemPosition(),fRegion.getSelectedItemPosition(),inviteCode,isFirst)
                     .enqueue(new Callback<JsonResponse>() {
                         @Override
                         public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
@@ -451,6 +494,8 @@ public class ProfileFragment extends Fragment {
                             save.setEnabled(true);
                             fEmail.setEnabled(true);
                             fSex.setEnabled(true);
+                            fBirth.setEnabled(true);
+
                             fName.setEnabled(true);
                             fFamily.setEnabled(true);
                             fInviteCode.setEnabled(true);
@@ -493,6 +538,8 @@ public class ProfileFragment extends Fragment {
                             save.setEnabled(true);
                             fEmail.setEnabled(true);
                             fName.setEnabled(true);
+                            fBirth.setEnabled(true);
+
                             fFamily.setEnabled(true);
                             fRegion.setEnabled(true);
                             fEdu.setEnabled(true);
@@ -519,4 +566,9 @@ public class ProfileFragment extends Fragment {
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        String date = year+"/"+(monthOfYear+1)+"/"+dayOfMonth;
+        fBirth.setText(date);
+    }
 }

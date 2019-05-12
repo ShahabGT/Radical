@@ -6,6 +6,7 @@ import ir.radical_app.radical.classes.MyUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.widget.Button;
 
 public class ErrorActivity extends AppCompatActivity {

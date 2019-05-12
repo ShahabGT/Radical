@@ -18,7 +18,7 @@ public class NewVersionDialog extends Dialog {
     private FragmentActivity context;
     private String urgent;
     private boolean doubleBackToExitPressedOnce;
-    private ImageView playstore,myket;
+    private ImageView playstore;
 
 
     public NewVersionDialog(@NonNull FragmentActivity context, String urgent) {
@@ -34,7 +34,6 @@ public class NewVersionDialog extends Dialog {
         doubleBackToExitPressedOnce = false;
 
         playstore = findViewById(R.id.newversion_dialog_playstore);
-        myket = findViewById(R.id.newversion_dialog_myket);
         onClicks();
 
     }
@@ -47,16 +46,6 @@ public class NewVersionDialog extends Dialog {
                     context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                 } catch (Exception e) {
                     context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                }
-
-        });
-
-        myket.setOnClickListener(View-> {
-
-                try {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("myket://details?id=" + PACKAGE_NAME)));
-                } catch (Exception e) {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://myket.ir/app/" + PACKAGE_NAME)));
                 }
 
         });

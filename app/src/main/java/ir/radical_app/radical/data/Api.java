@@ -56,6 +56,7 @@ public interface Api {
             @Field("name") String name,
             @Field("family") String family,
             @Field("sex") int sex,
+            @Field("birthday") String birthday,
             @Field("email") String email,
             @Field("education") int education,
             @Field("job") int job,

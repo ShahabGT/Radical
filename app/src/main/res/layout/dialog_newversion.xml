@@ -43,28 +43,15 @@
 
         <ImageView
             android:id="@+id/newversion_dialog_playstore"
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="20dp"
             android:src="@drawable/playstore"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintLeft_toRightOf="@+id/newversion_dialog_myket"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/newversion_dialog_description" />
 
-        <ImageView
-            android:id="@+id/newversion_dialog_myket"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/myket"
-            android:paddingLeft="20dp"
-            android:paddingRight="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/newversion_dialog_playstore"
-            app:layout_constraintTop_toBottomOf="@id/newversion_dialog_description" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

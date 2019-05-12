@@ -70,6 +70,9 @@ class MySharedPreference private constructor(context: Context){
     fun getName() = sp.getString("Name","")
     fun setName(Name:String)=editor.putString("Name",Name).apply()
 
+    fun getBirthday() = sp.getString("Birthday","")
+    fun setBirthday(Birthday:String)=editor.putString("Birthday",Birthday).apply()
+
     fun getFamily() = sp.getString("Family","")
     fun setFamily(Family:String)=editor.putString("Family",Family).apply()
 

@@ -42,5 +42,8 @@
     <color name="material_drawer_header_selection_text">#000000</color>
     <color name="material_drawer_header_selection_subtext">#8A000000</color>
 
+    <color name="mdtp_accent_color">#232e33</color>
+    <color name="mdtp_accent_color_dark">#202020</color>
+
 
 </resources>

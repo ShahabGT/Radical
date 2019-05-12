@@ -7,6 +7,7 @@ public class JsonResponse {
     private String message;
 
     private String name;
+    private String birthday;
     private String family;
     @SerializedName("category_id")
     private String categoryId;
@@ -38,6 +39,10 @@ public class JsonResponse {
     private String region;
     private String description;
     private String merchant;
+
+    public String getBirthday() {
+        return birthday;
+    }
 
     public String getSocialCount() {
         return socialCount;

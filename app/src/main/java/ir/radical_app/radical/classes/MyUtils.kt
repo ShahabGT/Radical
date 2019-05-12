@@ -22,7 +22,9 @@ class MyUtils {
 
         fun hideKeyboard(activity: Activity){
                 val inptMng : InputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inptMng.hideSoftInputFromWindow(activity.currentFocus!!.windowToken,InputMethodManager.HIDE_NOT_ALWAYS)
+            try {
+                inptMng.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            }catch(e:Exception){}
 
 
         }
@@ -46,8 +48,8 @@ class MyUtils {
             val pattern: Pattern
             val res: Boolean
             val matcher: Matcher
-            val EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
-            pattern = Pattern.compile(EMAIL_PATTERN)
+            val emailPattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+            pattern = Pattern.compile(emailPattern)
             matcher = pattern.matcher(email)
             if (matcher.matches()) {
                 email = email.toLowerCase()
