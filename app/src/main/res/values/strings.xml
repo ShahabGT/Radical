@@ -1,10 +1,5 @@
 <resources>
     <string name="app_name">Radical</string>
-
-    <string name="category_image_url">https://radical-app.ir/api/images/categories/%s.png</string>
-    <string name="main_image_url">https://radical-app.ir/api/images/shops/%s/main.JPG</string>
-    <string name="shop_image_url">https://radical-app.ir/api/images/shops/%s/%s.JPG</string>
-    <string name="slider_image_url">https://radical-app.ir/api/images/slider/%s.JPG</string>
     <string name="eng_digits">1234567890abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_@.-</string>
 
     <string name="search_hint">جستجو</string>
