@@ -182,12 +182,12 @@
                     android:padding="5dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:visibility="gone"
                         android:id="@+id/shop_discount1_layout"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
                         android:background="@drawable/discount_circle"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
@@ -222,10 +222,10 @@
                             app:layout_constraintRight_toRightOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-                    <TextView
-                        android:visibility="gone"
 
+                    <TextView
                         android:id="@+id/shop_discount1_title"
+
                         style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -233,30 +233,32 @@
                         android:fontFamily="@font/vazir"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/shop_discount1_layout"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/shop_discount1_layout" />
-                    <View
-                        android:visibility="gone"
 
-                        android:layerType="software"
+                    <View
                         android:id="@+id/shop_discount1_line"
+
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
                         android:background="#DBDBDB"
+                        android:layerType="software"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/shop_discount1_layout" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:visibility="gone"
-
                         android:id="@+id/shop_discount2_layout"
+
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
                         android:background="@drawable/discount_circle"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/shop_discount1_line">
 
@@ -291,10 +293,10 @@
                             app:layout_constraintRight_toRightOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-                    <TextView
-                        android:visibility="gone"
 
+                    <TextView
                         android:id="@+id/shop_discount2_title"
+
                         style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -302,29 +304,31 @@
                         android:fontFamily="@font/vazir"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/shop_discount2_layout"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/shop_discount2_layout" />
-                    <View
-                        android:visibility="gone"
 
+                    <View
                         android:id="@+id/shop_discount2_line"
+
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
                         android:background="#DBDBDB"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/shop_discount2_layout" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:visibility="gone"
-
                         android:id="@+id/shop_discount3_layout"
+
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
                         android:background="@drawable/discount_circle"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/shop_discount2_line">
 
@@ -359,10 +363,10 @@
                             app:layout_constraintRight_toRightOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-                    <TextView
-                        android:visibility="gone"
 
+                    <TextView
                         android:id="@+id/shop_discount3_title"
+
                         style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -370,29 +374,31 @@
                         android:fontFamily="@font/vazir"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/shop_discount3_layout"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/shop_discount3_layout" />
-                    <View
-                        android:visibility="gone"
 
+                    <View
                         android:id="@+id/shop_discount3_line"
+
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
                         android:background="#DBDBDB"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/shop_discount3_layout" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:visibility="gone"
-
                         android:id="@+id/shop_discount4_layout"
+
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
                         android:background="@drawable/discount_circle"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/shop_discount3_line">
 
@@ -427,10 +433,10 @@
                             app:layout_constraintRight_toRightOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-                    <TextView
-                        android:visibility="gone"
 
+                    <TextView
                         android:id="@+id/shop_discount4_title"
+
                         style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -438,29 +444,31 @@
                         android:fontFamily="@font/vazir"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/shop_discount4_layout"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/shop_discount4_layout" />
-                    <View
-                        android:visibility="gone"
 
+                    <View
                         android:id="@+id/shop_discount4_line"
+
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
                         android:background="#DBDBDB"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/shop_discount4_layout" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:visibility="gone"
-
                         android:id="@+id/shop_discount5_layout"
+
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
                         android:background="@drawable/discount_circle"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/shop_discount4_line">
@@ -498,9 +506,8 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
-                        android:visibility="gone"
-
                         android:id="@+id/shop_discount5_title"
+
                         style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -508,15 +515,17 @@
                         android:fontFamily="@font/vazir"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/shop_discount5_layout"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/shop_discount5_layout" />
+
                     <View
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
                         android:layout_width="match_parent"
-                        android:layout_height="26dp"/>
+                        android:layout_height="26dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -555,6 +564,15 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/shop_static_map"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shop_address" />
+
                     <TextView
                         android:id="@+id/shop_tel"
                         style="@style/Base.TextAppearance.AppCompat.Small"
@@ -567,7 +585,7 @@
                         android:textColor="@color/black"
                         android:textDirection="rtl"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/shop_address" />
+                        app:layout_constraintTop_toBottomOf="@+id/shop_static_map" />
 
                     <ImageView
                         android:id="@+id/shop_website"
@@ -625,8 +643,8 @@
     </ScrollView>
 
     <TextView
-        style="@style/Base.TextAppearance.AppCompat.Medium"
         android:id="@+id/shop_buy"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

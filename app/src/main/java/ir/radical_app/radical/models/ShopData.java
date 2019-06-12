@@ -23,7 +23,17 @@ public class ShopData {
     private String plan;
     private String count;
     private String sum;
+    private String lat;
+    private String lon;
 
+
+    public String getLat() {
+        return lat;
+    }
+
+    public String getLon() {
+        return lon;
+    }
 
     public String getPlan() {
         return plan;

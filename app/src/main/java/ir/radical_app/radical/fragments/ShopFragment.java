@@ -5,6 +5,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -19,16 +20,26 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.tmall.ultraviewpager.UltraViewPager;
 import com.tmall.ultraviewpager.transformer.UltraDepthScaleTransformer;
 import com.willy.ratingbar.BaseRatingBar;
 import com.willy.ratingbar.ScaleRatingBar;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+
+import ir.map.sdk_services.ServiceHelper;
+import ir.map.sdk_services.models.MaptexError;
+import ir.map.sdk_services.models.base.ResponseListener;
 import ir.radical_app.radical.activities.QrcodeActivity;
 import ir.radical_app.radical.activities.SplashActivity;
 import ir.radical_app.radical.adapters.ShopsImagesAdapter;
@@ -47,7 +58,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ShopFragment extends Fragment {
+public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
     private final int CAMERA_REQUEST_CODE = 658;
     private final int QR_REQUEST_CODE = 668;
     private String shopId;
@@ -73,6 +84,7 @@ public class ShopFragment extends Fragment {
     private View globalView;
 
     private int maxDiscount;
+    private ImageView staticMap;
 
     public ShopFragment() {
     }
@@ -98,6 +110,8 @@ public class ShopFragment extends Fragment {
         open= v.findViewById(R.id.shop_open);
         rateTtile = v.findViewById(R.id.shop_rate_title);
         buy=v.findViewById(R.id.shop_buy);
+
+        staticMap = v.findViewById(R.id.shop_static_map);
 
         rate = v.findViewById(R.id.shop_RatingBar);
         telegram = v.findViewById(R.id.shop_telegram);
@@ -278,6 +292,12 @@ public class ShopFragment extends Fragment {
         ultraViewPager.setAutoScroll(3000);
     }
     private void parseData(ShopDetailsModel response){
+        if (!ImageLoader.getInstance().isInited()) {
+            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getContext()).build();
+            ImageLoader.getInstance().init(config);
+        }
+        if(!response.getData().getLat().isEmpty())
+            getStaticMap(response.getData().getLat(),response.getData().getLon());
         shopId = response.getData().getShopId();
         name.setText(response.getData().getName());
         category.setText(response.getData().getCategoryName());
@@ -541,7 +561,7 @@ public class ShopFragment extends Fragment {
     private void showUpgradeDialog() {
         UpgradeDialog upgradeDialog = new UpgradeDialog(getActivity());
 
-        upgradeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(upgradeDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         upgradeDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         upgradeDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
@@ -550,4 +570,19 @@ public class ShopFragment extends Fragment {
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
+    @Override
+    public void onSuccess(Bitmap response) {
+        staticMap.setVisibility(View.VISIBLE);
+        staticMap.setImageBitmap(response);
+
+    }
+
+    private void getStaticMap(String lat,String lon) {
+        new ServiceHelper().getStaticMap(Double.valueOf(lat), Double.valueOf(lon), 11, this);
+    }
+
+    @Override
+    public void onError(MaptexError error) {
+        staticMap.setVisibility(View.GONE);
+    }
 }
