@@ -1,5 +1,6 @@
 package ir.radical_app.radical.classes
 
+import android.app.Application
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -8,7 +9,7 @@ import ir.map.sdk_map.Mapir;
 import ir.map.sdk_services.ServiceSDK
 
 
-class MyAppController : MultiDexApplication() {
+class MyAppController : Application() {
 
     override fun onCreate() {
         super.onCreate()

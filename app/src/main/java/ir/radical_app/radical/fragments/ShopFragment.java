@@ -40,6 +40,7 @@ import androidx.fragment.app.Fragment;
 import ir.map.sdk_services.ServiceHelper;
 import ir.map.sdk_services.models.MaptexError;
 import ir.map.sdk_services.models.base.ResponseListener;
+import ir.radical_app.radical.activities.MapActivity;
 import ir.radical_app.radical.activities.QrcodeActivity;
 import ir.radical_app.radical.activities.SplashActivity;
 import ir.radical_app.radical.adapters.ShopsImagesAdapter;
@@ -246,17 +247,21 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
                         public void onResponse(Call<ShopDetailsModel> call, Response<ShopDetailsModel> response) {
                             loadingDialog(true);
                             if(response.isSuccessful()){
-                                switch (response.body().getData().getMessage()){
-                                    case "ok":
-                                        parseData(response.body());
-                                        break;
+                                if ("ok".equals(response.body().getData().getMessage())) {
 
-                                    default:
-                                        MyToast.Companion.create(getContext(),getString(R.string.general_error));
-                                       getActivity().getSupportFragmentManager().popBackStackImmediate();
-
-
-
+                                    if (!response.body().getData().getLat().isEmpty()) {
+                                        if (!ImageLoader.getInstance().isInited()) {
+                                            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getContext()).build();
+                                            ImageLoader.getInstance().init(config);
+                                        }
+                                        staticMap.setVisibility(View.VISIBLE);
+                                        getStaticMap(response.body().getData().getLat(), response.body().getData().getLon());
+                                        staticMap.setOnClickListener(View -> showBigMap(response.body().getData().getName(), response.body().getData().getLat(), response.body().getData().getLon()));
+                                    }
+                                    parseData(response.body());
+                                } else {
+                                    MyToast.Companion.create(getContext(), getString(R.string.general_error));
+                                    getActivity().getSupportFragmentManager().popBackStackImmediate();
                                 }
                             }else{
                                 MyToast.Companion.create(getContext(),getString(R.string.general_error));
@@ -292,12 +297,7 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
         ultraViewPager.setAutoScroll(3000);
     }
     private void parseData(ShopDetailsModel response){
-        if (!ImageLoader.getInstance().isInited()) {
-            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getContext()).build();
-            ImageLoader.getInstance().init(config);
-        }
-        if(!response.getData().getLat().isEmpty())
-            getStaticMap(response.getData().getLat(),response.getData().getLon());
+
         shopId = response.getData().getShopId();
         name.setText(response.getData().getName());
         category.setText(response.getData().getCategoryName());
@@ -515,6 +515,31 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
 
         alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    private void showBigMap(String name,String lat,String lon){
+
+        Intent intent = new Intent(getActivity(), MapActivity.class);
+        intent.putExtra("name",name);
+        intent.putExtra("lat",lat);
+        intent.putExtra("lon",lon);
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.fadein,R.anim.fadeout);
+
+
+//        MapActivity upgradeDialog = new MapActivity(getContext(),name,lat,lon);
+//
+//        upgradeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        upgradeDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationFade;
+//        upgradeDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+//
+//        upgradeDialog.show();
+//        Window window = upgradeDialog.getWindow();
+//        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+
+
+
     }
     private void requestCamera(){
 

@@ -28,6 +28,8 @@
     <string name="txt_profile_success">اطلاعات با موفقیت ذخیره شد!</string>
     <string name="txt_profile_success_noinvite">اطلاعات با موفقیت ذخیره شد، لطفا کد معرف را بررسی کنید!</string>
     <string name="txt_buy_success">اشتراک با موفقیت فعال شد!</string>
+    <string name="txt_gps">لطفا GPS تلفن خود را روشن کنید!</string>
+    <string name="txt_gps_loading">در حال یافتن مکان شما...</string>
 
     <string name="plan_bronze">عادی</string>
     <string name="plan_bronze_exp">نامحدود</string>
