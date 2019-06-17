@@ -268,6 +268,7 @@ https://play.google.com/store/apps/details?id=ir.radical_app.radical
     <string name="upgrade_pay_btn">پرداخت آنلاین</string>
     <string name="upgrade_buy_description">خرید اشتراک %s روزه اپلیکیشن رادیکال</string>
 
+    <string name="bottomsheet_model">%s دقیقه (%s کیلومتر)</string>
 
     <string name="stats_title1">تعداد خرید برای هر ماه در سال</string>
     <string name="stats_title2">میزان کل تخفیف کسب شده در سال %s :</string>
