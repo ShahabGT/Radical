@@ -1,7 +1,5 @@
 package ir.radical_app.radical.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -13,16 +11,12 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import ir.map.sdk_common.MapirLatLng;
-import ir.map.sdk_map.annotations.IconFactory;
-import ir.map.sdk_map.annotations.MarkerOptions;
-import ir.map.sdk_map.annotations.Polyline;
-import ir.map.sdk_map.annotations.PolylineOptions;
-import ir.map.sdk_map.camera.CameraUpdate;
-import ir.map.sdk_map.camera.CameraUpdateFactory;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.card.MaterialCardView;
 import com.mapbox.android.core.location.LocationEngineListener;
@@ -31,6 +25,14 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import ir.map.sdk_common.MapirLatLng;
+import ir.map.sdk_map.annotations.IconFactory;
+import ir.map.sdk_map.annotations.MarkerOptions;
+import ir.map.sdk_map.annotations.Polyline;
+import ir.map.sdk_map.annotations.PolylineOptions;
+import ir.map.sdk_map.camera.CameraUpdate;
+import ir.map.sdk_map.camera.CameraUpdateFactory;
 import ir.map.sdk_map.geometry.LatLng;
 import ir.map.sdk_map.geometry.LatLngBounds;
 import ir.map.sdk_map.location.LocationComponent;
@@ -38,10 +40,14 @@ import ir.map.sdk_map.maps.MapirMap;
 import ir.map.sdk_map.maps.SupportMapFragment;
 import ir.map.sdk_services.RouteMode;
 import ir.map.sdk_services.ServiceHelper;
+import ir.map.sdk_services.models.MaptexError;
+import ir.map.sdk_services.models.MaptexManeuver;
+import ir.map.sdk_services.models.MaptexRouteResponse;
+import ir.map.sdk_services.models.MaptexStepsItem;
 import ir.map.sdk_services.models.base.ResponseListener;
 import ir.radical_app.radical.R;
+import ir.radical_app.radical.classes.Const;
 import ir.radical_app.radical.classes.MyToast;
-import ir.map.sdk_services.models.*;
 import ir.radical_app.radical.route.MapirPolyUtil;
 import ir.radical_app.radical.route.MapirSphericalUtil;
 
@@ -50,11 +56,14 @@ public class MapActivity extends AppCompatActivity implements LocationEngineList
     private MapirMap mapirMap;
     private Location myLocation;
     private LocationManager manager;
-    private String lat,lon,name;
+    private String lat, lon, name,categoryId;
     private ImageView directions;
     private MaterialCardView routingCard;
-    private TextView routingDetails,routingName;
-    private int errorCounter=0;
+    private TextView routingDetails, routingName;
+    private int errorCounter = 0;
+    private final int Location_REQUEST_CODE = 658;
+
+
 
 
     @Override
@@ -66,17 +75,18 @@ public class MapActivity extends AppCompatActivity implements LocationEngineList
 
     }
 
-    private void init(){
+    private void init() {
         directions = findViewById(R.id.map_direction);
         Bundle bundle = getIntent().getExtras();
-        if(bundle!=null) {
+        if (bundle != null) {
             lat = bundle.getString("lat", "");
             lon = getIntent().getExtras().getString("lon", "");
             name = getIntent().getExtras().getString("name", "");
-            ((TextView)findViewById(R.id.map_shop_name)).setText(name);
+            categoryId = getIntent().getExtras().getString("categoryId", "1");
+            ((TextView) findViewById(R.id.map_shop_name)).setText(name);
 
-        }else{
-            MyToast.Companion.create(this,getString(R.string.general_error));
+        } else {
+            MyToast.Companion.create(this, getString(R.string.general_error));
             onBackPressed();
         }
 
@@ -93,7 +103,7 @@ public class MapActivity extends AppCompatActivity implements LocationEngineList
 
     }
 
-    private void mapInit(){
+    private void mapInit() {
         ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.myMapView))
                 .getMapAsync(Map -> {
 
@@ -102,10 +112,10 @@ public class MapActivity extends AppCompatActivity implements LocationEngineList
                         if (ActivityCompat.checkSelfPermission(getApplicationContext(),
                                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                             ActivityCompat.requestPermissions(
-                                    MapActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                                    MapActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Location_REQUEST_CODE);
                         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                             ActivityCompat.requestPermissions(
-                                    (Activity) MapActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                                     MapActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, Location_REQUEST_CODE);
 
                         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                                 && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -116,9 +126,13 @@ public class MapActivity extends AppCompatActivity implements LocationEngineList
                                 component.getLocationEngine().addLocationEngineListener(MapActivity.this);
                             }
                             LatLng storePosition = new LatLng(Double.valueOf(lat), Double.valueOf(lon));
-                            mapirMap.addMarker(new MarkerOptions().setTitle(name).position(storePosition).icon(IconFactory.getInstance(MapActivity.this).fromResource(R.mipmap.ic_pin)));
+                            mapirMap.addMarker(new MarkerOptions()
+                                    .setTitle(name)
+                                    .position(storePosition)
+                                    .icon(IconFactory.getInstance(MapActivity.this)
+                                            .fromResource(Const.Companion.getCategories().get(Integer.parseInt(categoryId)-1))));
 
-                            mapirMap.animateCamera(CameraUpdateFactory.newLatLngZoom(storePosition,15),1000);
+                            mapirMap.animateCamera(CameraUpdateFactory.newLatLngZoom(storePosition, 15), 1000);
 
                         }
                     }
@@ -126,38 +140,35 @@ public class MapActivity extends AppCompatActivity implements LocationEngineList
                 });
     }
 
-    private void onClicks(){
-        findViewById(R.id.map_myloc).setOnClickListener(View->{
+    private void onClicks() {
+        findViewById(R.id.map_myloc).setOnClickListener(View -> {
 
-            if(myLocation!=null)
+            if (myLocation != null)
                 mapirMap.animateCamera(CameraUpdateFactory
                         .newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 15));
-            else
-            if(!checkIfLocationEnabled()) {
+            else if (!checkIfLocationEnabled()) {
                 turnGPS();
-                MyToast.Companion.create(MapActivity.this,getString(R.string.txt_gps));
-            }else
-                MyToast.Companion.createShort(MapActivity.this,getString(R.string.txt_gps_loading));
+                MyToast.Companion.create(MapActivity.this, getString(R.string.txt_gps));
+            } else
+                MyToast.Companion.createShort(MapActivity.this, getString(R.string.txt_gps_loading));
 
         });
 
 
+        directions.setOnClickListener(View -> {
 
-        directions.setOnClickListener(View->{
-
-            if(myLocation!=null) {
-               route();
-            }else
-            if(!checkIfLocationEnabled()) {
+            if (myLocation != null) {
+                route();
+            } else if (!checkIfLocationEnabled()) {
                 turnGPS();
-                MyToast.Companion.create(MapActivity.this,getString(R.string.txt_gps));
-            }else
-                MyToast.Companion.createShort(MapActivity.this,getString(R.string.txt_gps_loading));
+                MyToast.Companion.create(MapActivity.this, getString(R.string.txt_gps));
+            } else
+                MyToast.Companion.createShort(MapActivity.this, getString(R.string.txt_gps_loading));
 
         });
     }
 
-    private void route(){
+    private void route() {
         MapirLatLng latLng1 = new MapirLatLng(Double.valueOf(lat), Double.valueOf(lon));
         MapirLatLng latLng2 = new MapirLatLng(myLocation.getLatitude(), myLocation.getLongitude());
 
@@ -180,7 +191,7 @@ public class MapActivity extends AppCompatActivity implements LocationEngineList
         return manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
-    private void turnGPS(){
+    private void turnGPS() {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivity(intent);
     }
@@ -194,10 +205,10 @@ public class MapActivity extends AppCompatActivity implements LocationEngineList
 
     @Override
     public void onError(MaptexError error) {
-        if(errorCounter++!=3)
+        if (errorCounter++ != 3)
             route();
         else
-            MyToast.Companion.create(this,getString(R.string.general_error));
+            MyToast.Companion.create(this, getString(R.string.general_error));
 
     }
 
@@ -305,17 +316,26 @@ public class MapActivity extends AppCompatActivity implements LocationEngineList
             routingCard.setVisibility(View.VISIBLE);
             DecimalFormat decimalFormat = new DecimalFormat("####.#");
             decimalFormat.setRoundingMode(RoundingMode.UP);
-            String distance = decimalFormat.format(routingInfo.routes.get(0).distance/1000);
-            String duration = ((int)routingInfo.routes.get(0).duration/60)+"";
-            routingDetails.setText(getString(R.string.bottomsheet_model,duration,distance));
+            String distance = decimalFormat.format(routingInfo.routes.get(0).distance / 1000);
+            String duration = ((int) routingInfo.routes.get(0).duration / 60) + "";
+            routingDetails.setText(getString(R.string.bottomsheet_model, duration, distance));
             routingName.setText(name);
-          //  routingCard.startAnimation(AnimationUtils.loadAnimation(MapActivity.this,R.anim.bottom_up));
+            //  routingCard.startAnimation(AnimationUtils.loadAnimation(MapActivity.this,R.anim.bottom_up));
 
 
         }
 
 
-
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==Location_REQUEST_CODE){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                mapInit();
+            }
+        }
+    }
 }

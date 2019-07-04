@@ -330,5 +330,15 @@ public interface Api {
             @Field("number") String number,
             @Field("accesstoken") String accessToken
     );
+    //___________________________________________
 
+    @FormUrlEncoded
+    @POST("nearme.php")
+    Call<ShopsResponse> getNearMe(
+            @Field("number") String number,
+            @Field("accesstoken") String accessToken,
+            @Field("lat") double lat,
+            @Field("lon") double lon
+
+    );
 }

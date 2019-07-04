@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.mikepenz.materialdrawer.Drawer;
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar appToolbar;
     private ConstraintLayout messages;
     private TextView messagesBadge;
+    private FloatingActionButton nearMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         messages = findViewById(R.id.toolbar_messages);
         messagesBadge = findViewById(R.id.toolbar_messages_badge);
         doubleBackToExitPressedOnce = false;
+        nearMe=findViewById(R.id.main_nearme);
 
         search();
         onClicks();
@@ -326,14 +329,16 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        messages.setOnClickListener(View-> {
+        messages.setOnClickListener(v-> {
                 MyUtils.Companion.removeNotification(MainActivity.this);
                 setFragment(new MessagesFragment());
         });
 
-        toolbarDiscount.setOnClickListener(View->
+        toolbarDiscount.setOnClickListener(v->
                 setFragment(new StatsFragment())
         );
+
+        nearMe.setOnClickListener(v->startActivity(new Intent(MainActivity.this,NearMeActivity.class)));
     }
 
     private void search() {

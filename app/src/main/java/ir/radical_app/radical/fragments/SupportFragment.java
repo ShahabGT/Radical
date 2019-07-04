@@ -105,19 +105,13 @@ public class SupportFragment extends Fragment {
 
         onClicks();
 
-       recyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-           @Override
-           public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-               if ( bottom < oldBottom) {
-                   recyclerView.post(new Runnable() {
-                       @Override
-                       public void run() {
-                           if(adapter!=null)
-                               recyclerView.scrollToPosition(adapter.getItemCount()-1);
+       recyclerView.addOnLayoutChangeListener((v1, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+           if ( bottom < oldBottom) {
+               recyclerView.post(() -> {
+                   if(adapter!=null)
+                       recyclerView.scrollToPosition(adapter.getItemCount()-1);
 
-                       }
-                   });
-               }
+               });
            }
        });
     }

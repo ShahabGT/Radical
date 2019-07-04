@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import androidx.annotation.NonNull;
@@ -330,7 +331,7 @@ public class BuyFragment extends Fragment {
     private void parseData(ShopDetailsModel response){
         ShopData data = response.getData();
         shopId = data.getShopId();
-        ArrayList<PlanData> plans = response.getPlans();
+        List<PlanData> plans = response.getPlans();
         shopName.setText(data.getName());
 
         switch (plans.size()){

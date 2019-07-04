@@ -29,6 +29,7 @@ import com.tmall.ultraviewpager.transformer.UltraDepthScaleTransformer;
 import com.willy.ratingbar.BaseRatingBar;
 import com.willy.ratingbar.ScaleRatingBar;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -85,6 +86,7 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
     private View globalView;
 
     private int maxDiscount;
+    private String categoryId;
     private ImageView staticMap;
 
     public ShopFragment() {
@@ -297,7 +299,7 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
         ultraViewPager.setAutoScroll(3000);
     }
     private void parseData(ShopDetailsModel response){
-
+        categoryId=response.getData().getCategoryId();
         shopId = response.getData().getShopId();
         name.setText(response.getData().getName());
         category.setText(response.getData().getCategoryName());
@@ -332,7 +334,7 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
         initViewPager(response.getData().getPicNum()-1);
 
 
-        ArrayList<PlanData> list = response.getPlans();
+        List<PlanData> list = response.getPlans();
         switch (list.size()){
             case 5:
                 String des5 = list.get(4).getDescription();
@@ -521,6 +523,7 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
 
         Intent intent = new Intent(getActivity(), MapActivity.class);
         intent.putExtra("name",name);
+        intent.putExtra("categoryId",categoryId);
         intent.putExtra("lat",lat);
         intent.putExtra("lon",lon);
         startActivity(intent);

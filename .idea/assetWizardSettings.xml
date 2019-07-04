@@ -111,10 +111,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="cropped" value="true" />
-                                      <entry key="iconShape" value="CIRCLE" />
-                                      <entry key="imageAsset" value="C:\Users\ShahabGT\Downloads\Map Pin.png" />
-                                      <entry key="outputName" value="ic_myloc" />
+                                      <entry key="iconShape" value="NONE" />
+                                      <entry key="imageAsset" value="C:\Projects\ra-other\web\php\images\categories\18l.png" />
+                                      <entry key="outputName" value="ic_loc18" />
                                     </map>
                                   </option>
                                 </PersistentState>

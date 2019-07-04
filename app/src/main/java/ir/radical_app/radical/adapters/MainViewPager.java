@@ -10,6 +10,8 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -25,9 +27,9 @@ import ir.radical_app.radical.models.SliderResponse;
 public class MainViewPager extends PagerAdapter {
 
     private FragmentActivity context;
-    private ArrayList<SliderResponse> slider;
+    private List<SliderResponse> slider;
 
-    public MainViewPager(FragmentActivity context, ArrayList<SliderResponse> slider){
+    public MainViewPager(FragmentActivity context, List<SliderResponse> slider){
         this.context=context;
         this.slider=slider;
 

@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import java.util.ArrayList;
+import java.util.List;
+
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
@@ -122,8 +124,8 @@ public class HomeFragment extends Fragment {
                         loadingDialog(true);
                         if(response.body().getList().size()>5){
 
-                            ArrayList<JsonResponse> list = response.body().getList();
-                            ArrayList<SliderResponse> slider = response.body().getSlider();
+                            List<JsonResponse> list = response.body().getList();
+                            List<SliderResponse> slider = response.body().getSlider();
 
                             categoryAdapter = new CategoryAdapter2(getContext(),list,getActivity());
                             categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,true));

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,9 +24,9 @@ public class CategoryAdapter2 extends RecyclerView.Adapter<CategoryAdapter2.View
 
     private Context context;
     private FragmentActivity activity;
-    private ArrayList<JsonResponse> list;
+    private List<JsonResponse> list;
 
-    public CategoryAdapter2(Context context, ArrayList<JsonResponse> list, FragmentActivity activity){
+    public CategoryAdapter2(Context context, List<JsonResponse> list, FragmentActivity activity){
 
         this.context=context;
         this.activity=activity;

@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import ir.radical_app.radical.models.HelpItem;
@@ -13,10 +15,10 @@ import ir.radical_app.radical.R;
 
 public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.ViewHolder> {
 
-    private ArrayList<HelpItem> list;
+    private List<HelpItem> list;
 
 
-    public HelpAdapter(ArrayList<HelpItem> list){
+    public HelpAdapter(List<HelpItem> list){
         this.list=list;
     }
 

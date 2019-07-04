@@ -10,6 +10,10 @@ import ir.radical_app.radical.R
 import java.lang.Exception
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 class MyUtils {
 
@@ -69,6 +73,22 @@ class MyUtils {
                 len-=3
             }while (len>3)
             return res
+        }
+
+        fun getDistanceFromLatLonInKm(lat1:Double,lon1:Double,lat2:Double,lon2:Double):Double {
+            val dLat = degToRad(lat2-lat1)
+            val dLon = degToRad(lon2-lon1)
+            val a =
+                    sin(dLat/2) * sin(dLat/2) +
+                            cos(degToRad(lat1)) * cos(degToRad(lat2)) *
+                            sin(dLon/2) * sin(dLon/2)
+
+            val c = 2 * atan2(sqrt(a), sqrt(1-a))
+            return 6371 * c * 1000
+        }
+
+        fun degToRad(deg:Double):Double {
+            return deg * (Math.PI/180)
         }
 
 

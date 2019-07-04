@@ -25,6 +25,13 @@ class MyDatabase constructor(context: Context): SQLiteOpenHelper(context,"Radica
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        if(newVersion>oldVersion){
+            db?.execSQL("DROP TABLE IF EXISTS messages")
+            db?.execSQL("DROP TABLE IF EXISTS support")
+            db?.execSQL("DROP TABLE IF EXISTS categories")
+            onCreate(db)
+        }
+
     }
 
     fun deleteSupportTable(){
@@ -74,7 +81,7 @@ class MyDatabase constructor(context: Context): SQLiteOpenHelper(context,"Radica
         db.insert(supportDB,null,cv)
     }
 
-    fun saveCategories(list : ArrayList<JsonResponse>){
+    fun saveCategories(list : List<JsonResponse>){
         val db = writableDatabase
         for(i in 0 until list.size){
             val cv = ContentValues()
@@ -95,9 +102,9 @@ class MyDatabase constructor(context: Context): SQLiteOpenHelper(context,"Radica
                 model.id=cursor.getInt(cursor.getColumnIndex("id")).toString()
                 model.read=cursor.getInt(cursor.getColumnIndex("read")).toString()
                 model.message=cursor.getString(cursor.getColumnIndex("message"))
+                model.title=cursor.getString(cursor.getColumnIndex("title"))
                 model.sender=cursor.getString(cursor.getColumnIndex("sender"))
                 model.receiver=cursor.getString(cursor.getColumnIndex("receiver"))
-                model.title=cursor.getString(cursor.getColumnIndex("title"))
                 model.date=cursor.getString(cursor.getColumnIndex("date"))
                 list.add(model)
             }while (cursor.moveToNext())
@@ -119,6 +126,7 @@ class MyDatabase constructor(context: Context): SQLiteOpenHelper(context,"Radica
         if(cursor.moveToFirst()){
             do{
                 val model=MessageModel()
+
                 model.message=cursor.getString(cursor.getColumnIndex("message"))
                 model.sender=cursor.getString(cursor.getColumnIndex("sender"))
                 model.receiver=cursor.getString(cursor.getColumnIndex("receiver"))
@@ -144,9 +152,10 @@ class MyDatabase constructor(context: Context): SQLiteOpenHelper(context,"Radica
         val cursor:Cursor=db.rawQuery("SELECT * FROM $categoryDB",null,null)
         if(cursor.moveToFirst()){
             do{
-                val model= JsonResponse()
-                model.name = cursor.getString(cursor.getColumnIndex("title"))
-                model.categoryId = cursor.getString(cursor.getColumnIndex("category_id"))
+                val model= JsonResponse(name=cursor.getString(cursor.getColumnIndex("title")),
+                        categoryId = cursor.getString(cursor.getColumnIndex("category_id")))
+//                model.name = cursor.getString(cursor.getColumnIndex("title"))
+//                model.categoryId = cursor.getString(cursor.getColumnIndex("category_id"))
                 list.add(model)
 
             }while (cursor.moveToNext())

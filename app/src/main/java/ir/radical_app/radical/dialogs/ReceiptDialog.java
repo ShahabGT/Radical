@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.card.MaterialCardView;
 import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import ir.radical_app.radical.activities.SplashActivity;
@@ -140,7 +142,7 @@ public class ReceiptDialog extends Dialog {
                             if(response.isSuccessful()){
                                 switch (response.body().getMessage()){
                                     case "ok":
-                                        ArrayList<BuyDetailsItem> list = response.body().getData();
+                                        List<BuyDetailsItem> list = response.body().getData();
                                         discountPercents = new ArrayList<>();
                                         discountTitles = new ArrayList<>();
                                         prices = new ArrayList<>();
