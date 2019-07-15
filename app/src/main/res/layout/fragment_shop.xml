@@ -50,7 +50,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="5dp">
+                    android:padding="8dp">
 
 
                     <TextView
@@ -225,22 +225,22 @@
 
                     <TextView
                         android:id="@+id/shop_discount1_title"
-
                         style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
                         android:fontFamily="@font/vazir"
+                        android:gravity="right"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/shop_discount1_layout"
+                        app:layout_constraintLeft_toRightOf="@+id/shop_discount1_layout"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/shop_discount1_layout" />
 
                     <View
                         android:id="@+id/shop_discount1_line"
-
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
@@ -253,7 +253,6 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/shop_discount2_layout"
-
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
@@ -296,16 +295,17 @@
 
                     <TextView
                         android:id="@+id/shop_discount2_title"
-
                         style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
                         android:fontFamily="@font/vazir"
+                        android:gravity="right"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/shop_discount2_layout"
+                        app:layout_constraintLeft_toRightOf="@+id/shop_discount2_layout"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/shop_discount2_layout" />
 
@@ -323,7 +323,6 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/shop_discount3_layout"
-
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
@@ -366,16 +365,17 @@
 
                     <TextView
                         android:id="@+id/shop_discount3_title"
-
                         style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
                         android:fontFamily="@font/vazir"
+                        android:gravity="right"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/shop_discount3_layout"
+                        app:layout_constraintLeft_toRightOf="@+id/shop_discount3_layout"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/shop_discount3_layout" />
 
@@ -393,7 +393,6 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/shop_discount4_layout"
-
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
@@ -436,22 +435,22 @@
 
                     <TextView
                         android:id="@+id/shop_discount4_title"
-
                         style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
                         android:fontFamily="@font/vazir"
+                        android:gravity="right"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/shop_discount4_layout"
+                        app:layout_constraintLeft_toRightOf="@+id/shop_discount4_layout"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/shop_discount4_layout" />
 
                     <View
                         android:id="@+id/shop_discount4_line"
-
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
@@ -463,7 +462,6 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/shop_discount5_layout"
-
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
@@ -507,16 +505,18 @@
 
                     <TextView
                         android:id="@+id/shop_discount5_title"
-
                         style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
                         android:fontFamily="@font/vazir"
+                        android:gravity="right"
                         android:text="تخفیف 1"
                         android:textColor="@color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/shop_discount5_layout"
+
+                        app:layout_constraintLeft_toRightOf="@+id/shop_discount5_layout"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/shop_discount5_layout" />
 
@@ -565,11 +565,11 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:visibility="gone"
-                        android:src="@drawable/loc_indicator"
                         android:id="@+id/shop_static_map"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
+                        android:src="@drawable/loc_indicator"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/shop_address" />

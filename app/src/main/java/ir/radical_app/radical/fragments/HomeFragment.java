@@ -21,7 +21,12 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import ir.radical_app.radical.activities.ErrorActivity;
+import ir.radical_app.radical.activities.MainActivity;
+import ir.radical_app.radical.activities.NearMeActivity;
 import ir.radical_app.radical.activities.SplashActivity;
 import ir.radical_app.radical.adapters.CategoryAdapter2;
 import ir.radical_app.radical.adapters.MainViewPager;
@@ -51,6 +56,8 @@ public class HomeFragment extends Fragment {
     private CategoryAdapter2 categoryAdapter;
     private MyDatabase myDatabase;
     private View v;
+    private FloatingActionButton nearMe;
+
 
 
 
@@ -73,9 +80,29 @@ public class HomeFragment extends Fragment {
         categoryRecyclerView = v.findViewById(R.id.home_category_recycler);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+        nearMe=v.findViewById(R.id.home_nearme);
 
         getCategories();
 
+        nearMe.setOnClickListener(v->startActivity(new Intent(getActivity(), NearMeActivity.class)));
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy)
+            {
+                if(dy > 0){
+                    nearMe.hide();
+                } else{
+                    nearMe.show();
+                }
+
+                super.onScrolled(recyclerView, dx, dy);
+
+            }
+
+
+        });
 
 
     }
@@ -83,13 +110,7 @@ public class HomeFragment extends Fragment {
     private void showData(PagerAdapter pagerAdapter){
         ShopsViewModel itemViewModel = ViewModelProviders.of(this).get(ShopsViewModel.class);
         final ShopsAdapter adapter = new ShopsAdapter(getContext(),getActivity(),pagerAdapter);
-        itemViewModel.itemPagedList.observe(this, new Observer<PagedList<ShopsItem>>() {
-
-            @Override
-            public void onChanged(PagedList<ShopsItem> shopsItems) {
-                adapter.submitList(shopsItems);
-            }
-        });
+        itemViewModel.itemPagedList.observe(this, shopsItems -> adapter.submitList(shopsItems));
         recyclerView.setAdapter(adapter);
     }
 

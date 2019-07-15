@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar appToolbar;
     private ConstraintLayout messages;
     private TextView messagesBadge;
-    private FloatingActionButton nearMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
         messages = findViewById(R.id.toolbar_messages);
         messagesBadge = findViewById(R.id.toolbar_messages_badge);
         doubleBackToExitPressedOnce = false;
-        nearMe=findViewById(R.id.main_nearme);
 
         search();
         onClicks();
@@ -338,7 +336,6 @@ public class MainActivity extends AppCompatActivity {
                 setFragment(new StatsFragment())
         );
 
-        nearMe.setOnClickListener(v->startActivity(new Intent(MainActivity.this,NearMeActivity.class)));
     }
 
     private void search() {
