@@ -43,6 +43,7 @@
                 android:text="مکان" />
 
             <com.willy.ratingbar.ScaleRatingBar
+                android:visibility="gone"
                 android:id="@+id/shops_row_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,6 +109,8 @@
             app:layout_constraintTop_toBottomOf="@id/shops_row_title" />
 
         <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             android:id="@+id/shops_row_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

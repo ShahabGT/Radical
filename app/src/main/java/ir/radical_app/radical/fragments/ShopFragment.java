@@ -2,6 +2,7 @@ package ir.radical_app.radical.fragments;
 
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -72,10 +73,10 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
     private LoadingDialog dialog;
     private ShopsImagesAdapter adapter;
     private ScaleRatingBar rate;
-    private boolean fromuser=true;
+    private boolean fromuser=true,liked=false,disliked=false;
 
-    private TextView name,category,description,address,tel,open,rateTtile,buy;
-    private ImageView telegram,instagram,website,bookmark,share;
+    private TextView name,category,description,address,tel,open,rateTtile,buy,likeCount,dislikeCount,commentsCount;
+    private ImageView telegram,instagram,website,bookmark,share,like,dislike,comment;
     private String telegramID,instagramID,websiteID,bookmarkStat;
 
     private TextView discount1, discount2, discount3, discount4, discount5;
@@ -122,6 +123,13 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
         website = v.findViewById(R.id.shop_website);
         bookmark = v.findViewById(R.id.shop_bookmark);
         share = v.findViewById(R.id.shop_share);
+        like = v.findViewById(R.id.shop_like_img);
+        dislike = v.findViewById(R.id.shop_dislike_img);
+        comment = v.findViewById(R.id.shop_comments_img);
+
+        likeCount = v.findViewById(R.id.shop_likes);
+        dislikeCount = v.findViewById(R.id.shop_dislikes);
+        commentsCount = v.findViewById(R.id.shop_comments);
 
         discount1 = v.findViewById(R.id.shop_discount1);
         discount1title = v.findViewById(R.id.shop_discount1_title);
@@ -210,7 +218,47 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
                                 "https://radical-app.ir/shops?id="+shopId))
         );
 
+        like.setOnClickListener(v->{
+           if (!liked){
+               like.setImageResource(R.drawable.tup);
+               dislike.setImageResource(R.drawable.tdownd);
+               animation(like);
+               liked=true;
+               disliked=false;
+               doLike(1);
+           }else {
+               animation(like);
+           }
+
+        });
+        dislike.setOnClickListener(v->{
+            if (!disliked){
+                like.setImageResource(R.drawable.tupd);
+                dislike.setImageResource(R.drawable.tdown);
+                animation(dislike);
+                disliked=true;
+                liked=false;
+                doLike(-1);
+
+            }else{
+                animation(dislike);
+            }
+
+        });
+
     }
+
+    private void animation(View v){
+        ObjectAnimator scaleXanimator = ObjectAnimator.ofFloat(v, "scaleX", 1f,1.5f,1f);
+        scaleXanimator.setDuration(300);
+
+        ObjectAnimator scaleYanimator = ObjectAnimator.ofFloat(v, "scaleY", 1f,1.5f,1f);
+        scaleYanimator.setDuration(300);
+
+        scaleXanimator.start();
+        scaleYanimator.start();
+    }
+
     private void intentAction(String id){
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
@@ -329,6 +377,38 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
             float mean = sum /count;
             rate.setRating(mean);
             rateTtile.setText(getString(R.string.shop_rate_title,String.valueOf(mean).substring(0,3),count));
+        }
+
+        int likes = response.getData().getLikes();
+        int dislikes = response.getData().getDislikes();
+        if(likes>999 && likes<1000000 )
+            likeCount.setText(likes/1000+"k");
+        else if(likes>=1000000)
+            likeCount.setText(likes/1000000+"m");
+        else
+            likeCount.setText(likes+"");
+
+        if(dislikes>999 && dislikes<1000000 )
+            dislikeCount.setText(dislikes/1000+"k");
+        else if(dislikes>=1000000)
+            dislikeCount.setText(dislikes/1000000+"m");
+        else
+            dislikeCount.setText(dislikes+"");
+
+
+        switch (response.getData().getUser()){
+            case 1:
+                like.setImageResource(R.drawable.tup);
+                dislike.setImageResource(R.drawable.tdownd);
+                disliked=false;
+                liked=true;
+                break;
+            case -1:
+                like.setImageResource(R.drawable.tupd);
+                dislike.setImageResource(R.drawable.tdown);
+                disliked=true;
+                liked=false;
+                break;
         }
 
         initViewPager(response.getData().getPicNum()-1);
@@ -492,6 +572,67 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
                         }
                     });
 
+        }
+    }
+
+    private void doLike(int status){
+        like.setClickable(false);
+        dislike.setClickable(false);
+        String number = MySharedPreference.Companion.getInstance(getContext()).getNumber();
+        String accessToken = MySharedPreference.Companion.getInstance(getContext()).getAccessToken();
+
+        if(number.isEmpty() || accessToken.isEmpty()){
+            MyToast.Companion.create(getContext(),getString(R.string.data_error));
+            MySharedPreference.Companion.getInstance(getContext()).clear();
+            startActivity(new Intent(getActivity(), SplashActivity.class));
+            getActivity().finish();
+        }else{
+            RetrofitClient.Companion.getInstance().getApi()
+                    .doLike(number,accessToken,shopId,status)
+                    .enqueue(new Callback<ShopDetailsModel>() {
+                        @Override
+                        public void onResponse(Call<ShopDetailsModel> call, Response<ShopDetailsModel> response) {
+                            if(response.isSuccessful()){
+                                int likes = response.body().getData().getLikes();
+                                int dislikes = response.body().getData().getDislikes();
+                                if(likes>999 && likes<1000000 )
+                                    likeCount.setText(likes/1000+"k");
+                                else if(likes>=1000000)
+                                    likeCount.setText(likes/1000000+"m");
+                                else
+                                    likeCount.setText(likes+"");
+
+                                if(dislikes>999 && dislikes<1000000 )
+                                    dislikeCount.setText(dislikes/1000+"k");
+                                else if(dislikes>=1000000)
+                                    dislikeCount.setText(dislikes/1000000+"m");
+                                else
+                                    dislikeCount.setText(dislikes+"");
+                                switch (response.body().getData().getUser()){
+                                    case 1:
+                                        like.setImageResource(R.drawable.tup);
+                                        dislike.setImageResource(R.drawable.tdownd);
+                                        disliked=false;
+                                        liked=true;
+                                        break;
+                                    case -1:
+                                        like.setImageResource(R.drawable.tupd);
+                                        dislike.setImageResource(R.drawable.tdown);
+                                        disliked=true;
+                                        liked=false;
+                                        break;
+                                }
+                            }
+                            like.setClickable(true);
+                            dislike.setClickable(true);
+                        }
+
+                        @Override
+                        public void onFailure(Call<ShopDetailsModel> call, Throwable t) {
+                            like.setClickable(true);
+                            dislike.setClickable(true);
+                        }
+                    });
         }
     }
 

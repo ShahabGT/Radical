@@ -20,7 +20,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
-        <activity android:name=".activities.NearMeActivity"></activity>
+        <activity android:name=".activities.NearMeActivity"/>
         <activity android:name=".activities.MapActivity" />
         <activity
             android:name=".activities.UpgradeActivity"

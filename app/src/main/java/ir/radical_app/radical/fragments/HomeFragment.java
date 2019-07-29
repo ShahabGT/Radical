@@ -84,25 +84,25 @@ public class HomeFragment extends Fragment {
 
         getCategories();
 
-        nearMe.setOnClickListener(v->startActivity(new Intent(getActivity(), NearMeActivity.class)));
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
-        {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy)
-            {
-                if(dy > 0){
-                    nearMe.hide();
-                } else{
-                    nearMe.show();
-                }
-
-                super.onScrolled(recyclerView, dx, dy);
-
-            }
-
-
-        });
+//        nearMe.setOnClickListener(v->startActivity(new Intent(getActivity(), NearMeActivity.class)));
+//
+//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+//        {
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy)
+//            {
+//                if(dy > 0){
+//                    nearMe.hide();
+//                } else{
+//                    nearMe.show();
+//                }
+//
+//                super.onScrolled(recyclerView, dx, dy);
+//
+//            }
+//
+//
+//        });
 
 
     }

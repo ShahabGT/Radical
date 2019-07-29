@@ -341,4 +341,14 @@ public interface Api {
             @Field("lon") double lon
 
     );
+    //___________________________________________
+
+    @FormUrlEncoded
+    @POST("like.php")
+    Call<ShopDetailsModel> doLike(
+            @Field("number") String number,
+            @Field("accesstoken") String accessToken,
+            @Field("shopid") String shopid,
+            @Field("status") int status
+    );
 }
