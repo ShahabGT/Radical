@@ -57,6 +57,7 @@
     <string name="wrongcode_error">کد وارد شده صحیح نیست!</string>
     <string name="noreg_error">خطایی در شماره تلفن رخ داده!</string>
     <string name="fillbuy_error">خطا! لیست خرید خود را تکمیل کنید</string>
+    <string name="comment_error">لطفا متن مورد نظر را وارد کنید</string>
 
     <string name="permission_camera">دسترسی به دوربین</string>
     <string name="permission_camera_toast">دسترسی به دوربین را داخل تنظیمات فعال کنید</string>

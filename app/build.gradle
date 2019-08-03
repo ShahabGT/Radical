@@ -11,8 +11,8 @@ android {
         applicationId "ir.radical_app.radical"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 10
-        versionName "1.6"
+        versionCode 11
+        versionName "2.0"
         multiDexEnabled true
     }
     buildTypes {
@@ -88,5 +88,7 @@ dependencies {
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     implementation 'ir.map.sdk:sdk_common:3.0.1'
     implementation 'ir.map.sdk:sdk_services:3.0.2'
+
+    implementation "androidx.emoji:emoji-bundled:1.0.0"
 }
 apply plugin: 'com.google.gms.google-services'

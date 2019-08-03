@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ir.radical_app.radical.arch.Bookmark.BookmarkResponse;
 import ir.radical_app.radical.arch.Category.ShopsCategoryResponse;
+import ir.radical_app.radical.arch.Comments.CommentsResponse;
 import ir.radical_app.radical.arch.Search.SearchResponse;
 import ir.radical_app.radical.arch.BuyHistory.BuyHistoryResponse;
 import ir.radical_app.radical.arch.Upgrade.UpgradeResponse;
@@ -351,4 +352,24 @@ public interface Api {
             @Field("shopid") String shopid,
             @Field("status") int status
     );
+    //___________________________________________
+
+    @GET("getcomments.php")
+    Call<CommentsResponse> getComments(
+            @Query("start") int start,
+            @Query("size") int size,
+            @Query("shopid") String shopid
+
+    );
+
+    //___________________________________________
+    @FormUrlEncoded
+    @POST("comment.php")
+    Call<JsonResponse> comment(
+            @Field("number") String number,
+            @Field("accesstoken") String accessToken,
+            @Field("shopid") String shopid,
+            @Field("comment") String comment
+    );
+    //___________________________________________
 }

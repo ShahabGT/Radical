@@ -42,10 +42,12 @@ import androidx.fragment.app.Fragment;
 import ir.map.sdk_services.ServiceHelper;
 import ir.map.sdk_services.models.MaptexError;
 import ir.map.sdk_services.models.base.ResponseListener;
+import ir.radical_app.radical.activities.CommentsActivity;
 import ir.radical_app.radical.activities.MapActivity;
 import ir.radical_app.radical.activities.QrcodeActivity;
 import ir.radical_app.radical.activities.SplashActivity;
 import ir.radical_app.radical.adapters.ShopsImagesAdapter;
+import ir.radical_app.radical.classes.Const;
 import ir.radical_app.radical.classes.MySharedPreference;
 import ir.radical_app.radical.classes.MyToast;
 import ir.radical_app.radical.classes.MyUtils;
@@ -246,6 +248,14 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
 
         });
 
+        comment.setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(), CommentsActivity.class);
+            intent.putExtra("shopid",shopId);
+            startActivity(intent);
+            Const.Companion.setShopid(shopId);
+            getActivity().overridePendingTransition(R.anim.bottom_up,R.anim.bottom_down);
+        });
+
     }
 
     private void animation(View v){
@@ -381,6 +391,7 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
 
         int likes = response.getData().getLikes();
         int dislikes = response.getData().getDislikes();
+        int comments = response.getData().getComments();
         if(likes>999 && likes<1000000 )
             likeCount.setText(likes/1000+"k");
         else if(likes>=1000000)
@@ -394,6 +405,13 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
             dislikeCount.setText(dislikes/1000000+"m");
         else
             dislikeCount.setText(dislikes+"");
+
+        if(comments>999 && comments<1000000 )
+            commentsCount.setText(comments/1000+"k");
+        else if(comments>=1000000)
+            commentsCount.setText(comments/1000000+"m");
+        else
+            commentsCount.setText(comments+"");
 
 
         switch (response.getData().getUser()){
@@ -595,6 +613,7 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
                             if(response.isSuccessful()){
                                 int likes = response.body().getData().getLikes();
                                 int dislikes = response.body().getData().getDislikes();
+                                int comments = response.body().getData().getComments();
                                 if(likes>999 && likes<1000000 )
                                     likeCount.setText(likes/1000+"k");
                                 else if(likes>=1000000)
@@ -608,6 +627,13 @@ public class ShopFragment extends Fragment implements ResponseListener<Bitmap> {
                                     dislikeCount.setText(dislikes/1000000+"m");
                                 else
                                     dislikeCount.setText(dislikes+"");
+
+                                if(comments>999 && comments<1000000 )
+                                    commentsCount.setText(comments/1000+"k");
+                                else if(comments>=1000000)
+                                    commentsCount.setText(comments/1000000+"m");
+                                else
+                                    commentsCount.setText(comments+"");
                                 switch (response.body().getData().getUser()){
                                     case 1:
                                         like.setImageResource(R.drawable.tup);

@@ -2,7 +2,7 @@ package ir.radical_app.radical.classes
 
 import ir.radical_app.radical.R
 
-class Const{
+public class Const{
 
     companion object {
         const val CHANNEL_CODE:String = "radical_notifications"
@@ -16,6 +16,7 @@ class Const{
 
         var onboarding: Int = 0
         var category: String? = null
+        var shopid: String? = null
         var word: String? = null
     }
 
