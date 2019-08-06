@@ -1,29 +1,24 @@
 package ir.radical_app.radical.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.google.android.material.button.MaterialButton;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.emoji.widget.EmojiEditText;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import ir.radical_app.radical.R;
 import ir.radical_app.radical.arch.Comments.CommentsAdapter;
 import ir.radical_app.radical.arch.Comments.CommentsViewModel;
-import ir.radical_app.radical.arch.Shops.ShopsAdapter;
-import ir.radical_app.radical.arch.Shops.ShopsViewModel;
 import ir.radical_app.radical.classes.Const;
 import ir.radical_app.radical.classes.MySharedPreference;
 import ir.radical_app.radical.classes.MyToast;
 import ir.radical_app.radical.data.RetrofitClient;
 import ir.radical_app.radical.models.JsonResponse;
-import ir.radical_app.radical.models.ShopDetailsModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,9 +28,10 @@ public class CommentsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CommentsViewModel itemViewModel;
     private LinearLayoutManager layoutManager;
-    private EditText commentText;
+    private EmojiEditText commentText;
     private CommentsAdapter adapter;
     private ImageView send;
+    private String shopid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,21 +45,24 @@ public class CommentsActivity extends AppCompatActivity {
     private void init() {
 
         commentText = findViewById(R.id.comments_text);
-        send=findViewById(R.id.comments_send);
+        send = findViewById(R.id.comments_send);
 
-        recyclerView=findViewById(R.id.comments_recycler);
+        recyclerView = findViewById(R.id.comments_recycler);
         layoutManager = new LinearLayoutManager(CommentsActivity.this);
-        layoutManager.setStackFromEnd(false);
+       //layoutManager.setStackFromEnd(false);
         layoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(layoutManager);
+        onClicks();
 
         showData();
+        shopid=getIntent().getExtras().getString("shopid","");
+        if(shopid.isEmpty())
+            onBackPressed();
 
-        onClicks();
         recyclerView.addOnLayoutChangeListener((v1, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-            if ( bottom < oldBottom) {
+            if (bottom < oldBottom) {
                 recyclerView.post(() -> {
-                    if(adapter!=null)
+                    if (adapter != null)
                         recyclerView.scrollToPosition(0);
 
                 });
@@ -71,54 +70,59 @@ public class CommentsActivity extends AppCompatActivity {
         });
 
 
+
+
     }
 
     private void onClicks() {
 
-        send.setOnClickListener(v->{
-            String comment=commentText.getText().toString();
-            if(comment.isEmpty())
-                MyToast.Companion.create(CommentsActivity.this,getString(R.string.comment_error));
-            else{
-                sendComment(comment);
+        send.setOnClickListener(v -> {
+            String comment = commentText.getText().toString();
+            if (comment.isEmpty())
+                MyToast.Companion.create(CommentsActivity.this, getString(R.string.comment_error));
+            else {
+                try {
+                    byte[] data = commentText.getText().toString().getBytes("UTF-8");
+                    sendComment(Base64.encodeToString(data, Base64.DEFAULT),shopid);
+                }catch (Exception e){ }
             }
 
 
         });
     }
 
-    private void sendComment(String comment) {
+    private void sendComment(String comment,String shopId) {
         commentText.setEnabled(false);
         String number = MySharedPreference.Companion.getInstance(CommentsActivity.this).getNumber();
         String accessToken = MySharedPreference.Companion.getInstance(CommentsActivity.this).getAccessToken();
 
-        if(number.isEmpty() || accessToken.isEmpty()){
-            MyToast.Companion.create(CommentsActivity.this,getString(R.string.data_error));
+        if (number.isEmpty() || accessToken.isEmpty()) {
+            MyToast.Companion.create(CommentsActivity.this, getString(R.string.data_error));
             MySharedPreference.Companion.getInstance(CommentsActivity.this).clear();
             startActivity(new Intent(CommentsActivity.this, SplashActivity.class));
             CommentsActivity.this.finish();
-        }else{
+        } else {
             RetrofitClient.Companion.getInstance().getApi()
-                    .comment(number,accessToken, Const.Companion.getShopid(),comment)
+                    .comment(number, accessToken, shopId, comment)
                     .enqueue(new Callback<JsonResponse>() {
                         @Override
                         public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
                             commentText.setEnabled(true);
-                            if(response.isSuccessful()){
+                            if (response.isSuccessful()) {
                                 itemViewModel.invalidateData();
                                 commentText.setText("");
-                            }else{
-                                switch (response.code()){
+                            } else {
+                                switch (response.code()) {
                                     case 401:
-                                        MyToast.Companion.create(CommentsActivity.this,getString(R.string.access_error));
+                                        MyToast.Companion.create(CommentsActivity.this, getString(R.string.access_error));
                                         MySharedPreference.Companion.getInstance(CommentsActivity.this).clear();
                                         startActivity(new Intent(CommentsActivity.this, SplashActivity.class));
                                         CommentsActivity.this.finish();
                                         break;
 
-                                        default:
-                                            MyToast.Companion.create(CommentsActivity.this,getString(R.string.general_error));
-                                            break;
+                                    default:
+                                        MyToast.Companion.create(CommentsActivity.this, getString(R.string.general_error));
+                                        break;
                                 }
                             }
 
@@ -127,14 +131,14 @@ public class CommentsActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<JsonResponse> call, Throwable t) {
                             commentText.setEnabled(true);
-                            MyToast.Companion.create(CommentsActivity.this,getString(R.string.general_error));
+                            MyToast.Companion.create(CommentsActivity.this, getString(R.string.general_error));
 
                         }
                     });
         }
     }
 
-    private void showData(){
+    private void showData() {
         itemViewModel = ViewModelProviders.of(this).get(CommentsViewModel.class);
 
         adapter = new CommentsAdapter(CommentsActivity.this);
@@ -145,6 +149,6 @@ public class CommentsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.bottom_up,R.anim.bottom_down);
+        overridePendingTransition(R.anim.bottom_up, R.anim.bottom_down);
     }
 }

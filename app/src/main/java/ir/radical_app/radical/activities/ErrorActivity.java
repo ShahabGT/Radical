@@ -1,13 +1,13 @@
 package ir.radical_app.radical.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import ir.radical_app.radical.R;
-import ir.radical_app.radical.classes.MyUtils;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import ir.radical_app.radical.R;
+import ir.radical_app.radical.classes.MyUtils;
 
 public class ErrorActivity extends AppCompatActivity {
 
@@ -18,14 +18,16 @@ public class ErrorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_error);
 
         Button reTry = findViewById(R.id.error_tryagain);
-        reTry.setOnClickListener(View->
+        reTry.setOnClickListener(View ->
                 onBackPressed()
         );
     }
 
     @Override
     public void onBackPressed() {
-        if(MyUtils.Companion.checkInternet(ErrorActivity.this))
-            super.onBackPressed();
+        if (MyUtils.Companion.checkInternet(ErrorActivity.this)) {
+            startActivity(new Intent(ErrorActivity.this, ErrorActivity.class));
+            ErrorActivity.this.finish();
+        }
     }
 }

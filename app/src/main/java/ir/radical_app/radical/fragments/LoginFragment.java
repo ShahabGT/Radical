@@ -1,15 +1,33 @@
 package ir.radical_app.radical.fragments;
 
 
+import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.credentials.Credential;
+import com.google.android.gms.auth.api.credentials.Credentials;
+import com.google.android.gms.auth.api.credentials.HintRequest;
+import com.google.android.gms.auth.api.phone.SmsRetriever;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.Task;
+
 import ir.radical_app.radical.classes.MySharedPreference;
 import ir.radical_app.radical.classes.MyToast;
 import ir.radical_app.radical.classes.MyUtils;
@@ -20,9 +38,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class LoginFragment extends Fragment {
 
+    private static final int RESOLVE_HINT = 581;
     private Button fLogin;
     private EditText fNumber;
 
@@ -31,12 +52,14 @@ public class LoginFragment extends Fragment {
     }
 
 
+
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
         init(v);
-
         return v;
     }
 
@@ -44,7 +67,36 @@ public class LoginFragment extends Fragment {
         fLogin = v.findViewById(R.id.login_login);
         fNumber = v.findViewById(R.id.login_number);
 
+        try {
+            requestHint();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         onClicks();
+    }
+
+    private void requestHint() throws Exception {
+        HintRequest hintRequest = new HintRequest.Builder()
+                .setPhoneNumberIdentifierSupported(true)
+                .build();
+        PendingIntent intent = Credentials.getClient(getContext()).getHintPickerIntent(hintRequest);
+        startIntentSenderForResult(intent.getIntentSender(),
+                RESOLVE_HINT, null, 0, 0, 0,null);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == RESOLVE_HINT) {
+            if (resultCode == RESULT_OK) {
+                Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
+                String number = credential.getId();
+                if(number.startsWith("+98"))
+                    number="0"+number.substring(3);
+                else if(number.startsWith("0098"))
+                    number="0"+number.substring(4);
+                fNumber.setText(number);
+            }
+        }
     }
 
     private void onClicks(){
@@ -66,7 +118,7 @@ public class LoginFragment extends Fragment {
         fNumber.setEnabled(false);
         fLogin.setEnabled(false);
         fLogin.setText(getString(R.string.txt_loading));
-
+        SmsRetriever.getClient(getActivity()).startSmsUserConsent("98300077");
         RetrofitClient.Companion.getInstance().getApi().doLogin(number)
                 .enqueue(new Callback<JsonResponse>() {
                     @Override

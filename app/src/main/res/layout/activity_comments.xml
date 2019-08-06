@@ -33,7 +33,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/comments_send"
                 android:layout_width="45dp"
@@ -41,7 +40,7 @@
                 android:padding="4dp"
                 android:src="@drawable/sendmessage" />
 
-            <EditText
+            <androidx.emoji.widget.EmojiEditText
                 android:id="@+id/comments_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -49,7 +48,6 @@
                 android:layout_marginRight="8dp"
                 android:layout_weight="1"
                 android:background="@null"
-                android:fontFamily="@font/vazir"
                 android:hint="متن مورد نظر"
                 android:inputType="textCapSentences|textMultiLine"
                 android:maxLength="500"

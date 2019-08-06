@@ -2,7 +2,7 @@ package ir.radical_app.radical.arch.Comments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
+import androidx.emoji.widget.EmojiTextView;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-
 import ir.radical_app.radical.R;
 import ir.radical_app.radical.classes.DateConverter;
 
@@ -47,9 +45,16 @@ public class CommentsAdapter extends PagedListAdapter<CommentItem, CommentsAdapt
             holder.user.setText(item.getName());
             String date = item.getDate();
             DateConverter dateConverter = new DateConverter();
-            dateConverter.gregorianToPersian(Integer.parseInt(date.substring(0,4)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(8,10)));
-            holder.date.setText(mCtx.getString(R.string.messages_model3,dateConverter.toString(),date.substring(11)));
-            holder.comment.setText(item.getComment());
+            dateConverter.gregorianToPersian(Integer.parseInt(date.substring(0, 4)), Integer.parseInt(date.substring(5, 7)), Integer.parseInt(date.substring(8, 10)));
+            holder.date.setText(mCtx.getString(R.string.messages_model3, dateConverter.toString(), date.substring(11)));
+            // holder.comment.setText(item.getComment());
+            //holder.comment.setText(StringEscapeUtils.unescapeJava(item.getComment()));
+            try {
+                String comment = new String( Base64.decode(item.getComment(), Base64.DEFAULT), "UTF-8");
+                holder.comment.setText(comment);
+            }catch (Exception e){
+
+            }
         } else {
             Toast.makeText(mCtx, "Item is null", Toast.LENGTH_LONG).show();
         }
@@ -75,14 +80,15 @@ public class CommentsAdapter extends PagedListAdapter<CommentItem, CommentsAdapt
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView id, comment, user, date;
+        private TextView id, user, date;
+        private EmojiTextView comment;
 
         ItemViewHolder(View v) {
             super(v);
             user = v.findViewById(R.id.comments_items_name);
             comment = v.findViewById(R.id.comments_items_comment);
             date = v.findViewById(R.id.comments_items_time);
-            id=v.findViewById(R.id.comments_items_id);
+            id = v.findViewById(R.id.comments_items_id);
 
         }
     }

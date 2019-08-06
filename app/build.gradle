@@ -51,8 +51,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-config:18.0.0'
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
-    implementation 'com.facebook.fresco:fresco:1.11.0'
-    implementation 'com.facebook.fresco:animated-gif:1.11.0'
+    implementation 'com.facebook.fresco:fresco:2.0.0'
+    //implementation 'com.facebook.fresco:animated-gif:2.0.0'
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
     implementation 'com.mikepenz:materialdrawer:6.1.1'
     //kotlin
@@ -89,6 +89,11 @@ dependencies {
     implementation 'ir.map.sdk:sdk_common:3.0.1'
     implementation 'ir.map.sdk:sdk_services:3.0.2'
 
-    implementation "androidx.emoji:emoji-bundled:1.0.0"
+    implementation "androidx.emoji:emoji:1.0.0"
+   // implementation 'org.apache.commons:commons-text:1.7'
+
+    implementation "com.google.android.gms:play-services-auth:17.0.0"
+    implementation 'com.google.android.gms:play-services-auth-api-phone:17.1.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

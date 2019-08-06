@@ -1,7 +1,10 @@
 package ir.radical_app.radical.fragments;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,6 +53,21 @@ public class CodeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_code, container, false);
+        BroadcastReceiver rec = new BroadcastReceiver()
+        {
+            @Override
+            public void onReceive(Context context, Intent intent)
+            {
+                String code = intent.getExtras().getString("code");
+                if(code!=null && code.length()==4){
+                    String FBToken = MySharedPreference.Companion.getInstance(getContext()).getFBToken();
+                    if(FBToken.length()<3)
+                        FBToken = FirebaseInstanceId.getInstance().getToken();
+                    doAuth(code, fNumber,FBToken);
+                }
+            }
+        };
+        getContext().registerReceiver(rec,new IntentFilter("codeReceived"));
         init(v);
 
         return v;
