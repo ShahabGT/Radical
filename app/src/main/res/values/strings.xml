@@ -43,6 +43,7 @@
     <string name="form_error">لطفا قبل از ذخیره فرم را کامل کنید!</string>
     <string name="birthday_error">لطفا تاریخ تولد را کامل کنید!</string>
     <string name="profile_error">قبل از برقراری ارتباط با پشتیبانی حساب کاربری خود را تکمیل کنید</string>
+    <string name="profile_error2">قبل از خرید اشتراک ابتدا حساب کاربری خود را تکمیل کنید</string>
     <string name="email_error">لطفا ایمیل را بررسی کنید!</string>
     <string name="color_error">لطفا رنگ مورد علاقه خود را انتخاب کنید!</string>
     <string name="data_error">خطا در اطلاعات برنامه! لطفا دوباره وارد شوید</string>

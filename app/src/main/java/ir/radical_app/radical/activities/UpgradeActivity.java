@@ -50,7 +50,14 @@ public class UpgradeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upgrade);
+
+        if(MySharedPreference.Companion.getInstance(this).getName().isEmpty()){
+            MyToast.Companion.create(this,getString(R.string.profile_error2));
+            onBackPressed();
+        }
         init();
+
+
     }
 
     private void init(){
