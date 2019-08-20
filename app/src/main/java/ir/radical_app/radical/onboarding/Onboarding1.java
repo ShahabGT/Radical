@@ -16,6 +16,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import ir.radical_app.radical.R;
 import ir.radical_app.radical.classes.Const;
 
@@ -27,6 +29,8 @@ public class Onboarding1 extends Fragment {
     private TextView title;
     private ImageView backbtn;
     private FloatingActionButton nextbtn;
+
+    private View v;
 
     private boolean fromBack;
 
@@ -41,7 +45,7 @@ public class Onboarding1 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v= inflater.inflate(R.layout.fragment_onboarding1, container, false);
+        v= inflater.inflate(R.layout.fragment_onboarding1, container, false);
         init(v);
         return v;
     }
@@ -127,11 +131,7 @@ public class Onboarding1 extends Fragment {
             public void onAnimationStart(Animator animation) {
                 new Handler().postDelayed(()-> {
 
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .setCustomAnimations(R.anim.fadein,R.anim.fadeout)
-                                .replace(R.id.intro_container, new Onboarding2())
-                                .commitNow();
-                        Const.Companion.setOnboarding(2);
+                    Navigation.findNavController(v).navigate(R.id.action_onboarding1_to_onboarding2);
 
 
                 },400);

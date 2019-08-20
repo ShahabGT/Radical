@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/onboarding1">
+
+    <fragment
+        android:id="@+id/onboarding1"
+        android:name="ir.radical_app.radical.onboarding.Onboarding1"
+        android:label="fragment_onboarding1"
+        tools:layout="@layout/fragment_onboarding1" >
+        <action
+            app:enterAnim="@anim/enter_right"
+            app:exitAnim="@anim/exit_left"
+            app:popExitAnim="@anim/exit_right"
+            app:popEnterAnim="@anim/enter_left"
+            android:id="@+id/action_onboarding1_to_onboarding2"
+            app:destination="@id/onboarding2" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboarding2"
+        android:name="ir.radical_app.radical.onboarding.Onboarding2"
+        android:label="fragment_onboarding2"
+        tools:layout="@layout/fragment_onboarding2" >
+        <action
+            android:id="@+id/action_onboarding2_to_onboarding3"
+            app:destination="@id/onboarding3" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboarding3"
+        android:name="ir.radical_app.radical.onboarding.Onboarding3"
+        android:label="fragment_onboarding3"
+        tools:layout="@layout/fragment_onboarding3" >
+        <action
+            android:id="@+id/action_onboarding3_to_onboarding4"
+            app:destination="@id/onboarding4" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboarding4"
+        android:name="ir.radical_app.radical.onboarding.Onboarding4"
+        android:label="fragment_onboarding4"
+        tools:layout="@layout/fragment_onboarding4" />
+</navigation>

@@ -17,12 +17,6 @@ public class IntroActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_intro);
-
-        getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.fadein,R.anim.fadeout)
-                .replace(R.id.intro_container,new Onboarding1())
-                .commitNow();
-        Const.Companion.setOnboarding(1);
     }
 
     @Override

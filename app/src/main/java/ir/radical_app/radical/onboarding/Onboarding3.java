@@ -14,6 +14,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import ir.radical_app.radical.R;
 import ir.radical_app.radical.classes.Const;
 
@@ -24,6 +26,8 @@ public class Onboarding3 extends Fragment {
     private ImageView logo,shape;
     private TextView text,title;
 
+    private View v;
+
     void setFromBack() {
         this.fromBack = true;
     }
@@ -31,7 +35,7 @@ public class Onboarding3 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v= inflater.inflate(R.layout.fragment_onboarding3, container, false);
+        v= inflater.inflate(R.layout.fragment_onboarding3, container, false);
 
         init(v);
 
@@ -143,13 +147,7 @@ public class Onboarding3 extends Fragment {
             public void onAnimationStart(Animator animation) {
                 new Handler().postDelayed(()-> {
 
-                        Onboarding2 onboarding2 = new Onboarding2();
-                        onboarding2.setFromBack();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .setCustomAnimations(R.anim.enter_left,R.anim.exit_right)
-                                .replace(R.id.intro_container, onboarding2)
-                                .commitNow();
-                        Const.Companion.setOnboarding(2);
+                            Navigation.findNavController(v).popBackStack();
 
                     }
                 ,200);
@@ -244,12 +242,7 @@ public class Onboarding3 extends Fragment {
             public void onAnimationStart(Animator animation) {
                 new Handler().postDelayed(()-> {
 
-                        Onboarding4 onboarding4 = new Onboarding4();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .setCustomAnimations(R.anim.enter_right,R.anim.exit_left)
-                                .replace(R.id.intro_container, onboarding4)
-                                .commitNow();
-                        Const.Companion.setOnboarding(4);
+                        Navigation.findNavController(v).navigate(R.id.action_onboarding3_to_onboarding4);
 
                     }
                 ,200);

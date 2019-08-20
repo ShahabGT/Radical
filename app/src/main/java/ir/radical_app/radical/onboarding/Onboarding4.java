@@ -17,6 +17,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import ir.radical_app.radical.R;
 import ir.radical_app.radical.activities.LoginActivity;
 import ir.radical_app.radical.classes.Const;
@@ -29,6 +31,8 @@ public class Onboarding4 extends Fragment {
     private TextView text,text2,title;
     private MaterialCardView btn;
 
+    private View v;
+
 
     public Onboarding4() {
     }
@@ -37,7 +41,7 @@ public class Onboarding4 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v= inflater.inflate(R.layout.fragment_onboarding4, container, false);
+        v= inflater.inflate(R.layout.fragment_onboarding4, container, false);
 
         init(v);
 
@@ -182,13 +186,7 @@ public class Onboarding4 extends Fragment {
             public void onAnimationStart(Animator animation) {
                 new Handler().postDelayed(()-> {
 
-                        Onboarding3 onboarding3 = new Onboarding3();
-                        onboarding3.setFromBack();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .setCustomAnimations(R.anim.enter_right,R.anim.exit_left)
-                                .replace(R.id.intro_container, onboarding3)
-                                .commit();
-                        Const.Companion.setOnboarding(3);
+                    Navigation.findNavController(v).popBackStack();
                 },400);
             }
 
