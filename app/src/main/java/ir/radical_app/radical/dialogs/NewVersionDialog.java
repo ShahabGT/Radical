@@ -18,7 +18,7 @@ public class NewVersionDialog extends Dialog {
     private FragmentActivity context;
     private String urgent;
     private boolean doubleBackToExitPressedOnce;
-    private ImageView playstore;
+    private ImageView playstore,direct;
 
 
     public NewVersionDialog(@NonNull FragmentActivity context, String urgent) {
@@ -34,6 +34,7 @@ public class NewVersionDialog extends Dialog {
         doubleBackToExitPressedOnce = false;
 
         playstore = findViewById(R.id.newversion_dialog_playstore);
+        direct = findViewById(R.id.newversion_dialog_direct);
         onClicks();
 
     }
@@ -47,6 +48,14 @@ public class NewVersionDialog extends Dialog {
                 } catch (Exception e) {
                     context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                 }
+
+        });
+
+        direct.setOnClickListener(v->{
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://radical-app.ir/download/radical.apk"));
+            context.startActivity(intent);
+
 
         });
 
