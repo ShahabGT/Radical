@@ -48,29 +48,35 @@ public class CodeFragment extends Fragment {
     public CodeFragment() {
     }
 
-
+    private BroadcastReceiver rec = new BroadcastReceiver()
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            String code = intent.getExtras().getString("code");
+            if(code!=null && code.length()==4){
+                String FBToken = MySharedPreference.Companion.getInstance(getContext()).getFBToken();
+                if(FBToken.length()<3)
+                    FBToken = FirebaseInstanceId.getInstance().getToken();
+                doAuth(code, fNumber,FBToken);
+            }
+        }
+    };
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_code, container, false);
-        BroadcastReceiver rec = new BroadcastReceiver()
-        {
-            @Override
-            public void onReceive(Context context, Intent intent)
-            {
-                String code = intent.getExtras().getString("code");
-                if(code!=null && code.length()==4){
-                    String FBToken = MySharedPreference.Companion.getInstance(getContext()).getFBToken();
-                    if(FBToken.length()<3)
-                        FBToken = FirebaseInstanceId.getInstance().getToken();
-                    doAuth(code, fNumber,FBToken);
-                }
-            }
-        };
+
         getContext().registerReceiver(rec,new IntentFilter("codeReceived"));
         init(v);
 
         return v;
+    }
+
+    @Override
+    public void onDestroy() {
+        getContext().unregisterReceiver(rec);
+        super.onDestroy();
     }
 
     private void init(View v){
@@ -132,6 +138,7 @@ public class CodeFragment extends Fragment {
                     if(!MyUtils.Companion.checkInternet(getContext()))
                         MyToast.Companion.create(getContext(),getString(R.string.internet_error));
                     else {
+                        fCommit.setEnabled(false);
                         String FBToken = MySharedPreference.Companion.getInstance(getContext()).getFBToken();
                         if(FBToken.length()<3)
                             FBToken = FirebaseInstanceId.getInstance().getToken();
@@ -156,16 +163,13 @@ public class CodeFragment extends Fragment {
 
     private void doAuth(final String code, String number,String FBToken){
         fCode.setEnabled(false);
-        fCommit.setEnabled(false);
         fCommit.setText(getString(R.string.txt_loading));
 
         RetrofitClient.Companion.getInstance().getApi().doAuth(number,FBToken,code)
                 .enqueue(new Callback<JsonResponse>() {
                     @Override
                     public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
-                        fCode.setEnabled(true);
-                        fCommit.setEnabled(true);
-                        fCommit.setText(getString(R.string.code_reg));
+
                         if (response.isSuccessful()){
                             String res = response.body().getMessage();
                             if(res.contains(code)){
@@ -193,6 +197,9 @@ public class CodeFragment extends Fragment {
                                 MyToast.Companion.create(getContext(),getString(R.string.general_error));
                             }
                         }else{
+                            fCode.setEnabled(true);
+                            fCommit.setEnabled(true);
+                            fCommit.setText(getString(R.string.code_reg));
                             MyToast.Companion.create(getContext(),getString(R.string.general_error));
                         }
                     }

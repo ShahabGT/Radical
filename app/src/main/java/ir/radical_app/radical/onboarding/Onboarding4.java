@@ -12,23 +12,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import ir.radical_app.radical.R;
 import ir.radical_app.radical.activities.LoginActivity;
-import ir.radical_app.radical.classes.Const;
 
 public class Onboarding4 extends Fragment {
 
     private ImageView backbtn;
     private FloatingActionButton nextbtn;
-    private ImageView logo,round1,round2;
-    private TextView text,text2,title;
+    private ImageView logo, round1, round2;
+    private TextView text, text2, title;
     private MaterialCardView btn;
 
     private View v;
@@ -41,7 +42,7 @@ public class Onboarding4 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        v= inflater.inflate(R.layout.fragment_onboarding4, container, false);
+        v = inflater.inflate(R.layout.fragment_onboarding4, container, false);
 
         init(v);
 
@@ -54,7 +55,7 @@ public class Onboarding4 extends Fragment {
         initAnimation();
     }
 
-    private void init(View v){
+    private void init(View v) {
         backbtn = getActivity().findViewById(R.id.intro_backbtn);
         nextbtn = getActivity().findViewById(R.id.intro_nextbtn);
 
@@ -62,36 +63,38 @@ public class Onboarding4 extends Fragment {
         text2 = v.findViewById(R.id.onboarding5_text);
         title = v.findViewById(R.id.onboarding4_title);
         logo = v.findViewById(R.id.onboarding4_logo);
-        round1=v.findViewById(R.id.onboarding4_round1);
-        round2= v.findViewById(R.id.onboarding4_round2);
+        round1 = v.findViewById(R.id.onboarding4_round1);
+        round2 = v.findViewById(R.id.onboarding4_round2);
 
-        backbtn.setOnClickListener(View->
-                backAnimation()
-            );
+        backbtn.setOnClickListener(View -> {
+                    backAnimation();
+
+                }
+        );
         nextbtn.hide();
 
 
-
         btn = v.findViewById(R.id.onboarding5_start);
-        btn.setOnClickListener(View-> {
-
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-                getActivity().overridePendingTransition(R.anim.fadein,R.anim.fadeout);
-                getActivity().finish();
+        btn.setOnClickListener(View -> {
+            btn.setEnabled(false);
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            getActivity().finish();
 
         });
 
     }
-    private void initAnimation(){
+
+    private void initAnimation() {
         ObjectAnimator textTranslation = ObjectAnimator.ofFloat(
                 text,
                 "TranslationX",
-                1500f,0f
+                1500f, 0f
         );
         ObjectAnimator text2Translation = ObjectAnimator.ofFloat(
                 text2,
                 "TranslationX",
-                1500f,0f
+                1500f, 0f
         );
         textTranslation.setDuration(500);
         text2Translation.setDuration(500);
@@ -99,95 +102,96 @@ public class Onboarding4 extends Fragment {
         ObjectAnimator titleTranslation = ObjectAnimator.ofFloat(
                 title,
                 "TranslationX",
-                2000f,0f
+                2000f, 0f
         );
         titleTranslation.setDuration(500);
 
         ObjectAnimator logoAlpha = ObjectAnimator.ofFloat(
                 logo,
                 "alpha",
-                0f,1f
+                0f, 1f
         );
         logoAlpha.setDuration(500);
 
         ObjectAnimator logo2Alpha = ObjectAnimator.ofFloat(
                 btn,
                 "alpha",
-                0f,1f
+                0f, 1f
         );
         logo2Alpha.setDuration(500);
 
         ObjectAnimator round1Translation = ObjectAnimator.ofFloat(
                 round1,
                 "TranslationX",
-                -500f,0f
+                -500f, 0f
         );
         round1Translation.setDuration(500);
 
         ObjectAnimator round2Translation = ObjectAnimator.ofFloat(
                 round2,
                 "TranslationX",
-                500f,0f
+                500f, 0f
         );
         round2Translation.setDuration(500);
 
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(textTranslation,text2Translation,titleTranslation,logoAlpha,logo2Alpha,round1Translation,round2Translation);
+        animatorSet.playTogether(textTranslation, text2Translation, titleTranslation, logoAlpha, logo2Alpha, round1Translation, round2Translation);
         animatorSet.start();
     }
-    private void backAnimation(){
+
+    private void backAnimation() {
         ObjectAnimator textTranslation = ObjectAnimator.ofFloat(
                 text,
                 "TranslationX",
-                0f,1500f
+                0f, 1500f
         );
         textTranslation.setDuration(500);
 
         ObjectAnimator text2Translation = ObjectAnimator.ofFloat(
                 text2,
                 "TranslationX",
-                0f,1500f
+                0f, 1500f
         );
         text2Translation.setDuration(500);
 
         ObjectAnimator titleTranslation = ObjectAnimator.ofFloat(
                 title,
                 "TranslationX",
-                0f,2000f
+                0f, 2000f
         );
         titleTranslation.setDuration(500);
 
         ObjectAnimator logoAlpha = ObjectAnimator.ofFloat(
                 logo,
                 "alpha",
-                1f,0f
+                1f, 0f
         );
         logoAlpha.setDuration(500);
 
         ObjectAnimator round1Translation = ObjectAnimator.ofFloat(
                 round1,
                 "TranslationX",
-                0f,-700f
+                0f, -700f
         );
         round1Translation.setDuration(500);
 
         ObjectAnimator round2Translation = ObjectAnimator.ofFloat(
                 round2,
                 "TranslationX",
-                0f,700f
+                0f, 700f
         );
         round2Translation.setDuration(500);
 
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(textTranslation,text2Translation,titleTranslation,logoAlpha,round1Translation,round2Translation);
+        animatorSet.playTogether(textTranslation, text2Translation, titleTranslation, logoAlpha, round1Translation, round2Translation);
 
         animatorSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                new Handler().postDelayed(()-> {
+                new Handler().postDelayed(() -> {
 
                     Navigation.findNavController(v).popBackStack();
-                },400);
+                }, 400);
             }
 
             @Override

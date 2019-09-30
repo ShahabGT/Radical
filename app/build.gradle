@@ -4,12 +4,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "ir.radical_app.radical"
         minSdkVersion 17
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 11
         versionName "2.0"
         multiDexEnabled true
@@ -37,27 +37,27 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'me.dm7.barcodescanner:zxing:1.9.8'
-    implementation 'com.google.firebase:firebase-core:17.1.0'
+    implementation 'com.google.firebase:firebase-core:17.2.0'
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
     implementation 'com.google.firebase:firebase-perf:19.0.0'
-    implementation 'com.google.firebase:firebase-config:19.0.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'com.google.firebase:firebase-config:19.0.2'
+    //don't update, won't support api <21
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.facebook.fresco:fresco:2.0.0'
-    //implementation 'com.facebook.fresco:animated-gif:2.0.0'
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
     implementation 'com.mikepenz:materialdrawer:6.1.1'
     //kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.50"
 
-    implementation 'androidx.core:core-ktx:1.2.0-alpha03'
+    implementation 'androidx.core:core-ktx:1.2.0-alpha04'
 
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
@@ -81,7 +81,7 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:3.5.7'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-gestures:0.3.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.0.1'
+   // implementation 'com.squareup.okhttp3:okhttp:4.0.1'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
@@ -93,8 +93,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-auth:17.0.0"
     implementation 'com.google.android.gms:play-services-auth-api-phone:17.1.0'
 
-    implementation "androidx.navigation:navigation-fragment:2.2.0-alpha01"
-    implementation "androidx.navigation:navigation-ui:2.2.0-alpha01"
-
+    implementation "androidx.navigation:navigation-fragment:2.2.0-alpha03"
+    implementation "androidx.navigation:navigation-ui:2.2.0-alpha03"
 }
 apply plugin: 'com.google.gms.google-services'

@@ -68,9 +68,9 @@ public class Onboarding1 extends Fragment {
         title =v.findViewById(R.id.onboarding1_title);
 
 
-        start.setOnClickListener(View->
-                animations()
-        );
+        start.setOnClickListener(View-> {
+            animations();
+        });
 
     }
 

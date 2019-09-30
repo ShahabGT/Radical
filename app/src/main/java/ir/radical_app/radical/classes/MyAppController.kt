@@ -11,16 +11,18 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import ir.map.sdk_map.Mapir
 import ir.map.sdk_services.ServiceSDK
 import ir.radical_app.radical.R
+import java.lang.Exception
 
 
-class MyAppController : Application() {
+class MyAppController : MultiDexApplication() {
 
     override fun onCreate() {
+     //   MultiDex.install(this)
         super.onCreate()
-        Mapir.getInstance(this, getString(R.string.map_key))
+            Mapir.getInstance(this, getString(R.string.map_key))
+
         ServiceSDK.init(this)
         Fresco.initialize(this)
-        MultiDex.install(this)
         val fontRequest = FontRequest(
                 "com.google.android.gms.fonts",
                 "com.google.android.gms",

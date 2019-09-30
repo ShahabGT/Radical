@@ -26,7 +26,7 @@ public class ErrorActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (MyUtils.Companion.checkInternet(ErrorActivity.this)) {
-            startActivity(new Intent(ErrorActivity.this, ErrorActivity.class));
+            startActivity(new Intent(ErrorActivity.this, MainActivity.class));
             ErrorActivity.this.finish();
         }
     }

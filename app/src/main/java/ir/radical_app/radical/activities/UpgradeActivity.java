@@ -54,8 +54,8 @@ public class UpgradeActivity extends AppCompatActivity {
         if(MySharedPreference.Companion.getInstance(this).getName().isEmpty()){
             MyToast.Companion.create(this,getString(R.string.profile_error2));
             onBackPressed();
-        }
-        init();
+        }else
+            init();
 
 
     }
@@ -265,7 +265,11 @@ public class UpgradeActivity extends AppCompatActivity {
             dialog.setCancelable(false);
             dialog.show();
         }else{
-            dialog.dismiss();
+            try {
+                dialog.dismiss();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

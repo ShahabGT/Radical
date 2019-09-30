@@ -14,7 +14,7 @@ class RetrofitClient{
     private var retrofit:Retrofit
 
     init {
-        var cipherSuites = ConnectionSpec.MODERN_TLS.cipherSuites
+        var cipherSuites = ConnectionSpec.MODERN_TLS.cipherSuites()
         if (!cipherSuites!!.contains(CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA)) {
             cipherSuites = ArrayList(cipherSuites)
             cipherSuites.add(CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA)
@@ -32,11 +32,11 @@ class RetrofitClient{
     }
 
     companion object{
-        private var instance:RetrofitClient?=null;
+        private var instance:RetrofitClient?=null
 
-        @Synchronized fun getInstance():RetrofitClient{
+        fun getInstance():RetrofitClient{
             if(instance==null)
-                instance=RetrofitClient();
+                instance=RetrofitClient()
             return instance!!
         }
     }
