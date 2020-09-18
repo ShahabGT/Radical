@@ -27,11 +27,6 @@ And soon in your city :)
   <img src="playstore.png" width="350" />
   </a>
 </p>
-<p align="center">
-   <a href="https://cafebazaar.ir/app/ir.radical_app.radical/" target="_blank">
-  <img src="bazaar.png" width="350" />
-  </a>
-</p>
 
 # Developed By
 
